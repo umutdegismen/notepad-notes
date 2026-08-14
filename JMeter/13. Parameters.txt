@@ -1,0 +1,41 @@
+
+	
+	Parameters:
+
+		When we have payload and provide parameters in jMeter, we need to pay attention what kind of parameter that is.
+		
+		A shortcut to know if it's a query parameter or form parameter:
+			
+			most of the time; 	if the HTTP method is POST, then the parameter is a PATH / form parameter 
+								if the HTTP method is GET, then the parameter is a QUERY parameter 
+
+		Path parameter or Query parameter.
+
+			- Path parameter is that we provide as path such as;
+
+				- url:
+					http://10.0.0.38:1080/cgi-bin/login.payload-> no parameter in url. we send it as payload.
+
+				- payload source view: 
+					userSession=141304.72855407HcziDzVpQHftDzVApVHVif&username=username1&password=password1&login.x=41&login.y=8&JSFormSubmit=off
+
+				- payload parsed view:
+					userSession: 141304.72855407HcziDzVpQHftDzVApVHVif
+					username: username1
+					password: password1
+					login.x: 41
+					login.y: 8
+					JSFormSubmit: off
+
+
+			- Query parameter is a part of the url and seperated with '?' (keep in mind -> QuestionMark - Query).
+
+				- url:
+					http://10.0.0.38:1080/cgi-bin/nav.pl?page=menu&in=home
+
+				- payload source view: 
+					page=menu&in=home
+
+				- payload parsed view:
+					page: menu
+					in: home

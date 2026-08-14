@@ -1,0 +1,117 @@
+	----------
+	Class 03
+	----------
+
+	1. git branch
+		What it does: Lists all local branches in your repository. The current branch is highlighted with an asterisk (*).
+		When to use: Use this command to see which branches are available locally and which one you’re currently on.
+
+	2. git branch -a
+		What it does: Lists all branches, both local and remote.
+		When to use: Use this when you want to see both local and remote branches in your repository.
+
+	3. git branch -r
+		What it does: Lists only the remote branches.
+		When to use: Use this when you want to see just the branches on the remote repository.
+
+	4. git branch <branchName>
+		What it does: Creates a new branch with the specified name but does not switch to it.
+		When to use: Use this command to create a new branch when you want to work on a different feature or experiment without affecting the main branch. 
+		
+			**	After creating a new branch, you need to push it to remote repository too.
+			**	git push -u origin <branch-name> --> for pushing the newly created branch.
+
+	5. git branch -m <branchName>
+		What it does: Renames the current branch to the specified new name.
+		When to use: Use this when you realize that the branch name should be changed to better reflect its purpose or content.
+
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	6. git checkout -b <branchName> -> old version ||| git switch -c <branchName>	-> new version after git v2.23
+		What it does: Creates a new branch with the specified name and immediately switches to it.
+		When to use: Use this when you want to create a new branch and start working on it right away.
+		
+	   git switch -c <branchName>	
+
+	7. git checkout <branchName>
+		What it does: Switches to the specified branch.
+		When to use: Use this to move from your current branch to another branch that already exists.
+		
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	
+	8. git branch -d <branchName>
+		What it does: Deletes the specified branch, but only if it has been fully merged with its upstream branch.
+		When to use: Use this to clean up branches that have already been merged into the main or another branch, indicating they are no longer needed.
+
+	9. git branch -D <branchName>
+		What it does: Forcefully deletes the specified branch, even if it hasn't been merged.
+		When to use: Use this when you want to delete a branch regardless of whether its changes have been merged. Be careful, as this can lead to loss of work.
+	
+	10. git push origin -d <branchName> or git push origin --delete <branchName>
+		What it does: Deletes the specified branch from the REMOTE REPOSITORY.
+		When to use: Use this to remove a branch from the remote repository after it has been merged or is no longer needed.
+	
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	
+	11. git pull origin <branchName>
+		What it does: Fetches and merges changes from the specified remote branch into your current branch.
+		When to use: Use this when you want to update your current branch with the latest changes from a branch on the remote repository.
+	
+	12. git push origin <branchName>
+		What it does: Pushes your local branch to the remote repository, making it available to others.
+		When to use: Use this to share your work on a branch with your team by pushing it to the remote repository.
+	
+		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		
+	13. git merge <branchName>
+		What it does: Merges the specified branch into the branch you are currently on.
+		When to use: Use this to combine the changes from one branch into another, often to incorporate a feature or fix into the main branch.
+		
+		
+	[Explained in Class 03] Procedure for Developing and Sharing Changes on GitHub
+	
+	1. Create a New Branch
+		Command: git checkout -b <branchName>
+		Description: Start by creating a new branch from the up-to-date main branch. This branch will serve as your working environment for developing the new feature or making specific changes. Always ensure that your main branch is up-to-date before branching off.
+	
+	2. Make Changes/Developments
+		Description: Implement your changes or develop the new feature within the newly created branch. You can use your preferred IDE, such as Eclipse, to make and test your changes locally. This step involves coding, debugging, and committing your work incrementally.
+	
+	3. Push the Branch Online
+		Command: git push origin <branchName>
+		Description: Once your changes are ready, push the branch to the remote repository on GitHub. This makes your work available online and accessible to others.
+	
+	4. Create a Pull Request
+		Description: After pushing your branch to GitHub, create a pull request to propose your changes for review and merging into the main branch. You can do this either through the link shown in Git Bash after pushing or directly from the GitHub website. The pull request allows collaborators to review your changes, discuss potential improvements, and approve the merge.
+	
+	5. Pull Changes and Update Your Branches
+		Commands:
+		git pull
+		git pull origin main
+		Description: After your pull request is reviewed and merged, it’s important to update your local main branch and any other branches you’re working on. This ensures that your environment remains in sync with the latest changes on the remote repository.
+		
+		
+		
+	Common Git Practices in Industry
+	1. Feature Branch Workflow
+		Description: In a feature branch workflow, each new feature or bug fix is developed in its own separate branch. This allows developers to work on multiple features or fixes simultaneously without interfering with the main branch or each other’s work.
+		Typical Workflow:
+		Create a Branch: A new branch is created for each feature or bug fix, typically based on the main branch (git checkout -b feature/feature-name).
+		Develop: All changes related to the feature are made within this branch.
+		Review: Once the feature is complete, a pull request is created, allowing other team members to review the changes.
+		Merge: After approval, the branch is merged back into main, and the feature branch is usually deleted.
+		Benefit: This practice keeps the main branch stable and free of incomplete or unstable code. It also makes collaboration more manageable by isolating different streams of work.
+	2. Code Review via Pull Requests
+		Description: Code review is an essential practice where peers review the code changes proposed in a pull request before they are merged into the main branch. This process helps catch bugs, improve code quality, and ensure consistency with the team’s coding standards.
+		Typical Workflow:
+		Pull Request Creation: After completing work on a branch, the developer pushes the branch to the remote repository and creates a pull request.
+		Review: Other team members review the code, providing feedback, suggestions, or approval. The review may include checking for coding standards, potential bugs, performance issues, and ensuring that the code fulfills its intended purpose.
+		Approval: Once the code has been thoroughly reviewed and any necessary changes have been made, the pull request is approved.
+		Merge: The approved code is then merged into the main branch.
+		Benefit: Code reviews improve the overall quality of the codebase, encourage knowledge sharing, and reduce the likelihood of introducing bugs or regressions.
+	3. Commit Early, Commit Often
+		Description: This practice encourages developers to make frequent, small commits rather than waiting until a large chunk of work is complete. Each commit should represent a single logical change or improvement.
+		Typical Workflow:
+		Small, Incremental Commits: Developers commit after making meaningful progress, such as fixing a bug, adding a new function, or completing a specific part of a feature.
+		Descriptive Commit Messages: Each commit should have a clear, descriptive message that explains what was done and why.
+		Benefit: Frequent commits make it easier to track changes, revert specific modifications if necessary, and understand the history of the project. It also reduces the risk of losing work and makes collaboration smoother, as smaller changes are easier to integrate and review.

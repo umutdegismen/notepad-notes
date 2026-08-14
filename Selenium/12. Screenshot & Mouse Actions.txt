@@ -1,0 +1,94 @@
+
+--------------------------------
+Class 12
+--------------------------------
+
+In testing it is necessary to take the screenshot for verification so we can prove that our test case has covered certain functionality or not.
+
+Commons IO is a library that helps developing IO functionality.
+In order to save the image to our computer we need to add commons-io jar file in our project.
+
+	Steps to download and add commons-io jar file:
+		Go to https://mvnrepository.com/
+		Search for "commons io" in the search area
+		Click on "Apache Commons IO"
+		Scroll down to version 2.11.0 and click on it
+		You click on the jar file which will download
+		Create a folder named "Commons IO" under Documents/JarFiles
+		Copy the downloaded commons-io-2.6.jar file to "Commons IO" folder
+		In the project go to Java Build Path
+		Add the commons-io-2.11.0.jar file by using Add the External JARs
+
+	We take screenshot In selenium:
+	- Using TakesScreenshot Interface
+
+	1. TakesScreenshot ts = (TakesScreenshot) driver;
+	2. File picture = ts.getScreenshotAs(Output.Type.FILE);
+	3. 	try {
+		  FileUtils.copyFile(picture, new File(destination/filename.extension));
+		}catch(IOException e){
+			SOPln(e.getMessage);
+		}
+    
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	In Selenium we have Actions Class to automate mouse and keyboard operations:
+		- click
+		- right click
+		- double click 
+		- hover over elements	--> action.moveToElement(element).perform();
+		- drag and drop
+
+	When do we go?
+		Lets say 
+			driver.findElement().click(); does not work, but you still can click manually, 
+			then we can use Actions Class to perform click or double click
+			
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~		
+
+	Iterview Question: 
+		How do you perform right click or double click?
+		Selenium API provides Actions Class 
+			to do right click --> contextClick().perform();
+			to do double click --> doubleClick().perform();
+			to drag and drop --> dragAndDrop(from, to).perform();
+
+	Drag and Drop:
+		We use Actions class to drag and drop an element.
+		To drag and drop:
+		identify element to drag
+		identify to which element to drop
+		actions.dragAndDrop(elementToDrag, whereToDrop).perform();
+		
+		
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	
+											
+												COMMON ACTIONS
+											~~~~~~~~~~~~~~~~~~~~~~
+											
+	Mouse Hover:
+	
+		WebElement element = driver.findElement(By.id("nav-link-accountList");
+		Actions action = new Actions(driver);
+		action.moveToElement(element).perform();
+			
+	
+	Mouse Right-click:
+	
+		Actions action = new Actions(driver);
+		action.contextClick().perform();
+			
+	
+	Mouse Double-click
+		
+		WebElement element = driver.findElement(By.id("nav-link-accountList");
+		Actions action = new Actions(driver);
+		action.doubleClick().perform();
+		
+	Mouse drag & drop
+		
+		WebElement drag = driver.findElement(By.id("nav-link-accountList");
+		WebElement drop = driver.findElement(By.id("nav-link-accountList");
+		
+		Actions action = new Actions(driver);
+		action.clickAnHold(drag).moveToElement(drop).release().perform();

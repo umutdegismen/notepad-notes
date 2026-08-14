@@ -1,0 +1,49 @@
+
+	Volume Mapping: (Basically file sharing)
+	
+		Bu, Docker konteynerinin içindeki bir klasörü veya dosyayı, host makinenizdeki bir klasöre bağlamak anlamına gelir. Böylece konteyner içindeki veriler kalıcı olur ve konteyner silinse bile host üzerinde saklanır.
+		
+			"docker run -v /host/klasor:/container/klasor [imageName]"
+			
+			"docker run -v /HostPath/folderName:/ContainerPath/folderName [imageName]"
+
+		Burada "/host/klasor", host makinedeki klasör, "/container/klasor" konteyner içindeki klasördür.
+		
+		Docker-Volume Mapping icin "D:","E:","F:" gibi directory'ler kullanma!
+		
+		Best directory for volume mapping is the project root. 
+		To use that path, we either use an absolute path or //${PWD} which means the 'CURRENT FOLDER'.
+		
+		Bu ayari Docker Desktop programinda "Settings/Resources/File Sharing" kismindan degistirebilirsin.
+		
+		SAMPLE COMMAND	: docker run -it -v c:/Users/Blu3s/docker/workspace:/use/sampleFolder ubuntu"
+											docker run -it -v //${PWD}:/home/sampleFolder ubuntu"
+											// -> olusturulan klasoru sonuna ';C' eklenmesini engeller. 
+											// -> Docker'ın yolu olduğu gibi okumasını sağlar
+											-- YA DA --
+											docker run -it -v "$(pwd)/result:/home/selenium-docker/test-output" [imageId] -> burada 'pwd' LOWERCASE !!!! 
+											
+								-it : intereactive mode (to see inputs and outputs) otherwise, after applying the command, it'll exit.
+								-v  : volume mapping
+								c:/Users/Blu3s/docker/workspace 	: path in local machine (host path)
+								/use/sampleFolder 								: folderName in the container -> ALWAYS CREATE THE REMOTE FOLDER IN A FOLDER LIKE 'usr'
+								ubuntu 														: the image name that we want to create the connection with.
+							
+		Sample practice:
+
+			docker run -it -v c:/Users/blu3s/docker/workspace/udemy-docker:/usr/udemy ubuntu -> create the remote directory 'udemy'
+			ls -al				-> list the folders in 'ubuntu'
+			cd usr/udemy 	-> navigate to the created folder 'udemy' 
+			OUTPUT: root@afdb1ab2d31a:/usr/a# 
+			
+		After creating a folder in ubuntu, we create a txt file there by using ubuntu commands.
+		
+			echo "docker is awesome" > test-result.txt 	: creates a "test-result" txt file on ubuntu.
+			mv test-resul.txt test-result.txt 					: renames the remote folder name on ubuntu.
+			less test-result.txt												:	just opens the file and shows what is inside which we wrote "docker is awesome"
+			to quit -> press 'q'
+			
+
+			
+			
+							

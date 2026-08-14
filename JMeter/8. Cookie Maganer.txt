@@ -1,0 +1,32 @@
+
+	
+	HTTP Cookie Manager:
+	
+		
+		Let's say, we record the steps of our test on a website. 
+		
+		- We navigate to the page, 
+		- we send the valid cridentials, 
+		- we login, 
+		- we see the dashboard
+		- we logout. 
+		
+		Whenever we check the 'response body' in 'View Result Tree', we realize that the header text is different than we expected to see. We see that all test stesp are green, but the status code is 303 and header text is still the same header we see on the login page. 
+		
+		This is because of [no cookies]. Since jMeter is not storing cookies like browsers, we don't see that the page is loged in. 
+		
+		Here is the place where HTTP Cookie Manager comes to the picture.
+		
+		To make jMeter act like a browser and store cookies, we can use Cookie Manager.
+		
+			- right click on 'Thread Group'
+			- click on 'add / config element / HTTP Cookie Manager'
+		
+		This Cookie Manager stores the cookies just like how browsers does.
+		
+	
+	How are we going to know in real time project if we are going to need to use HTTP Cookie Manager or not ? 
+		
+		In real time, we will attend 'Requirements Planning Meetings' and 'Project Planning Meetings' and people will be talking about how to develope that authentication portal. And that time if they come accross any concept of 'cookies storage' and all, that is one key point that we need to know that something is happening around cookies in that flow and make sure we put the cookie manager into our test in jMeter.
+			
+			

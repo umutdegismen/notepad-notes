@@ -1,0 +1,36 @@
+
+	
+	1. How would you write the user flow ? 
+		
+		We can write th user flow in 2 ways:
+			
+			- writing our own script from scratch using JMeter
+			or	
+			- just record and generate the script
+			
+	
+	
+	2. What are the challenges you faced when you're working with JMeter ?
+		
+		When I try to run the result, result tree shows 'PASSED' but actual response is 'FAILED'. In that case, wrong results are shown in the performance metrics (View Result Tree, Aggregate Report and Graph Results). To make sure, we can simply make a search in Response Data what we were expecting to see on the web page. Let's say we expect "Thank you for your purchase today!", we can search "Thank" or "today".
+		
+	
+	
+	3. What is an ideal way of throughput graph if you want to have a good performance server ?
+		
+		'Throughput' (green line) should always increase and 'Deviation' (red line) should always decrease.
+		
+		Because if throughput is increasing that means the server can handle the load very well.
+	
+	
+	
+	4. What kind of assertions do you use ? 
+		
+		- Response Assertion
+		- Size Assertion
+		- Duration Assertion
+	
+	
+	5. What is the difference between LOAD testing and STRESS testing ? 
+
+		Load testing is about anticipated loads (ongorulen, beklenen), stress testing is about seeing the limits of the system. Running the tests until breaking the system to see the limits.

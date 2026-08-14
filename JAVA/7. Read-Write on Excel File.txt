@@ -1,0 +1,99 @@
+
+    
+    APACHE POI (Neded Libraries)is needed to use the methods we need to read and write on excel file
+    
+    For Practicing -> Google search: apache poi read excel file example
+    
+    ALWAYS import "SS" version when using the methods:
+        -Workbook
+        -Sheet
+    
+
+    // usuing 'filePath' allows you to reach out the file in your System
+    // FileInputStream allows you to reach out the files in your Network
+        
+        Do not forget to close the connections!            
+            book.close();
+            fis.close();
+            fos.close();
+            
+    
+    .properties file
+    
+    it doesn't matter if you use = or :
+
+        FirsName=Umut
+        LastName=Degimen
+        Age=35
+        School:Neotech
+    
+    
+    
+    METHODS
+   ~~~~~~~~~
+    
+	-> row.getPhysicalNumberOfCells()   : gets the number of cells that has value in them (doesn't count the empty cells in a row)
+											- (sadece ici dolu olan hucrelerin sayisini verir)
+	-> row.getLastCellNum()             : gets the number of the last cell that has value in a row 
+											- (en son dolu olan hucreye kadar olanhucrelerin sayisini verir)
+								
+		1   2   3   4   5   } getPhysicalNumberOfCells  -> returns 3        ->  + -> there is value in cell
+		+   +           +   } getLastCellNum            -> returns 5        -> ' ' -> no values in cell  
+		
+	Reading Methods:
+																						   
+		-> .getSheet("Sheet1")          : gets the specific SHEET   --> Sheet sheet = book.getSheet("Sheet1");
+		-> .getRow(2)                   : gets the specific ROW     --> Row row2 = sheet.getRow(2);
+		-> .getCell(1);                 : gets the specific CELL    --> Cell cell1 = row2.getCell(1);
+		
+	Writing Methods:
+																						   
+		-> .createRow(3)                 }
+		-> .createCell(0)              --} // create the 4th row and create 1st column and put the value "user" in the cell
+		-> .setCellValue("user");        }
+		-> .write(FileOUtputStream)     : writes the changes on excel file (saves)  --> workbook.write(fos);
+		-> .close()                     : closes the connection                                                                                       
+									 
+		
+			Reading Excel File
+
+	String xlFile = "/Users/Neotech/Desktop/TestData.xlsx";
+
+	// create file input stream object and load file
+	FileInputStream fis = new FileInputStream(xlFile);
+
+	// create an object for workbook and load the file
+	Workbook workbook = new XSSFWorkbook(fis);
+
+	// get the sheet which you want to read or modify
+	Sheet sheet = workbook.getSheet("Login");
+
+	// create an object for row
+	Row row = sheet.getRow(0);
+	// create an object for cell
+	Cell cell = row.getCell(0);
+
+	// get and print the value from specific cell
+	String value = cell.toString();
+	System.out.println(value);
+
+	/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+	Writing to Excel File
+
+	String xlFile = "/Users/Neotech/Desktop/TestData.xlsx";
+	FileInputStream fis = new FileInputStream(xlFile);
+	// create an object for workbook and load the file
+	Workbook workbook = new XSSFWorkbook(fis);
+	// get the sheet which you want to read or modify
+	Sheet sheet = workbook.getSheetAt(0);
+	// create the 4th row and create 1st column
+	sheet.createRow(3).createCell(0).setCellValue("user");
+	// get the 4th row and create 2nd column
+	sheet.getRow(3).createCell(1).setCellValue("user123");
+	// create file output stream object and pass the file path
+	FileOutputStream fos = new FileOutputStream(xlFile);
+	// write the content
+	workbook.write(fos);
+	// close the stream
+	fos.close();

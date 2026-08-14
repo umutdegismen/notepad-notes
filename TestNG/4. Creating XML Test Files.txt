@@ -1,0 +1,57 @@
+
+
+	Creating Test XML Files for SMOKE TEST / REGRESSION Test
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ Creating XML from CLASSES
+ 
+	- Select more than one CLASS using CTRL
+	- Right click 'TestNG' and 'Convert to TestNG'
+	- You can change the name in 'Location', 'Suite name' and 'Test name' like 'Smoke test'
+	- Click "Next"
+	- Ticks should be UNCHECKED in "Changes to be performed" section
+	- Click "Finish"
+	
+	
+ Creating XML from PACKAGES
+ 
+	- Select more than one PACKAGE using CTRL
+	- Right click 'TestNG' and 'Convert to TestNG'
+	- You can change the name in 'Location', 'Suite name' and 'Test name' like 'Smoke test'
+	- Click "Next"
+	- Ticks should be UNCHECKED in "Changes to be performed" section
+	- Click "Finish"
+	
+	
+	** With this way, we can run many test cases at the same time without running them one by one/class by class
+	
+	
+	In TestNG we have testng.xml file
+	Provides execution of multiple classes/packages/methods
+	We can configure which classes/packages/methods we want to execute
+
+	Why do we need testng.xml file
+		To execute multiple methods in different packages/classes
+
+	Example:
+	<suite>
+		<test>
+			<classes>
+				<class name="">
+				<class name="">
+			</classes>
+		</test>
+
+		<test>
+			<classes>
+				<class name="">
+				<class name=""
+				<class name=""
+			</classes>
+		</test>
+	</suite>
+
+	The testng.xml file will have following hierarchy
+	1.	The root tag of this file is <suite>.
+	2.	<suite> tag can contain one or more <test> tags.
+	3.	<test> tag can contain one or more <classes> and <packages> tags.

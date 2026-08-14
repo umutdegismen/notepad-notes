@@ -1,0 +1,67 @@
+
+
+
+	Bug Creation Syntax: <FirstName LastName> Bug <Story Name>
+		
+	Example: John Doe Bug Create Document Functionality
+		
+		
+	-------------------------------------------------------------------
+
+	Umut Degismen-Bug-Implement Add New Employee Functionality-Middle Name field's requirements
+
+	DESCRIPTION
+
+	Description: 
+
+	There is no any sign that aware Admin that “Middle Name” field is optional. Since the middle name section is under the “Employee Full Name*“,  the requirement is not clear. To see if it's mandatory or optional, Admin has to try it manually.
+
+	Steps to Reproduce: 
+
+	After successful login to https://hrm.neotechacademy.com with Admin credentials:Admin / Neotech@123
+
+	Click on "PIM" and then on "Add Employee"
+
+	A modal ‘Add Employee’ page should pop-up
+
+	Expected Result:
+
+	Middle Name section should be present and optional
+
+	Actual Result:
+
+	Middle Name section is optional but Admin can not see if this field is optional or not. There is no any specific sign about it like  '*'.
+
+	-------------------------------------------------------------------
+	ENVIRONMENT
+
+	Observed on Windows 11 Experience Pack 1000.22700.1020.0, 
+
+	Google Chrome Version 131.0.6778.205 (Official Build) (64-bit)
+
+	Microsoft Edge Version 131.0.2903.112 (Official build) (64-bit)
+
+	600 mbps wifi connection
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

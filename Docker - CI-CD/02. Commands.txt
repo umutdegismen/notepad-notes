@@ -1,0 +1,180 @@
+	
+	
+	The commands that we'll be using in common:
+		
+		GENERAL:
+			docker version 												: prints the client and the server versions
+			clear / ctrl+l												: cleans the screen
+			docker 														: opens the commands list
+			docker-compose version 										: output-> Docker Compose version v5.0.1 
+		
+		IMAGES:
+			docker pull [IMAGENAME]										: pulls an image from DockerHub
+			docker images 												: shows all the images in our machine
+			docker rmi [IMAGENAME]/[IMAGEID]							: removes an image
+			docker run -d [IMAGENAME]									: to run the container in the background
+			docker run -i [IMAGENAME]									: to attach the standard input to the container
+			docker run -t [IMAGENAME]									: to attach the standard output to the container
+			docker run -it [IMAGENAME]									: runs the container in interactive mode. (like pretty keyword in cucumber-runner.class)
+		
+		CONTAINERS:
+			docker ps													: shows all the running containers
+			docker ps -a												: shows all the containers including stopped containers
+			docker run [IMAGENAME]										: creates a container from an image
+			docker start [CONTAINER_ID]									: starts the container again
+			docker start -i [CONTAINER_ID]								: starts the container and enters in it
+			docker stop [CONTAINER_ID] / [CONTAINER_NAME]				: stops a running container 
+			docker rm -f [CONTAINER_ID]									: -f flag'i force demek, container calisiyor olsa bile direkt siler.
+			docker rm [CONTAINER_ID]									: container calismiyorsa siler. Calisiyorsa, once "docker stop containerID" gerekli 
+			docker exec -it [CONTAINER_ID] bash							: goes back inside the container tomorrow after stopping it today (yeni kapi acma)
+			docker exec -it [CONTAINER_ID] sh							: use 'sh' instead of 'bash' when executing small images like alpine (yeni kapi acma)
+			docker attach [CONTAINER_ID]								: eski kapiya geri donme
+			[ctrl + p + q]												: interactive moddan cikar (container calismaya devam eder)
+			docker system prune -f										: removes all the stopped containers (docker doesn't touch the running containers)
+			docker system prune -a										: removes all the stopped containers (docker doesn't touch the running containers) + UNUSED IMAGES
+			docker logs [CONTAINER_ID / CONTAINER_NAME]					: prints the console output (let's say we run the container and printed the output 
+																		  and cleared the screen with 'clear' command but we want to see the output again.
+																		  By using this command, we can see the log output again without creating another container)
+			docker run -d --name [SOME_NAME] nginx						: to assign a new name to the container (-d is to run in the background)
+			docker run -it --entrypoint=/bin/bash						: Entrypoint is the command to be executed once a container is created.
+																		  An image might have an entrypoint already.
+																		  This option overrides the container's entrypoint.
+		
+		NETWORK:
+			docker network ls											: lists the created networks
+		
+		VOLUME MAPPING:
+			docker run -v /HostPath/folderName:/ContainerPath/folderName [imageName]	
+																										: Creates a volume map between the local folder and the container folder.
+																											Whatever you add in the local folder, you see it in the container folder, whatever you add in the container folder, you see it in the local folder.
+		
+		DOCKER COMPOSE:
+			docker compose up															: Runs the services/images declared in the compose.yaml file
+			docker compose up -d													: Runs the services/images declared in the compose.yaml file in background.
+			docker compose down														: Stops all running services/images declared in the compose.yaml file
+			docker compose up --scale [browser-name]=3		: Sets up the scale of the service (browser)-(deploy/replicas).
+																											How many browsers you want to run in parallel, you set it up with this code, or through the yaml file.
+			docker compose up --scale chrome=2 --scale firefox=2 -d	
+																										: Sets up the scale of more than one services/images. 
+																											For each service, you need to specify it's own "--scale".
+			docker compose ps															: List of running services/images		
+		
+		
+		CURL:		
+			This is mostly used to apply an auto wait to nodes. Curl command pulls the response using JSON format.
+			So, we can avoid "SessionNotCreatedException" by using "ready: true" property.
+		
+			winget install jqlang.jq											: Downloads and installs "jq" package manager/CLI tool on Windows.
+			curl http://localhost:4444/status							: Displays raw (unformatted) JSON status of Selenium Grid, along with curl download progress.
+			curl -s http://localhost:4444/status | jq			: Displays status in formatted/pretty JSON (via jq) in SILENT mode (hides curl progress).
+			curl -sS http://localhost:4444/status | jq		: Formatted JSON only + shows network errors if Grid is down (Best practice).
+			curl http://localhost:4444/status | jq				:	Displays formatted/pretty JSON, but includes curl's download progress output alongside it.
+			curl -sS http://localhost:4444/status | jq .value 			 		: Displays only the value of "value" key from the json response.
+			curl -sS http://localhost:4444/status | jq .value.ready  		: Displays only the value of "ready" key from the json response.
+			curl -sS http://localhost:4444/status | jq .value.message 	: Displays only the value of "message" key from the json response.
+			curl -sS http://localhost:4444/status | jq -r .value.browser: Removes the quotation marks. --- output : chrome instead of "chrome"
+			
+		Installing JQ or Curl to a container:
+			1. Create a container of an Image in interactive mode :	docker run -it bellsoft/liberica-openjdk-alpine
+			2. Check if Curl or jq is installed										: type 'jq' or 'jq --version'
+																															type 'curl' or 'curl --version'
+      3. Install curl and jq																: apk add jq / apk add curl
+																															(just typing 'apk' displayes the commands that can be used.)
+			4. Check if Curl or jq is installed again.
+		
+		
+																
+	
+	Type 'docker' to get the whole commands list:
+	
+		Common Commands:
+		  run         Create and run a new container from an image
+		  exec        Execute a command in a running container
+		  ps          List containers
+		  build       Build an image from a Dockerfile
+		  bake        Build from a file
+		  pull        Download an image from a registry
+		  push        Upload an image to a registry
+		  images      List images
+		  login       Authenticate to a registry
+		  logout      Log out from a registry
+		  search      Search Docker Hub for images
+		  version     Show the Docker version information
+		  info        Display system-wide information
+
+		Management Commands:
+		  ai*         Docker AI Agent - Ask Gordon
+		  builder     Manage builds
+		  buildx*     Docker Buildx
+		  compose*    Docker Compose
+		  container   Manage containers
+		  context     Manage contexts
+		  debug*      Get a shell into any image or container
+		  desktop*    Docker Desktop commands
+		  extension*  Manages Docker extensions
+		  image       Manage images
+		  init*       Creates Docker-related starter files for your project
+		  manifest    Manage Docker image manifests and manifest lists
+		  mcp*        Docker MCP Plugin
+		  model*      Docker Model Runner
+		  network     Manage networks
+		  offload*    Docker Offload
+		  plugin      Manage plugins
+		  sandbox*    Docker Sandbox
+		  sbom*       View the packaged-based Software Bill Of Materials (SBOM) for an image
+		  scout*      Docker Scout
+		  system      Manage Docker
+		  volume      Manage volumes
+
+		Swarm Commands:
+		  swarm       Manage Swarm
+
+		Commands:
+		  attach      Attach local standard input, output, and error streams to a running container
+		  commit      Create a new image from a container's changes
+		  cp          Copy files/folders between a container and the local filesystem
+		  create      Create a new container
+		  diff        Inspect changes to files or directories on a container's filesystem
+		  events      Get real time events from the server
+		  export      Export a container's filesystem as a tar archive
+		  history     Show the history of an image
+		  import      Import the contents from a tarball to create a filesystem image
+		  inspect     Return low-level information on Docker objects
+		  kill        Kill one or more running containers
+		  load        Load an image from a tar archive or STDIN
+		  logs        Fetch the logs of a container
+		  pause       Pause all processes within one or more containers
+		  port        List port mappings or a specific mapping for the container
+		  rename      Rename a container
+		  restart     Restart one or more containers
+		  rm          Remove one or more containers
+		  rmi         Remove one or more images
+		  save        Save one or more images to a tar archive (streamed to STDOUT by default)
+		  start       Start one or more stopped containers
+		  stats       Display a live stream of container(s) resource usage statistics
+		  stop        Stop one or more running containers
+		  tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+		  top         Display the running processes of a container
+		  unpause     Unpause all processes within one or more containers
+		  update      Update configuration of one or more containers
+		  wait        Block until one or more containers stop, then print their exit codes
+
+		Global Options:
+			  --config string      Location of client config files (default
+								   "C:\\Users\\blu3s\\.docker")
+		  -c, --context string     Name of the context to use to connect to the
+								   daemon (overrides DOCKER_HOST env var and
+								   default context set with "docker context use")
+		  -D, --debug              Enable debug mode
+		  -H, --host string        Daemon socket to connect to
+		  -l, --log-level string   Set the logging level ("debug", "info",
+								   "warn", "error", "fatal") (default "info")
+			  --tls                Use TLS; implied by --tlsverify
+			  --tlscacert string   Trust certs signed only by this CA (default
+								   "C:\\Users\\blu3s\\.docker\\ca.pem")
+			  --tlscert string     Path to TLS certificate file (default
+								   "C:\\Users\\blu3s\\.docker\\cert.pem")
+			  --tlskey string      Path to TLS key file (default
+								   "C:\\Users\\blu3s\\.docker\\key.pem")
+			  --tlsverify          Use TLS and verify the remote
+		  -v, --version            Print version information and quit

@@ -1,0 +1,198 @@
+
+													MAP INTERFACE
+													-------------
+
+
+	Map - > Stores groups of objects in the form of a KEY : VALUE pair
+
+	- KEY + VALUE --> is called ENTRY or PAIR
+	- MAP is a collection of ENTRIES/PAIRS
+	- MAP is an interface
+	- MAP is NOT a Collection, but it's a part of Java Collections
+	- MAP is NOT iterable
+	
+	SADECE "KEY"leri aliyoruz	
+	--------------------------
+	
+	***** .keySet(); metodu ile Set<String> yaratiyoruz.
+	
+		Tum Map'i Set'e atarak sadece "key"lerden olusan bir Set olusturuyoruz. 
+		Bu bize SADECE "key"leri veriyor.
+		
+			Set<String> englishWords = dictionaryMap.keySet();
+			System.out.println("keys -> " + englishWords);
+			
+			
+			
+	SADECE "VALUE"lari aliyoruz	 
+	----------------------------
+	
+	***** .values(); metodu ile Collection<String> yaratiyoruz.
+	
+		Tum Map'i Collection'a atarak sadece "value"lardan olusan bir Collection olusturuyoruz. 
+		Bu bize SADECE "value"lari veriyor.
+			
+			Collection<String> spanishWords = dictionaryMap.values();
+			System.out.println("values -> " + spanishWords);
+
+
+
+	KEY-VALUE Pair seklinde aliyoruz
+	---------------------------------
+	
+	***** .getKey() metodu ile "key" aliyoruz
+	***** .getValue() metodu ile "value" aliyoruz
+	
+		Bunun icin ENTRY kullaniyoruz vunku Map, iterable degildir!
+		
+			Set<Entry<String,String>> entry = dictionaryMap.entrySet<>();
+		
+		Simdi iterable oldu!
+			// now we can iterate the map
+			for(Entry<String,String> item: entries) {
+				String key = pair.getKey();
+				String value = pair.getValue();
+			}
+		
+	----------------------------------------------------------------------------------
+	
+
+	Map has 4 implementation classes: 
+		- HashMap
+		- LinkedHashMap
+		- TreeMap
+		- HashTable
+	
+	
+	-HASHMAP		: 	No order is maintained. Slightly faster due to lack of ordering constraints.
+						Use when you don't care about the order of elements and you want optimal performance for storing and retrieving key-value pairs.
+						Allows one null key and multiple null values.
+						Iteration order is random and can change over time, especially after resizing.
+	
+	-LINKEDHASHMAP	: 	Maintains insertion or access order. Slightly slower due to additional overhead. 
+						Ideal for scenarios where order is important.
+						Use when you need to maintain the insertion order or access order of elements. It’s often used in cases like LRU (Least Recently Used) cache implementations, where the access order is important.
+						Allows one null key and multiple null values.
+						Iterates in the order of insertion (or access order if specified).
+	
+	-TreeMap		:	Keys are sorted in ASCENDING order by default, or in custom order if specified during instantiation.
+						Iterates in sorted order of keys.
+						Does not allow null keys
+	
+
+	VALUES in a map can be duplicates, but KEYS have to be unique. 
+
+	.put(key, value) ---> adds an entry in the map
+	.get(key)		 ---> get the value for a given key
+	.replace(key, value) ---> replace an entry 
+	.remove(key)		---> remove an entry from the map
+	.containsKey() --> checks if a key exists in a map
+	.containsValue() --> checks if a value exists in a map
+    
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+    -> LIST + MAP -> To put duplicated elements in an ArrayList
+    
+        - Ornegin 2 ayni isimde, ayni notu alan ogrenci ismini kaydetmemiz gerek.
+        - Map : NO DUPLICATE
+        - List : ALLOWS ONLY ONE ELEMENT
+        - O yuzden bu yontemi kullaniyoruz.
+        
+        Structor: 
+            
+            List<Map.Entry<String,Integer>> studentClass = new ArrayList<>();
+            
+            // notu 95 olan birden fazla Olga var
+            Map.Entry<String,Integer> student1 = new AbstractMap.SimpleEntry("Olga",95);   
+            Map.Entry<String,Integer> student2 = new AbstractMap.SimpleEntry("Olga",95);
+            Map.Entry<String,Integer> student3 = new AbstractMap.SimpleEntry("Sinem",92);
+            Map.Entry<String,Integer> student4 = new AbstractMap.SimpleEntry("Olga",95);
+            Map.Entry<String,Integer> student5 = new AbstractMap.SimpleEntry("Umut",98);
+            Map.Entry<String,Integer> student6 = new AbstractMap.SimpleEntry("Olga",95);
+            
+            // add the students in the studentClass List
+            studentClass.add(student1);
+            studentClass.add(student2);
+            studentClass.add(student3);
+            studentClass.add(student4);
+            studentClass.add(student5);
+            studentClass.add(student6);
+            
+            // to change value
+            std6.setValue(25);
+            
+            // to replace student with new one
+            classroom.set(5, new AbstractMap.SimpleEntry("Jason",78));  -> index'i 5 olan elemani, notu 78 olan Jason ile degistir
+            
+            
+        PRINT on screen
+        
+            for(Map.Entry<String, Integer> s: classroom) {
+			
+			String name = s.getKey();
+			Integer grade = s.getValue();
+			
+			System.out.println(name+" -> "+grade);
+		  }
+        
+       
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	Map Example
+	-----------
+    
+	Map<String, String> europe = new TreeMap<>(); // ACS order
+		europe.put("Italy", "Rome");
+		europe.put("Spain", "Barcelona");
+		europe.put("Greece", "Athens");
+		System.out.println(europe);
+
+		// ----------------------------------------
+
+		Map<String, String> africa = new LinkedHashMap<>(); // insertion order
+		africa.put("Kenya", "Nairobi");
+		africa.put("Gambia", "Banjul");
+		africa.put("Senegal", "Dakar");
+		System.out.println(africa);
+
+		// ----------------------------------------
+
+		Map<String, String> asia = new HashMap<>(); // insertion order
+		asia.put("Philippines", "Manila");
+		asia.put("Bhutan", "Thimpu");
+		asia.put("Turkey", "Ankara");
+		System.out.println(asia);
+
+		// ----------------------------------------
+
+		System.out.println("---- WORLD ----");
+
+		// We can have a LIST of MAPS
+		// if the types of the maps were different, we couldn't store them in one list
+		List<Map<String, String>> world = new ArrayList<>();
+		world.add(europe);
+		world.add(africa);
+		world.add(asia);
+
+		System.out.println("WORLD --> " + world);
+
+		System.out.println("-------- Let's iterate the WORLD --------");
+
+		for (Map<String, String> continent : world) {
+			System.out.println(continent);
+		}
+
+		System.out.println("----------------------");
+
+		// let's print all the countries with cities
+		for (Map<String, String> continent : world) {
+			Set<String> keys = continent.keySet(); // countries -> key
+			for (String key : keys) {
+				String value = continent.get(key);
+				System.out.println("Capital of " + key.toUpperCase() + " is " + value.toUpperCase());
+			}
+		}
+        
+        
+        

@@ -1,0 +1,58 @@
+
+	Passing arguments to the containerized Java app:
+		
+		-e : (environment variables) makes it able to provide us parameter.
+			 
+			 The runtime flag sets an environment variable inside the container, which the Java app retrieves using System.getenv().
+		
+			
+			-- Our Dockerfile:
+			
+				** COPY is the standard, modern instruction for moving files from your local computer (the host) into the image you are building
+				
+				Why 'COPY' instead of 'ADD'?
+				----------------------------
+				
+				While ADD works, the Docker community prefers COPY for simple file transfers because:
+
+					TRANSPARENCY: COPY only does one thing: copies files.
+
+					Avoids "Magic": ADD has extra features, like automatically extracting .tar.gz files or downloading files from URLs. This can sometimes lead to security risks or unexpected behavior if you just want to move a simple Java file.
+				
+						FROM alpine
+						RUN apk add openjdk21
+						ENV PATH $PATH:/usr/lib/jvm/java-21-openjdk/bin
+						WORKDIR /usr/share/udemy
+						COPY Test.java .
+						# Compile it ONCE during build
+						RUN javac Test.java
+						# Use a script or shell to pass the ENV var to Java
+						ENTRYPOINT java Test $NUMBER
+				
+			
+			-- Our java app takes a parameter from the user and prints the calculation as output to screen.
+				
+					public static void main(String[] args) {
+						System.out.println("Received # is " + args[0]);
+						int number = Integer.parseInt(args[0]);
+
+						// print the square of each number
+						for (int i = 1; i <= number; i++) {
+							System.out.println("Square of " + i + " is => " + Math.pow(i, 2));
+						}
+					}
+			
+			-- Build the image
+				
+					[docker build -t umutdegismen/new-app .]	
+			
+			-- Run the image (create the container) and pass the variable
+					
+					[docker run -e NUMBER=10 umutdegismen/new-app]
+					
+					-> NUMBER is the parameter that the command sends it to the Dockerfile.
+					-> Dockerfile takes it and provides as NUMBER parameter to java file.
+				
+		
+	
+		

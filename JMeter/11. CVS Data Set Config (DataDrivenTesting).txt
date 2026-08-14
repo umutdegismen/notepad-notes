@@ -1,0 +1,103 @@
+
+	Datadrive the data into application: (Sending data through an excel.cvs file)
+
+		CVS Data Set Config
+		--------------------
+
+		How to add?
+
+			1. Add an 'HTTP Request' to the 'Test Plan':
+
+				- Right-click on 'Test Plan' add 'Thread Group'
+				- In 'Thread Group' add 'HTTP Request' ('Thread Group/Add/Sampler/HTTP Request')
+				- Click on 'Thread Group' and set 'Number of Threads' the number that you want to repeat the process (how many employees you want to add? 10? 1000?) 
+					
+					- name this 'HTTP Request' as e.g 'Registration'
+					- fill up the fields:
+						
+						Our test case is testing the load of new user creation on "Web Tours" web application:
+							
+							1. Go to the page and simulate the test case manually (not by recording)
+								- Click on login page
+								- Click on 'sign up now'
+								- Enter the information to the fields
+								- Before clicking on action button (e.g."Continue"), right-click/inspect/Network/All then click the action button
+								- click on the page name on the left side panel (e.g. login.pl)
+									- see the 'Headers' section. Here you can see the "Status Code", "Request URL", "Request Method"
+									- see the 'Payload' section. Here you can see the entered information.
+										-click on 'view source' and copy the line. (We will paste them in the jMeter as parameters).
+
+									Now we have these results in chrome developer mode:
+
+									Headers:
+										Request URL: http://10.0.0.38:1080/cgi-bin/login.pl
+										Request Method:POST
+										Status Code:200
+									
+									Payload: 
+										username=&password=&passwordConfirm=&firstName=&lastName=&address1=&address2=&register.x=64&register.y=14
+							
+							2. Fill up the fields in jMeter, with the information we created in chrome: 
+
+								- click on 'HTTP Request' that we named as 'Registration'
+
+								- 'Protocol(HTTP)'		-> 'Headers' section/Request URL/just the request protocol part (HTTP)
+								- 'Server Name or IP'	-> 10.0.0.38
+								- 'Port Number'			-> 1080
+								- 'HTTP Request'		-> POST
+								- 'Path'				-> cgi-bin/login.pl
+								- 'Parameters'			-> To paste the parameters, click 'Add from Clipboard'
+
+							
+							**	We will send more than one user information to the server. And to do that, create an excel.cvs file. 
+
+								To send the data from the cvs file dynamically, we will enter the parameters in this format -> ${parameter}
+
+									e.g., 	username: ${username}
+											password: ${password}
+											country:  ${country}
+
+			
+			2. Add 'CVS Data Set Config' for setting up sending parameters dynamically in jMeter
+
+				- Right-click on 'Thread Group'
+				- In 'Thread Group' add 'CVS Data Set Config' (Thread Group/Add/Config Element/CVS Data Set Config)
+
+			
+			3. Setting up 'CVS Data Set Config' 
+
+				- Click on 'CVS Data Set Config' 
+				- Click on 'Browse' and select the excel.cvs file from 'Filename' 
+				- Enter the variable names that you want to send as parameters (just enter them with commas. No {} or "")
+					 (username,password,country) -> Whatever name we enter here, we need to enter the same in here -> ${parameter}
+				
+				- Recycle on EOF?: False	(EOF: End of File)
+					
+					This means, repeats the test until the rows are finished in excel.cvs.
+					
+					We don't want it to recycle. 
+					
+					Let's say we will create 500 users and we only have 470 users in excel file. If we keep this setting as "True", it will recycle and will send the same information from the beginning and we will get a "user exist" error. That's why we keep this "False" so it will stop after the last row of data.
+
+				- Stop thread on EOF?: True (EOF: End of File)
+					Same here. We want it to stop after the last data row.
+
+			
+			4. Add 'Response Assertion'
+
+				To assert, you can assert the toast message. e.g. "Thank you"
+
+				Enter the expected text in 'Patterns to Text' area and select 'Text Response' in 'Field to Test' area.
+
+				Select 'Contains' for assertion
+
+			
+			5. Add 'View Result Tree' for reporting
+
+				After running the test, you can see the assertion results here.
+
+				To see the Web-Page style result in Response Body, select 'HTML (download resources)' as result type.
+
+
+
+

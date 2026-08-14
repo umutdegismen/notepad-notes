@@ -1,0 +1,19 @@
+1. What is a computer?
+
+Computer is an electronic device which allows us to do many things and tasks  like, writing something, 
+playing games or surfing on Web.
+
+2.What are input and output?
+
+Input is the value that user gives to the program like username and password.
+Output is what we see on the screen.
+
+3-) What is hardware?
+Hardware is any of the computer components. A cpu, a graphics card, a motherboard, a printer. these are all hardwares.
+
+
+4-) What is software?
+
+Any program which we install and use on our phones, tablets or computers called softwares. 
+For example instagram, Microsoft word, drivers for the computer hardwares etc. are called softwares.  
+

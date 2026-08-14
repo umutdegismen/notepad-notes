@@ -1,0 +1,54 @@
+
+
+
+											BUF LIFE CYCLE
+										  ==================
+	
+	New ---> Assigned ---> Open ---> Fixed ---> Retest ---> Verified ---> Closed 
+							|					  |
+							|					  |
+					     Reopened <-----------Bug Found  
+
+
+
+
+													 BUG CLASSIFICATION
+															  |
+													 		  |
+										----------------------|------------------------
+										|			|		  |			   |		  |
+									BLOCKER 	CRITICAL	MAJOR		TRIVIAL		MINOR
+		
+						
+						
+						
+						
+						
+						
+						
+						
+
+												BUG PRIORITY & SEVERITY EXAMPLES
+											   =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+HIGH priority - LOW Severity:
+==============================
+	--> Mis-spell on Neotech Logo. It is not good for the schools prestige and needs to be fixed ASAP, but it doesn't stop or block students to enroll the classes.
+	
+	--> The spelling mistakes that happens on the cover page or heading or title of an application.
+	
+HIGH Priority & HIGH Severity:
+==============================
+
+	--> An error which occurs on the basic functionality of the application and will not allow the user to use the system.
+	--> For Example: Login Issues
+	
+LOW Priority & HIGH Severity:
+==============================
+
+	--> An error which occurs on the functionality of the application (for which there is no workaround) and will not allow the user to use the system but it’s on part of the application rarely used.
+	
+LOW Priority and LOW Severity:
+==============================
+
+	--> Any cosmetic or spelling issues which is within a paragraph or in the report (Not on the cover page, heading, title).

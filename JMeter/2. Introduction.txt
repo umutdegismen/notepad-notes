@@ -1,0 +1,45 @@
+
+
+	- What is performance testing ? 
+		
+		PERFORMANCE testing is a type of testing to ensure software applications will perform well under the particular workload.
+		
+		-> There are different types of performance testing such as 
+			- Load testing : Tests the anticipated realistic loads. e.g. 50 users is normal but it may reach to 100/200 users for a specific event.
+			- Stress testing : Tries to find the limits of the system
+			- Scalability testing (Ölçeklenebilirlik) : 
+			- Capacity testing : How many users will meet the stated performance objectives. If 50 users is normal, there should not be any delay.
+			- Endurance testing : Tests the system in long hours non-stop to see how long is it gonna last without crashing with very normal load.
+			- Concurrency testing : Tests impact of situations where specific actions occur simultaneously (when large number of users log in at the same time)
+									e.g. in beta version of a game, they launge the latests version and everyone tries to download it and the system crashes.
+			- Spike testing : Tests how the system will react under high load in a short time. Sisteme kısa sürede ani yük artışı/düşüşü uygular.	
+			
+			
+		   They are called performance testing.
+		
+	
+	- What is the difference between LOAD testing and STRESS testing ? 
+
+		Load testing is about anticipated loads (ongorulen, beklenen), stress testing is about seeing the limits of the system. Running the tests until breaking the system to see the limits.
+		 
+	
+	- There are many popular tools are availible in the market. 
+		- JMeter	 -> free - open source
+		- LoadRunner -> 2nd popular in the market but it's not free like JMeter
+		- NeoLoad
+		- LoadUI
+			
+	- Why JMeter ? What are the advantages of JMeter ? 
+		
+		- It's an open source tool.
+		- It supports cross platform. It's build in JAVA which means we can use this tool on different platforms like Windows, Mac, Linux etc.
+		- It doesn't need any code knowledge. Scripting isn't essential to use JMeter.
+		- JMeter GUI is more user-friendly.
+		
+	
+			
+		 
+		
+	
+	
+		

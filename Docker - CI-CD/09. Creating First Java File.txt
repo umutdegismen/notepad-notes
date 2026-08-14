@@ -1,0 +1,88 @@
+
+	Bir java class'i olusturalim ve onu 'alpine' uzerinde calistiralim:
+	--------------------------------------------------------------------
+	
+	-> Calistigin Docker folder icinde oldugundan emin olduktan sonra;
+	
+		notepad Test.java	: Notepad acarak java dosyasi olusturur. (kodu manual olarak yazmalisin)
+		
+		javac Test.java		: Hazirladigimiz java dosyasini compiler'in anlayacagi dile ceviren bir tool.
+		
+		java Test			: java dosyasini calistirir.
+							  Yazdigimiz kodda, main metod icinde [System.out.println("Hello World!')] oldugu icin 
+							  [java Test] komutu ekrana "Hello World!" yazar.
+	
+	-----------------------------------------------------------------------------------
+	
+	Yazdigimiz Test.java class'ini "alpine" image'i icinde calistmak icin:
+		
+		-docker run -it alpine	: 'alpine' icinde bir container olustur. Bu komuttan sonra /# container icinde olman gerek.
+		-java					: 'java' komutu ile 'alpine' icinde java yuklu mu degil mi kontrol et.
+		-javac					: 'javac' komutu ile 'alpine' icinde java yuklu mu degil mi kontrol et.
+								   (muhtemelen yuklu degil)
+		-apk					: 'apk', alpine uzerinde calistirmak istedigimiz komutlari calistirmak icin kullandigimiz bir komut.
+		  						  ('apk' yazarak apk komutu ile neler yapabilecegini gorebilirsin)
+		-apk openjdk21			: alpine'a java yukler.
+								  (yuklendikten sonra duzgun yuklendigini kontrol et: java -version)
+		
+		----------	
+		
+		-Dockerfile'i ac ve ayarlari yap. 
+			Dockerfile icindeki ayarlar, image'i run edip container olusturan herkesin default olarak su an yaptiklarimizi otomatik olarak docker'in yapmasini sagliyor. java class constructor mantigi
+				-Belirtilen image dosyasindan container olustur
+				-apk add openjdk21 ile java yukle gibi..
+				
+		-find / -name java : alpine icerisinde java'nin yuklendigi path'i verir. O path'i, Dockerfile icinde ENV olarak yaziyoruz.
+
+		-alpine icinde bir folder sec ve WORKDIR olarak belirle. 
+			Programini calistirmak istedigin bir folder bulamazsan "mkdir [foldername]" ile folder olustur. [WORKDIR /usr/share/udemy]
+		
+		-Alpine icinde calistirmak istedigin Test.java dosyasini goster.
+			[ADD Test.java Test.java]
+				- Test.java dosyasindakileri al (local'den), Test.java(alpine icinde) icine koy.
+			
+		-Container kurulur kurulmaz calistirilacak komutu ENTRYPOINT ile belirle.
+			[ENTRYPOINT javac Test.java && java Test.java]
+				- Bu komutla 2 sey calistiracagiz. 
+					1. javac(compiler)
+					2. yazdigimiz Test.java class'i.
+			
+		-Dockerfile kaydet ve teminalde 'exit' ile container'dan cikis yap.
+				
+				Dockerfile son hali:
+		
+					FROM alpine
+					RUN apk add openjdk21
+					ENV PATH $PATH:/usr/lib/jvm/java-21-openjdk/bin
+					WORKDIR /usr/share/udemy
+					ADD Test.java Test.java
+					ENTRYPOINT javac Test.java && java Test.java
+		
+		-Hazirladigin image'i olustur.
+			docker build -t=umutdegismen/hello-world .
+			
+		-Yukleme yapilacak. [docker images] komutu (tum image'lari listeler) ile olusturdugun imaji goreceksin.
+		-Yukledigin java class'ini calistirmak icin de container olusturman yeterli. 
+			[docker run umutdegismen/hello-world]
+			
+			** docker run -it umutdegismen/hello-world **
+			
+				[-it] Burada ise yaramaz cunku ENTRYPOINT ile programi nasil calistiracagini belirtiyoruz onceden. Yani interactive sekilde calisip calismayacagini -it ile belirleyemiyoruz ENTRYPOINT override ediyor. Eger interactive mode gormek istiyorsak, ENTRYPOINT'i override etmemiz gerekir.
+				
+				docker run -it --entrypoint=/bin/sh umutdegismen/hello-world (default entrypoint=bash burada belirtiyoruz)
+				
+				** UNUTMA!! interactive modda manual olarak entrypoint verdigimiz zaman (debug mode gibi) tum islemleri el ile manual devam ettirmek durumundasin. 
+					-klasore git
+					-javac Test.java && java Test.java 
+					
+		
+		
+
+		
+		
+		
+		
+		
+											
+		
+		

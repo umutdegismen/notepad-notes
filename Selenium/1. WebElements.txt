@@ -1,0 +1,148 @@
+
+--------------------------------
+Class 03
+--------------------------------
+	HTML/XML
+
+	<input type="email" name="mailbox" id="mail" />
+	
+		tag -> input
+		attributes -> type, name, id
+		attribute values -> email, mailbox, mail
+
+	Why do we need Xpath and CSS selector??
+
+		1. Not every element will have an ID, className, name...
+		2. Alpha numeric Id's than may change after refresh/reload
+		3. Using Xpath and CSS we can locate an element using any attribute
+
+
+	Comparison between CSS and Xpath:
+		1. CSS selector is faster that xpath
+		2. CSS is native to the browser, xpath is not
+		3. Xpath has more features in Selenium, but CSS has a good performance
+
+
+----------------------------------------------------------------------------------------------------------------------------
+
+
+	Xpath:
+		1. Absolute - the complete path, from the beginning of the HTML code to the location of the element (/html) 
+			*  not really preferred to use a lot
+
+		2. Relative - a shorter path created using the attributes of the element
+			//tag[@attribute = 'value of the attribute']
+			
+		3. Find element by finding grand child
+		
+			//div[@id='hobbiesWrapper']/div[2]//label -> 
+				
+				//		find the main div				1 step in		2 steps in the div (grandchild element)
+				//		div[@id='hobbiesWrapper']		/div[2]			//label
+			
+
+	Methods in Xpath:
+
+		name[contains(@attribute, 'partial value')]		// Attribute should contain partial value
+		name[contains(text(), 'partial value')] 		// contains a text of value
+		
+		img[starts-with(@attribute, 'partial value') 	// Attribute should start with partial value
+		img[starts-with(text(), 'partial value')]   	// starts with a text of value
+	
+ 
+ 
+ 
+----------------------------------------------------------------------------------------------------------------------------
+ 
+ 
+ 
+	CSS selector
+		- Provides a shorter way to use id, class or other attributes, sometimes it is faster to find/locate the element
+		
+
+
+	tag and id
+		-> tag#id, The generator just gives the #id
+			
+				If we use ID, we use #  -> (By.cssSelector("a[id='current time']"))
+										-> (By.cssSelector("a#current time"))
+				
+				<a id="current time" href="http://someurl/" onlick="s_objectID="http://someurl/">url</a>
+				
+				WebElement element = driver.findElement(By.cssSelector("a[id='current time']"))
+				
+				OR
+				
+				WebElement element = driver.findElement(By.cssSelector("a#current time"))
+				
+
+	tag and className
+		-> tag.className
+		
+					If we use class, we use .   -> (By.cssSelector("a[class='current time']"))
+												-> (By.cssSelector("a.current time"))
+				
+				<a id="current time" href="http://someurl/" onlick="s_objectID="http://someurl/">url</a>
+				
+				WebElement element = driver.findElement(By.cssSelector("a[id='current time']"))
+				
+				OR
+				
+				WebElement element = driver.findElement(By.cssSelector("a#current time"))
+
+	tag and attribute
+	
+		-> tag[attribute='value of attribute']
+
+	Symbols to represent the methods
+	
+		^ -> when used, it is similar to a start-with() method    CSS: [id^='u_0_5' ]                     -> Match only the beginning
+		$ -> when used, it is similar to a ends-with() method     CSS: a[href^='/user/'][href$='/edit/']  -> Matching the beginning
+																											 and the end
+		* -> when used, it is similar to a contains() method      a[href*='/dashboard/']                  -> Match anywhere in the URL
+
+	input[name*='mai'] --> name attribute contains the value 'mai'
+
+
+----------------------------------------------------------------------------------------------------------------------------
+
+
+	// findElement is for locationg several elements at once
+	
+	// in this example , we locate 9 items
+
+	// we get the common xpath and add them in a list
+
+	List<WebElement> elements = driver.findElements(By.xpath("//table[@class='inline_grid choices']/tbody/tr/td/label"));
+
+		// I want to click on Female radio button, and I want to check Saturday checkbox
+
+		for (WebElement element : elements) {
+			String text = element.getText();
+
+			if (text.equals("Female")) {
+				element.click();
+			}
+			else if (text.equals("Saturday")) {
+				element.click();
+			}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

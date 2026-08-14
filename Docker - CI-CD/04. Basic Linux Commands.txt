@@ -1,0 +1,14 @@
+
+	This is the list of some basic Linux commands which I would be using in this course.
+
+		- pwd 			 								: Print the current working directory
+		- ls -al		 								: List all the files & folders
+		- mkdir 'folderName'  							: Create folder
+		- cd 'dirname'	 								: Change to directory
+		- touch 'filename' 								: Create file 
+		- find / -name partialfilename 					: Find files with the name
+		- rm file										: Remove file
+		- rm -r directory								: Remove directory
+		- echo "docker is awesome" > test-result.txt 	: creates a "test-result" txt file on ubuntu.
+		- mv test-resul.txt test-result.txt				: Renames the remote folder name on ubuntu
+		

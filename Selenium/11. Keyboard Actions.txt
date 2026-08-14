@@ -1,0 +1,30 @@
+
+	
+	
+	
+	KEYBOARD Actions
+
+	
+		// Note1: keyDown(); -> It will press/click the key on keyboard
+
+		// Note2: keyUp(); -> It will relase the key on keyboard 
+
+		// Note3: Use "Keys" keyword --> to perfom the methods --> keyDown(Keys.<method>) / keyUp(Keys.<method>)
+
+		// Note4: Since this is a Action like mouse action -> create object of the Actions
+
+		// Note5: You should click on the text box that you want to write something in it. -> action.click()
+
+		// Note6: For press the key use the keyDown() method.
+
+		// Note7: For specify which key you would like press -> keyDown(Keys.<theKeyWantToPress>)
+
+		// Note8: After you press the key you want to take action of it, send key -> keyDown(Keys.<theKeyWantToPress>).sendKeys()
+
+		// Note9: After you done sending the value, relase the key -> keyUp(Keys.<theKeyPressed>)
+
+		// Note10: For making it work use perfom in the end --> perform();
+
+		// Note11: The example code -> action.click(searchBox).keyDown(Keys.SHIFT).sendKeys("s").keyUp(Keys.SHIFT).perform();
+
+		// Note12: If you want to keep pressing and then release use keyDown and Keyup, but otherwise use sendKeys(Key.<theKeyWantToPress>)

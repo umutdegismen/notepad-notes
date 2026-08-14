@@ -1,0 +1,56 @@
+	--------------------------------
+	Class 01
+	--------------------------------
+	Link to install Cucumber
+	https://cucumber.github.io/cucumber-eclipse-update-site-snapshot
+
+	Our Framework:
+	1. Developed using Maven
+		We have 2 source folders: 
+		scr/test/java - we place our java code
+		src/test/resources - java not related files
+
+	2. In src/test/java :
+		pages package - we are following Page Object model using PageFactory. For each page in our application we develop Java class to store WebElement and methods of respective page.
+		
+		utils package:
+		Common Methods - reusable methods/functions to perform on browser
+		Base Class - browser set up and tear down
+		Constants - final variables
+		ConfigsReader - reading property file in which our application configurations are stored
+		ExcelUtility  - to read and write Excel files
+
+	3. In src/test/resources
+		drivers: chromedriver, geckodriver, iedriver
+		configuration file: property file that stores test configuration such as: browser, url, username, password
+		test data: excel file to perform data driven testing
+
+	BDD - is a software development process that uses one common simple language to write system/application requirements that is understandable by technical and non-technical people. Scenarios/user stories are written from end user perspective & system behavior.
+
+	Cucumber uses Gherkin language 
+	Gherkin is available in many different languages(English, Turkish, Russian, Urdu..)
+
+	Gherkin uses specific set of keywords:
+		Given -> precondition
+		When -> action
+		Then -> result/outcome
+		And -> continuing with steps(given, when , then)
+
+	----------------------------------------------------------------
+
+	US12345: As a user I should be able to perform search on Google
+	Acceptance Criteria:
+
+	1) Search by typing
+		Given I navigated to google
+		When I type search item in the search box
+		And I click on Search Button
+		Then I see results of search are displayed
+		And I see number of the search results
+
+	2)  Search by voice
+		Given I navigated to google
+		When I click microphone icon
+		And I speak search item
+		Then I see results of search are displayed
+		And I see number of search results

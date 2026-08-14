@@ -1,0 +1,116 @@
+
+	Properties file in Java
+		- It is a file that has an extension .properties
+		- It is used to store configuration settings such as
+			url, username, password, database credentials etc
+
+	How do we store data in the properties file?
+		username=sabah
+		password=Neotech@123
+
+	--------------------------------
+
+	To handle(read/write) a file in Java 
+		1. Have the file and its path
+		2. Create a FileInputStream/FileOutputStream
+		3. If dealing with a property file, use Properties class in Java
+
+	Properties class extends HashTable class
+		- Data are stored in a form of K = V and no order will be maintained
+
+	To write into an existing file, make sure that you load everything before creating your output stream.
+	Or else, you will lose the data already there.												
+												
+
+												
+														TO READ
+														-------
+		
+		1. 	Location
+			
+				String path = "C:/user/..";
+			
+				// to make it DYNAMIC use a userDirectory to get the direcrtory of the file
+				// "C:\Users\Blu3sm4n\eclipse-workspace\JavaBasic7_Lessons" (this is wht userDirectory get)
+			
+				String userDirectory = System.getProperty("user.dir");
+			
+		2.	Concatinate the userDirectory with the rest of the path (this part is same on every computer) to get the full path
+		
+				String dynamicPath = System.getProperty("user.dir") + "/configs/conf.properties";
+			
+		3. 	Create a FileInputStream object and give it the path
+			
+				FileInputStream fis = new FileInputStream(dynamicPath);
+			
+		4. 	Create Properties object and load it with path
+			
+				Properties prop = new Properties();
+				
+				prop.load(fis);
+			
+		5.	Now I have read the file and loaded all the data in the prop object
+			
+			I can get any data that I want to print out/use on the file
+			
+			// Let's say we have a "url" and a "browser" on the file. Let's print it..
+			
+				To read data we use getProperty() method
+				
+					String url = prop.getProperty("url");
+					System.out.println(url);	
+					
+					System.out.println(prop.getProperty("browser");
+					
+						IN FILE ->	url=https://hrm.neotechacademy.com/
+									browser=chrome
+						
+						OUTPUT 	->	https://hrm.neotechacademy.com/
+									chrome
+						
+	
+		--------------------------------------------------------------------------------------------------------
+	
+						
+														TO WRITE
+														--------
+														
+		1.	NOT to OVERWRITE or DELETE the file, first READ then WRITE!
+			
+				Repeat all the steps that are done in the reading process
+				
+					String userDirectory = System.getProperty("user.dir"); 	-> dir=direcrtory
+					
+					String fullPath = userDirectory + "/configs/conf.properties"	--|
+																					  |
+					FileInputStream fis = new FileInputStream(fullPath);			--|->	These are the main things!
+					Properties prop = new Properties ();							--|				Learn!
+					prop.load(fis);													--|
+					
+		
+		2.	To write new data on PROPERTIES, we use setProperty() method
+		
+				prop.setProperty("....","....");
+				
+				
+		3.	To write the data on FILE, we create an object of  FileOutputSteam  and use store() method
+		
+				 FileOutputSteam fos = new  FileOutputSteam (fullPath); -> do NOT forget to put the FULLPATH as parameter!
+				 prop.store(fos, "we just updated the file");
+				 
+				 
+		
+				
+					
+					
+					
+				
+			
+			
+			
+			
+		
+			
+			
+		
+		

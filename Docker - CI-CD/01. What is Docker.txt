@@ -1,0 +1,41 @@
+
+	-Docker nedir? 
+		
+		Docker, uzak masaustu makinalarda olusturulan sanal container'lar diyebiliriz. Bir cesit virtual machine fakat virtual machine gibi agir degildir. 
+		
+		Testleri veya uygulamaları Docker ile çalıştırmak, VM kurmak kadar ağır değildir; aynı işletim sistemi kernel’ini paylaşır ama uygulamanın çalışması için gerekli bağımlılıkları izole eder.
+		
+		ing.: 
+			
+			Docker is a tool to create, develop and deploy applications using containers. We can basically say that Docker is a light weight VM.
+		
+		- Linux tabanli container'lar MB boyutundadir.
+		- Windows tabanli container'lar GB boyutundadir.
+		
+		
+	-Login credentials:
+		Google account.
+		
+	-Docker Terminologies:
+	
+		TERMINOLOGY				DESCRIPTION													SIMILAR JAVA TERM
+		-------------------------------------------------------------------------------------------------------
+		Dockerfile 	 			The code file - it does NOT have extension					.java
+		Build	  				Creating an image snapshot from the Dockerfile				compile / package
+		Image	  				VM snapshot													.class / .jar
+		Tag						Version of image / Release									jar file version
+		Container				Light weight VM
+								It's created from an image									instances / Objects
+								We can create multiple container from same image	
+		DockerHub				Image Repository that we push after creating the image 		GitHub Repository
+								so that others can pull and create multiple containers
+								using the run command.										
+		
+	
+		
+		
+	
+		
+		
+	
+		

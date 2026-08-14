@@ -1,0 +1,57 @@
+
+	Docker Compose:
+	---------------
+	
+		First, we need a 'yaml' file created in the project folder and named "docker-compose.yaml".
+		
+		To create this yaml file, use this template:
+			
+			docker-compose.yaml:
+			--------------------
+			
+				version: "3"
+				services:
+				  [service-name]: 
+					image: [image-name]
+					container_name: [some-name]
+					entrypoint: ["command to invoke"]
+					depends_on:
+					- [any-other-service]
+					working_dir: /a/b/c
+					environment:
+					- KEY1=value1
+					- KEY2=value2
+					ports:
+					- 80:80
+					- 1234:1234
+					- 8080:3344
+					volumes:
+					- ./relative-path/host-path1:/a/b/c
+					- /abolute-path/host-path234:/c/d/e
+					
+					
+				
+		Docker compose amaci, birden fazla container’dan oluşan bir uygulamayı tek komutla tanımlamak, çalıştırmak ve yönetmektir.
+		
+		Ornegin;  	
+		
+			web:
+			  image: nginx		)															
+			api:				)												   docker run ...)	Birden fazla 'run' komutu kullanmaliyiz.
+			  image: my-api		)>------> Bu uygulamalari calistirmak icin ------> docker run ...)> Bunu onlemek icin Docker Compose kullaniyoruz.
+			db:					)												   docker run ...)	
+			  image: postgres 	)
+					
+		
+		
+	COMMANDS:
+	---------
+				
+		docker compose up				: Brings all the resources up. Starts the container
+		docker compose down				: Stops, DELETES the container. Deletes the default network.
+		docker compose stop				: Stops the containers. Containers and the default network STAYS.
+		docker compose stop -t 30		: Gives 30seconds grace period
+		docker compose kill				: If the container locks and doesn't respond, kills it.
+		
+		It basically starts-stops the "docker-compose.yaml" file. 
+		So, all the settings are being set in the yaml file.

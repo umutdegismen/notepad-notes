@@ -1,0 +1,19 @@
+
+
+STLC 
+-----
+
+What is STLC ? 
+
+(Software Testing Life Cycle)
+
+1. Requirement Analysis - Interacting with various stakeholders like Client, Business Analyst, System Analyst, Technical Lead to understand the requirements in detail to develop the project.
+During this phase, the QA takes an important decisions like what are the testing types&techniques
+
+2. Test Planning
+3. Test Case Development
+4. Environment Setup
+5. Test Execution
+6. Test Closure
+
+

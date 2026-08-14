@@ -1,0 +1,236 @@
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//	
+//	4 Components of REQUEST:
+//	
+//		1.Http method 	-> GET/POST/PUT/PATCH/DELETE
+//		2.URI			-> BaseUrl + Endpoint + (path/query parameter)
+//		3.Header 		-> In headers we say the body we are providing is in JSON format. (Content-Type=json)
+//		4.Request Body 	-> We don't always provide a body. The documentation says us if we will provide a body or not.
+//		 (Payload) 
+//
+//	3 Components of RESPONSE: 
+//		
+//		1.Status Code
+//		2.Header		-> List of things such as "Content-Type=json" (Date,Server,Content-Encoding etc.)
+//		3.Response Body -> The result body of what we request. 
+//						   for example:
+//						   "result":{
+//								"items":[
+//									{
+//										"name": "Python",
+//										"id": 332,
+//										"instructor": "Umut"
+//									}
+//
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+	GET Request:
+
+
+		Request:	GET - URI - PARAMS ---> Send
+		Response:	RESPONSE CODE, MESSAGE, PAYLOAD (BODY)
+		
+		
+		click on the command (GET LIST USERS)
+		click on Request ->/api/users?page=2
+		It will navigate a website
+		get the complete url and paste on Postman
+		you should see "200 OK" and JSON format code in Postman
+		
+		{
+			"id": "519",
+			"createdAt": "2024-10-26T18:24:58.759Z"  ---> JSON format
+		}
+        
+        
+################################################################        
+
+IDEMPOTENT in API:
+    
+    Idempotent : Getting the same result over and over again with sending the same request.
+                 As long as we send the request, we will get the same result. That's why, GET method is an IDEMPOTENT method.
+   
+    GET request     -> Idempotent
+    POST request    -> NOT Idempotent
+    PUT request     -> Idempotent (In general PUT request is Idempotent depends on how developers develope API)
+    DELETE request  -> Idempotent (In general DELETE request is Idempotent depends on how developers develope API. 
+                                   For example, first time I delete something it says OK, second time I try to delete the same thing it says "There is no such element to delete")
+
+################################################################
+
+
+	POST Request / PUT Request / PATCH Request
+
+
+		Request:   POST/PUT/PATCH - URI - PARAMS - PAYLOAD (BODY) ---> Send 
+		Response:  RESPONSE CODE, MESSAGE, PAYLOAD
+
+
+		-copy url
+		-copy the body 
+			{
+				"name": "morpheus",
+				"job": "zion resident"
+			}
+		-select on Postman 'body'
+		-select on Postman 'raw'
+		-select on Postman 'JSON'
+		-paste the JSON code to the body in Postman
+			{
+				"name": "morpheus",
+				"job": "zion resident"
+			}
+
+################################################################	
+
+	DELETE: 
+		Request: DELETE  - URI - PARAMS  ---> Send 
+		Response: RESPONSE CODE, MESSAGE
+		
+################################################################	
+
+	Adding new Request on Postman:
+		-click on ... (View More Actions) 
+		-click 'Add Request'
+
+################################################################	
+		
+	Responses:
+	
+		200 -> OK
+		201 -> Created
+		204 -> Deleted / Content Removed
+		
+		400 -> Bad Request (ex. "there is no such a method")
+		401 -> Unauthorised Error
+		404 -> Not Found
+		
+################################################################
+
+
+	Authorization:
+	
+		When we try to get the data in Students class, we will have Authorization problems. 
+		
+		We have to authorize ourselfs in Postman by creating token authotentication.
+		
+		-Copy the URI 'TokenAuth' from swagger and create a POST request in Postman in Authorization section.
+		
+		-Provide the data for in 'Body/raw/JSON' in Postman 
+			{
+			  "userNameOrEmailAddress": "Tester",
+			  "password": "Student@Neo",
+			  "rememberClient": true
+			}
+		
+		-Copy the 'accessToken' 
+		-Go back to 'Get All Students' request and paste the token in Authorization section.
+		-Select 'Bearer Token' in 'Type' section and paste the token you've copied and click 'Send'.
+		-Now, you will see the 'Students Data'.
+		
+		*** The token will be available 24h ***
+		
+##############################################################################################################################
+
+
+	Environments: (Like the Constants variables in Java)
+
+		"Environment" tab is located on the very left side of Postman under "Collections" tab.
+		
+		By clicking "+", we create a new environment.
+		
+		Variable	 :		--> BaseUrl								--> We can name it anything. 
+		Type		 :		--> default								--> default or secret
+		Initial Value:		--> https://neo-api.azurewebsites.net	--> We keep the main url of our API
+		Current Value:		--> https://neo-api.azurewebsites.net	--> We keep the main url of our API
+		
+		Syntax to use:		--> {{BaseUrl}}/api/services/app/Class/GetAll
+		
+		*** MAKE SURE THAT YOU SELECT THE RIGHT ENVIRONMENT ON THE RIGHT-TOP-CORNER IN POSTMAN ***
+			
+			
+##############################################################################################################################
+	
+	Parameters:
+	
+		API Documentations tells us if we need to nse 'Path Parameters' or 'Query Parameters'
+	
+		PATHS Parameters:
+	
+			Id *
+			integer($int32)
+			(path)				----> TELLS US IF IT IS PATH Parameter OR QUERY Parameter
+			
+				If you see {id} in uri like: "/api/services/app/Class/Get/{Id}"
+				
+				That means we need to give a parameter to see the data such as "/api/services/app/Class/Get/327"
+				
+				When it is a PATH parameter, we use "/" at the end of api: /Get/327
+				
+				Part of the URL path itself. We send the parameter at the end of the Uri / Endpoint
+				Used to specify a data like ID. (Mandatory Data) (getStudent/Id=337)
+		
+		QUERY Parameters:
+			
+			Id
+			integer($int32)
+			(query)				----> TELLS US IF IT IS PATH Parameter OR QUERY Parameter
+			
+				If it needs a QUERY parameter, we need to send a QUERY parameter like: "/api/services/app/Student/Get?id=317"
+				
+				When it is a QUERY parameter, we use "?" at the end of api: /Get?id=317
+				
+				We send the parameter at the end of the Endpoint by using '?' 
+				
+				Usually used for optional filters or configurations.
+				Used to filter, sort, or modify the data (Optional Data)
+				
+################################################################
+
+    CRUD OPERATIONS:
+    
+        Genaral Name    SQL         API
+    -------------------------------------
+    C   Create          INSERT      POST
+    R   Retrieve/Read   SELECT      GET
+    U   Update          UPDATE      PUT/PATCH
+    D   Delete          DELETE      DELETE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

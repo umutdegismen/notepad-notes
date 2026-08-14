@@ -1,0 +1,18 @@
+
+	Appium (posibble) Interview Questions
+	------------------------------------
+	
+	1. What are the benefits of Appium ?
+		
+		Appium Features
+
+			-Cross-platform compatibility
+			-Open source
+			-Supports multiple programming languages
+			-No app modification required
+			-Integration with CI tools
+			-Supports native, hybrid, and mobile web applications
+			-Real device and emulator/simulator testing
+			-Built-in inspector for element identification
+			-Parallel execution of tests
+			-Wide range of Appium client libraries

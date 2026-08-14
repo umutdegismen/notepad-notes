@@ -1,0 +1,30 @@
+	
+	Multiple Environment & Compose Files:
+	-------------------------------------
+	
+	Multiple environment files:
+	---------------------------
+	
+		NUMBER=3 docker compose up					: providing parameter to ${NUMBER} -> ONLY FOR DEFAULT ENVIRONMENT
+		
+		docker compose --env-file dev.env up		: composing the dev.env file to get the paramaters such as VERSION, PORT etc..
+		docker compose --env-file qa.env up			: same here, qa.env containter is being created.
+		docker compose --env-file dev.env down		: closes the connection, removes the network and the container
+	
+	
+	
+	
+	Multiple compose files:	
+	-----------------------
+	
+		In some projects, we may have multiple services (more than 10-15 services such as alpine, nginx, busybox etc..) in a compose-file.
+		
+		To keep everything organized, we may want to keep the settings of the services in seperate compose-files for each service.
+		
+		So, to achive that, we create multiple compose files and name them as "[service-name.yaml] e.g: "nginx.yaml, alpine.yaml"" instead of "docker-compose.yaml" 
+	
+		Since we don't have default compose file here, we can not start the container with [docker compose up] command. That's why we use '-f'.
+			
+		docker compose -f nginx.yaml up				: starts the yaml file and creates the container
+		docker compose -f nginx.yaml up -d			: runs the container in the BACKGROUND mode	
+		docker compose -f nginx.yaml down			: stops and clears the containers and networks.

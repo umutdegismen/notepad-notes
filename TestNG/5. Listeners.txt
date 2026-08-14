@@ -1,0 +1,48 @@
+
+--------------------------------
+Class 04
+--------------------------------
+
+- Jars we have used:
+	- Selenium 
+	- Appache POI - Dealing with Excel 
+
+- We created the method takeScreenshot() - in CommonMethods class
+- ExcelUtility: Class that gets the data from Excel files and stores it into a 2D-array
+
+Test Parameterization
+Data Driven Test
+1. Testing same functionality with different sets of data
+2. Keep data separate and code separate, so when we change data we don't affect the code/logic in the test
+
+In TestNG DDT can be achieved using @DataProvider
+Steps to achieve DDT:
+1. Create a method that will return data in 2D-array 
+2. Annotate that method with @DataProvider
+3. Pass it to the parameter/attribute of the @Test method
+
+--------------------------------
+
+TestNG Listeners - listen to every event that is happening in the code. Based on what happens we can trigger specific action.
+
+If test passes --> do something
+If test fails --> do something else
+
+Listeners can be implemented at the class level (individual to each class) or at the project level (applicable for all test classes within the project)
+
+-Listeners:
+	-OnStart		- after class initialization, before any other method
+	-OnFinish		- after all methods are executed, before class finishes
+	-OnTestStart	- before a @Test method starts
+	-OnTestSuccess	- only when a test is successful (passed)
+	-OnTestFailure	- only when a test fails
+
+We implement Listeners in two ways: 
+
+1. In java class
+@Listeners(package.ListenerClassName.class)
+
+2. In xml file
+<listeners>
+	<listener class-name="package.ListenerClassName"></listener>
+</listeners>

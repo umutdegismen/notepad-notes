@@ -1,0 +1,75 @@
+
+	RECAP OOP
+===============
+	
+	CLASS --> is a template/blueprint 
+				- can have features (variables)
+				- can have behaviors (methods)
+				
+				
+	OBJECT --> an instance of a class
+	
+	
+	INHERITANCE --> when a child class would inherit all the features and behaviors from a parent
+					
+					4 types: 
+						- single 
+						- hierarchical
+						- multilevel
+						- multiple 
+	
+	POLYMORPHISM --> the same object taking different shapes
+			
+			1. method overloading
+				-- static/early/compile 	- same method name, different number/type/order of parameters within the same class
+			
+			2. method overriding
+				-- dynamic/late/runtime     - requires inheritance, exact same method in parent and child classes
+		
+	ABSTRACTION	 --> the process of hiding implementation details
+			1. Abstract classes (partial abstraction)
+			2. Interfaces		(full abstraction) 
+			
+			** to differtiate easy between Interfaces and abstract classes:
+					-- EVERY VARIABLE in an interface must be PUBLIC STATIC FINAL
+							-- this means not instance variables
+								-- this means no constructor
+									-- this means we cannot create an object of it
+					-- every method must be abstract
+	
+	ENCAPSULATION	-- data hiding  -- we are wrapping the variables (making them private) and coding methods to allow the users to 
+									   work with them
+	
+					how do we do it: 
+					-- make the variables private
+					-- implement public GETTERS and SETTERS
+						
+	ACCESS MODIFIER
+		
+		Visibility:
+		
+			public 		-- seen anywhere in the project - seen from everywhere
+			private 	-- seen only WITHIN THE CLASS - the most restricted
+			
+			default 	-- when we don't put explicitly an access modifier -- WITHIN PACKAGE - seen only inside the package
+
+			protected 	-- if there is not inheratance involved, protected is exactly same as the default
+						-- if there is inheratance then we can access the protected members from outside the package 
+						-- seen only inside the package (except inheritance)
+
+
+			static   	- this variable belongs to the class  
+			instance  	- this variable is dependent on each instance/obj
+			local    	- variable only used in a block of code
+
+		Same idea is true about the methods:
+	
+			static   	- method that belongs to the class
+						- cannot contain instance variables
+			instance 	- method that is different for each instance
+
+			Static: for all objects, IT KEEPS ONLY ONE COPY
+
+
+ 
+

@@ -1,0 +1,121 @@
+
+	
+	 ASSERTIONS:
+	-------------
+	
+	
+	1. RESPONSE ASSERTION:
+	  ====================
+	
+		
+		
+		FIELD TO TEST Elements:	(The elements that we use to specify the assertion type)
+		-----------------------
+		
+
+		-> 	Test Response:
+			---------------
+
+			Add 'Response Assertion'
+				- right click on the test step that we want to assert. For example 'authenticate' (in Thread Group).
+				- Add / Assertions / Response Assertion
+				
+			Steps we need to do for assertion:
+			
+				1. First we need to copy the 'expected result' from response body or type manually.
+				2. After clicking on Response Assertion, select 'Text Response' in 'Field to Test' section.
+				3. Select 'Contains' in 'Pattern Matching Rules' 
+				4. Click 'Add' and 'Add from Clipboard' 
+					
+					"Welcome to the Secure Area. When you are done click logout below."
+					
+					** If we want, we can add multiple assertions!
+			
+		
+		->	Response Code:
+			---------------
+		
+				5. Add one more Response Assertion to assert the response code is 200 (status code).
+					- Select 'Response Code' in 'Field to Test' section.
+					- Select 'Equals' in 'Pattern Matching Rules' 
+					- Click 'Add' and type 200
+			
+			To run the test, click on 'View Results Tree' then click on 'Run'.
+			
+			If we see GREEN result, it means everything PASSED. 
+			
+			If we remove the Cookies Manager, we should see a RED result in the Vew Results Tree. Because, jMeter won't store the cookies and won't be able to find the 'expected' result. That's why it will fail.
+				
+			- The result when we delete the 'cookies manager':
+				
+				Assertion error:false
+				Assertion failure:true
+				Assertion failure message:Test failed: text expected to contain /Welcome to the Secure Area. When you are done click logout below./
+				
+			
+		
+		->	Response Headers:
+			------------------
+			
+				6. Add one more Response Assertion to assert a result from the Response Header.
+					- Select 'Response Header' in 'Field to Test' section.
+					- Select 'Contains' in 'Pattern Matching Rules' 
+					- Click 'Add' and Copy-Paste a result from response header.
+						
+						-> Click the step that you want to assert (in our case 'authenticate' step in our test)
+						-> Click Response Data / Response Headers
+						-> Copy the result that you want to assert.
+							(for example: X-Content-Type-Options: nosniff OR Content-Type: text/html;charset=utf-8)
+							
+		
+		->	Request Headers:
+			-----------------
+		
+			This is the option we need to select to pass the inputs.
+			
+			
+	
+		PATTERN MATCHING RULES Elements:	(The elements we use for assertion)
+		---------------------------------
+			
+			- Contains	:	If actual CONTAINS the expected value
+			- Mathces	:	Regular expression
+			- Equals	:	If actual is EQUAL to expected value. It should be EXACT same value!
+			- Substring	:	It should be a Substring
+			- Not		:	NEGATIVE validation. ACTUAL value should NOT be the same with EXPECTED to return the result true.
+		
+	
+	
+	
+	2. SIZE ASSERTION:
+	  =================	
+		
+		Bir web service request yaptık diyelim ve response JSON verisinin en az 500 bayt olması gerektiğini düşünüyoruz. 'Size Assertion' kullanarak, 'Size in byte'in 500 bayttan büyük olup olmadığını kontrol edebiliriz. Eğer 'Size in byte' 500 bayttan küçükse test fail olur.
+		
+		"Size Assertion"i assert edecegimiz test step'ine sag tiklayip ekliyoruz. 
+			
+			- right click on "authenticate" / add / assertions / size assertion
+	
+	
+	
+	3. DURATION ASSERTION:
+	  ====================
+	  
+		We add this assertion type by right clicking on a specific request / test step to assert the duration of a specific request like "authenticate".
+		
+			- right click on "authenticate" / add / assertions / duration assertion
+			
+		We use this assertion to assert the "LOAD TIME". How much time that did "authenticate request" take to get the response. 
+		
+		This is what we do in general load testing. 
+		
+		HOW MUCH TIME THAT REQUEST IS TAKING TO GENERATE RESPONSE.
+		
+		We can see how much time does is take to generate the response under "Sampler Result" tab in "View Result Tree". 
+			
+			-> Load time:38
+			
+		So, we put a duration time in the "Duration in miliseconds" field. THIS IS THE MAX LIMIT. If the load time takes longer than this time we provided, the test will FAIL.
+		
+		
+		

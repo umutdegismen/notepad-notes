@@ -1,0 +1,63 @@
+----------
+Class 02
+----------
+
+1. git help
+    What it does: Provides access to Git’s built-in help system, allowing you to view documentation and get help on specific Git commands and concepts directly from the terminal.
+    When to use: Use this command when you need quick access to the official documentation or help on a specific Git command or concept. For example, you can type git help <command> to get detailed information about a specific command.
+
+2. git log
+    What it does: Displays the commit history of the repository, showing a chronological list of commits along with commit messages, authors, dates, and commit hashes.
+
+    When to use: Use this command to track changes, understand the history of your project, or find specific commits. It's particularly useful for reviewing the evolution of your project.
+
+    Common Variations:
+    git log --oneline		: Displays a condensed view of the commit history, with each commit on a single line.
+    git log --graph			: Shows a graphical representation of the commit history, useful for visualizing branches and merges.
+    git log -p					: Shows the patch (diff) introduced in each commit.
+		git log 						: normal
+		git log --stat 			: detaylı
+
+3. git clone
+    What it does: Creates a copy of an existing repository in a new location, cloning both the repository’s files and its entire history.
+
+    When to use: Use this when you need to create a new working area on your local machine by cloning a repository from a remote server, such as GitHub. It is commonly used to start working on an existing project.
+
+    Key Points:
+    The cloned repository includes a full copy of the project’s history.
+    You’ll have your own local repository that you can work in independently of others.
+    
+		Example: git clone https://github.com/user/repo.git
+
+4. git pull
+    What it does: Fetches changes from a remote repository and merges them into your current branch. It combines the actions of git fetch and git merge.
+    When to use: Use this command to update your local repository and working area with the latest changes from the remote repository, keeping your work in sync with others.
+
+5. git fetch
+    What it does: Fetches changes from a remote repository, updating your local repository with the latest commits from the remote, but does not merge them into your current branch.
+
+    When to use: Use this when you want to see the latest changes on the remote repository without merging them right away. It’s a safer alternative to git pull when you want to review changes before applying them.
+
+    Key Difference from git pull:
+    git fetch updates your local repository’s information but does not alter your working area.
+    After git fetch, you can decide when and how to merge the fetched changes.
+
+ 6. git stash
+    What it does: Temporarily saves changes in your working directory that are not ready to be committed. This allows you to switch branches or perform other tasks without losing your work in progress.
+
+    When to use: Use this when you need to temporarily set aside your current changes (e.g., to address something urgent on another branch) without committing them.
+
+    Common Situations:
+    Example: You’re working on a feature, but need to pull changes from the remote repository to fix an issue without committing your incomplete feature. Use git stash to store your changes temporarily.
+    Key Points:
+   
+   Basic Commands:
+    git stash: Stashes the modifications in your working directory (but does not include new untracked files).
+    git stash pop: Reapplies the latest stashed changes and removes them from the stash list.
+    git stash apply: Reapplies the latest stashed changes but keeps them in the stash list.
+    git stash list: Displays all stashes.
+    git stash clear: Removes all stashes from the list.
+    
+	Advanced:
+    git stash --include-untracked: Stashes both tracked and untracked files.
+    git stash pop stash@{1}: Applies a specific stash from the list (in this case, the second one).

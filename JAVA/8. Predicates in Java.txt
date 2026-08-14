@@ -1,0 +1,23 @@
+
+	
+	Predicate<T> in JAVA 
+	----------------------
+	
+		List<Integer> num = numbers
+				.stream()
+				.filter(x-> x<13)
+				.collect(Collectors.toList());
+				
+		- Java'da Predicate<T> interface'i, T türünde bir girdi alıp, boolean döndüren fonksiyonel bir interface'tir.
+		
+		- "x -> x < 13" ifadesi, bir Predicate<Integer> olarak davranır çünkü x bir Integer (<T> tipi) ve sonuç bir boolean (true ya da false).
+		
+		- Bi ifadede kullanilan "x-> x<13" bir lambda ifadesidir ve bu ifade PREDICATE interface'ini temsil eder.
+		
+		- .filter() metodu, bir Predicate bekler.
+		
+		
+		İstersek bu ifadeyi şu şekilde de yazabiliriz:
+			
+			Predicate<Integer> isLessThan13 = x -> x < 13;
+			List<Integer> num = numbers.stream().filter(isLessThan13).collect(Collectors.toList());

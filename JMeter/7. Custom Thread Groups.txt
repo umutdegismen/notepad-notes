@@ -1,0 +1,75 @@
+	
+	CUSTOM THREAD GROUPS:
+		
+		-> We installed ext thread groups from JMeter marketplace (Plugins Manager).
+		
+			- Custom Thread Groups
+		
+		-> How to use them ? 
+			
+			- Right click on Test Plan / Add Threads(Users) /   - Concurrency Thread Groups
+																- Ultimate Thread Group
+																
+																
+
+	1. CONCURRENCY THREAD GROUP: (Take values as sample values)
+		
+		-Target Concurrency			: 60  	-> User count (ayni anda kullanim sayisi)
+		-Ramp Up Time(sec)			: 30  	-> In how many seconds should 60 users ramp-up and hit the server ? (30 seconds long)
+											   Which means, after 30 seconds, all users (60 users) will be on the server.
+											   How many users will hit the server in 30 secs ? Depends on Ramp-up Steps Count.
+											   If we set the Ramp-up Steps Count as 3, 20 users will hit the server on each Ramp-up Steps.
+			
+			** Ornegin, Black Friday saat 12'de basliyor. Tum kullanicilarin 12:00 da gelmesini beklemezsin. Kimi 12:10'da gelir, kimi 12:20, kimi 12:30'da. O yuzden Ramp-up Time'i 30 saniye degil de 30 dakika olrak ayarlarsin. Bu durumda 12:00 ile 12:30 arasinda, 30 dakika icinde tum kullanicilarin sisteme girdigini simule edebilirsin.
+											
+											
+		-Ramp-up Steps Count			: 3   	-> We'll repeat these steps 3 times in a row.
+		-Hold Target Rate Time (sec)	: 180 	-> 60 kullanici 180 saniye boyunca server'a bagli kalacak anlaminda.
+		
+			Here is the graph of these entries for 60 users: 
+						
+				60 			---------------------- -> Hold Target Rate Time
+			  (users)		|
+							| -> Ramp-up
+							|
+				40		----
+						|
+						| -> Ramp-up
+						|
+				20	----
+					|
+					| -> Ramp-up
+				0	|
+				
+				
+	2. ULTIMATE THREAD GROUP: (Take values as sample values)
+		
+		First, we need to click on 'Add Row'
+		
+		-Start Threads Count : 50	-> User count
+		-Initial Delay (sec) : 5	-> Ilk gecikme. Testi baslattigimizda ilk 5 saniye hic bir kullanici sisteme giris yapmiyor. 
+		-Startup Time (sec)	 : 30	-> "Initial Delay"den sonra testin basladigi andan intibaren "User Count"a ulasacagi sure.
+										Yani, 5 saniye bekleyecek ve test baslayacak. Kullanicilar sisteme giris yapmaya baslayacak.
+										50 kullanicinin tumunun giris yapmasi, 30 saniye surecek.
+		-Hold Load For (sec) : 60	-> 50 kullanici 60 saniye boyunca server'a bagli kalacak anlaminda.
+		-Shutdown Time		 : 10	-> Shutdown 10 saniyede gerceklesiyor. Gercek senaryoda, serverdaki herkes ayni anda serverdan
+									   ayrilmadigi icin, Shutdown time kullaniyoruz. Serverin sifirlanmasina kadar gecen sure.
+									   
+		These numbers reflect a real time scenario. Here is the graph of these entries: 
+		
+		
+	  Users								   Hold Load For
+		50							     ________|_______
+		45							   _|				 \
+		40							 _|					  \
+		35						   _|					   \
+		30						 _|							\
+		25	Initial Delay	   _|   						 \	-> Shutdown Time
+		20		^			 _|								  \
+		15	   /|\		   _|								   \
+		10		|		 _|									    \
+		5		|	   _|										 \
+		0	____|_____|											  \
+
+				
+			

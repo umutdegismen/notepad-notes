@@ -1,0 +1,120 @@
+
+	COLTROLLERS:
+	
+		Controllers are basically a storage-container where we can store all our requests. It is a folder.
+		
+		THE CONTROLLERS WE MOSTLY USE:
+		------------------------------
+		
+		1.	- Recording Controller		->  When we start recording, it stores all samplers in this controller.
+											We just sort them in other controllers.(Login, flight search, reservation, payment) etc.
+			
+		2.	- Transaction Controller	->	We use this to store the main steps in each transaction controller.
+											(Login, flight search, reservation etc.) 
+			
+		3.	- Simple Controller			->	Very similar controller to Transaction Controller.
+											The only different is, Simple Controller doesn't record the steps for reporting. 
+											Requests(samplers) are not able to see in the Aggregate Report under one lable.
+											
+				For example, we created 'Simple Controller' and put 2 samples under it (69/cgi-bin/welcome.pl and 70/cgi-bin/nav.pl). 
+				After we run the test, we'll see these samplers under the 'Simple Controller' we've created. 
+				But, if it would have been a 'Transaction Controller', then we should've seen them under one label in the Aggregate Report such as 'Logout'.
+			
+		4.	- Module Controller			->	If we want to repeat a step, we select it under 'Module Controller'
+											Let's say we want to repeat the "Add Employee" steps. We use "Module Controller"
+											
+		5.	- InterLeave Controller		->	One sampler per Iteration is executed in top to bottom order.
+											Cucumber'daki Scenario Outline gibi bir calisma yapisi vardir.
+											
+											Direkt olarak tekrarlatmak istedigimiz Trancsaction Controller'i copy paste yaparak InterLeave Contoller icine atiyoruz. (1'den fazla kere-kac kere add-employee, flight search gibi adimlari tekrarlatacaksak)
+
+
+											
+			////////////////////////////////////////////////////////////////////////////////////////////////
+			//	
+			//	**** InterLeave Contoller calismasi icin, THREAD GROUP -> LOOP COUNT en az 2 olmali ! ****
+			//	
+			////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+			
+				Ornegin, AddEmployee ya da farkli destinasyonlara ucus reservasyonu gibi senaryolar test ederken, sadece icine koydugumuz "sampler"lari (adimlari) iterate eder. 
+					
+				Yani diyelim ki, adimlar:	1. adim ->  login
+											2. adim ->  destinasyon secimi-1
+														destinasyon secimi-2
+														destinasyon secimi-3
+											3. adim ->	payment
+											4. adim ->	logout
+											
+				Bu drumda InterLeave Controller	 ile yaptigimiz testde calisma siralamasi soyle olur;
+					
+					1. adim ->  login					|
+					2. adim ->  destinasyon secimi-1	| -> LOOP-1
+					3. adim ->	payment					|
+					4. adim ->	logout					|
+					
+					5. adim ->  login					|
+					6. adim ->  destinasyon secimi-2	| -> LOOP-2
+					7. adim ->	payment					|
+					8. adim ->	logout					|
+					
+					9.  adim ->  login					|
+					10. adim ->  destinasyon secimi-3	| -> LOOP-3
+					11. adim ->	payment					|
+					12. adim ->	logout					|
+		
+		
+		6.	- Runtime Controller		->	Runtime Controller controls the execution of its samplers/requests for the given time.	
+		
+		
+		
+		CONDITION CONTROLLERS:
+		----------------------
+		
+		
+		Steps to add a Controller:
+			
+			1. Right click Test Plan
+				
+				- Add / Non-Test Elements / HTTPS test Script Recorder
+				- Add / Threads / Thread Group
+			
+			2. Right click Thread Group
+				
+				- Add / Logic Controller / any controller you need. 
+				
+				
+			*** We will use 'RECORDING CONTROLLER', 'TRANSACTION CONTROLLER', and MODULE CONTROLLER	the most.
+				
+		
+			For example, we can create 3 controller for a flight reservation action.
+			
+				1. - Login islermleri icin 		-> Login Controller
+				
+				2. - Search for flight 	
+				   - give all the details 		-> Flight Selection Controller
+				   - select flight 	
+				
+				3. - Passenger details
+				   - Payment information 		-> Reservation Controller
+				   - Confirm booking
+
+
+		If we want to see a more clear Aggregate Report, we can click 'Generate parent sample' to see only the Controllers results.
+			
+			- Berfore running the test, click on each Transaction Controller, then click on Generate parent sample.
+			
+		
+		** In real world, the client give you the requirements like;
+			
+			- Enter credit card details, enter minimum payment 							-> Transaction Controller
+			- Scheduling the payment on specific date and selecting funding source		-> Transaction Controller
+		
+		So, this allows us to see the test results (Aggregate Report) simpler and more clear. 
+		
+			
+				
+		
+			
+		

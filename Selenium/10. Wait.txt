@@ -1,0 +1,114 @@
+
+
+// Note1: implicitlyWait() 	-> It help us to set time for the page load 
+
+// Note2: implicitlyWait() 	-> finElement() and finElements() immediately try to locate the element.
+								If the element has not load until then, the code will throw an exception
+
+// Note3: implicitlyWait() 	-> will wait up to 15 second | thread.sleep -> has to wait until the second you entered done.
+
+// Note4: implicitlyWait() 	-> right after the driver initialize
+ 
+// Note5: implicitlyWait() 	-> you do not need to write this over and over again. It will be work until the driver quit.
+
+// Note6: pageLoadTimeout() -> waits for the page to load
+
+// Note7: Use it only when you use drivet.get() driver.navigate().to()
+
+
+
+--------------------------------
+Class 08
+--------------------------------
+
+	Synchronization:
+		Matching automation tool speed with the web application speed
+
+	StaticWait: Thread.sleep(2000);
+
+	Types of wait:
+		Implicit
+		Explicit
+			- WebDriverWait
+			- FluentWait
+			
+			
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	
+	-IMPLICIT WAIT:  
+	
+	*What it does: 	While trying to find an element, we say, do not give up for 10-15 sec before throwing an exception
+	
+		Is a way to tell the driver that when finding the elements (only using findElement and findElements) and they are not immediately there, to wait for some time. If they are not there even after the waiting time, then throw exception. 
+
+	We have been using implicit wait of 0 seconds. 
+	You can set a new implicit wait time:
+	
+	driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+
+	If element is found before reaching the end of the set time, then the remaining time is ignored the execution proceeds. 
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+	-EXPLICIT WAIT: 
+	
+		WebDriverWait
+	   ~~~~~~~~~~~~~~~
+	   
+		Is used to tell the driver to wait for specific conditions to happen. When the time to wait is reached and the conditions has not happened yet, then exception is thrown. 
+
+	WebDriverWait works with ExpectedConditions class
+
+	How to use it: 
+
+	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+	wait.until(ExpectedConditions.--------);
+	
+	
+	// wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("button1")));
+	OR 
+	// wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("button1"))));
+	
+	
+	--------------------------------
+	Different Conditions can be used
+	--------------------------------
+	alertIsPresent()
+	elementSelectionStateToBe()
+	elementToBeClickable()
+	elementToBeSelected()
+	frameToBeAvaliableAndSwitchToIt()
+	invisibilityOfTheElementLocated()
+	invisibilityOfElementWithText()
+	presenceOfAllElementsLocatedBy()
+	presenceOfElementLocated()
+	textToBePresentInElement()
+	textToBePresentInElementLocated()
+	textToBePresentInElementValue()
+	titleIs()
+	titleContains()
+	visibilityOf()
+	visibilityOfAllElements()
+	visibilityOfAllElementsLocatedBy()
+	visibilityOfElementLocated()
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+	FLUENT WAIT: 
+  ~~~~~~~~~~~~~~~	
+  
+		Is used to tell the web driver to wait for a condition, as well as the frequency with which we want to check the condition before throwing an exception.
+
+	How to use it:
+
+		FluentWait wait = new FluentWait(driver);
+		wait.withTimeout(Duration.ofSeconds(30));
+		wait.pollingEvery(Duration.ofSeconds(1));
+		wait.ignoring(NoSuchElementException.class);
+
+
+	

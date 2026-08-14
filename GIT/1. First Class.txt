@@ -1,0 +1,271 @@
+
+
+
+			GIT
+	~~~~~~~~~~~
+															
+	
+	BASIC GIT COMMANDS
+	
+		➔ cd .. 									--> Step out of current director
+		➔ pwd 										--> Get the current folder details
+		➔ git rev-parse --show-toplevel  			--> Repo root'u neresi?
+		➔ cd folderName 							--> Move into a sub-folder	
+		➔ ls 										--> List the files in the current folder (same as 'dir')		
+		➔ ls -al									--> List the files in DETAILED (creating time-who created-when created..)	
+		➔ rm -rf folderName							--> Removes a specific FOLDER	
+		➔ rm fileName.txt							--> Removes a specific FILE	
+		➔ git mv old-name.txt new-name.txt.			--> Renames a specific FILE
+		
+		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+		➔ mkdir + "name of the folder to Create"	--> Create a new folder
+		➔ vim FileName.txt 							--> create a text file
+		➔ Press “I” to Insert 						--> This will allow you to edit text file
+		➔ Press “ESC” 								--> You will exit from text file
+		➔ Press “:wq” 								--> when you enter this line this will write and quit.
+	
+		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		
+		➔ dir -> powershell
+		➔ ls  -> linux, macOS
+			
+			you can still use ls in powershell so there's some crossover in the commands, but linux doesn't use the dir command to list the files in the directory.
+		
+		
+	CREATING FOLDER AND FILES: 
+		
+		- mkdir folderName --> creates a FOLDER in your current directory
+		- vim testFile.txt --> creates a FILE in the current directory
+			- this will open the file (on git bash)
+			- we press I to start writing
+			- ESC and :wq --> to SAVE and QUIT 
+			
+	
+	git config --global user.name umutdegismen							--> creates username
+	git config --global user.name														--> shows the created username
+	
+	git config --global user.email umutdegismen@gmail.com		--> creates email
+	git config --global user.email                          --> shows the created email
+	
+	
+	
+	
+	
+														STAGES
+													~~~~~~~~~~~~~~~
+	
+	
+		  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  		  /																									       /
+		  /	 WORKING DIRECTORY	 -----	 STAGING AREA	-----	LOCAL REPOSITORY	------>>  	REMOTE REPOSITORY  /
+		  /					   																				       /
+		  /					    git add	.   ----->>	  git commit -m   ---->>	    git push					   /
+		  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~			
+						
+	
+	
+		- Create a project folder (MyGitFolder)
+		- Created a txt file
+		- Openned git bash
+		- Navigate to the project folder 
+		
+			-> cd c:
+			-> cd MyGitFolder
+			-> git init --> - Creates a Git Repository
+							- After you create a repository, you should see (main) next to your ~/MyGitFolder on git bash
+							
+			-> git status 				--> shows if the file is being tracking or not
+			
+			~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			
+			-> git add testFile.txt 	--> it moves the files to the 'Staging Area' (starts to track the file)
+											now we are in 'Staging Area'
+			
+			-> git add .				--> . means -> git add all --> it moves 
+			
+			-> git commit -m "the message - usually the changes are described"   -> to add a comment
+			
+			-> git revert HEAD			--> reverts the last commit and commit it
+			
+	
+		 ~~~~~~~~~~~~~~~~~~~~~~~~~~~		
+		~~~~~~~~~  PUSHING  ~~~~~~~~~
+	   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		
+		
+		Everytime I have changes to share:
+			- git add .
+			- git commit -m "describe them"
+			- git push -u origin main 		-> (bu komuttan sonra yapilacak olan 'git push'lar icin son upload url'ini hafizaya alir 
+												ve direkt 'git push' kullanarak upload edebiliriz )
+			- git push -> (en son upload yapilan yere upload yapar)
+		
+		
+		
+		LOG History
+			
+			git log 			-> normal
+			git log --stat 		-> detaylı
+			git log --oneline 	-> in one line
+			
+		
+		
+		 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		~~~~~~~~~  PULLING  ~~~~~~~~~
+	   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~		
+
+
+		To IMPORT a project from GitHub to ECLIPSE: 
+		
+		
+			- git log	--> looking at history
+			- git clone https://github.com/sbushaj93/ClassProjectExample.git	--> Cloning a project from GitHub to my local pc
+																					It will have its own local repository
+																					
+			- then open Eclipse and import in Eclipse
+				General -> Existing Projects.. -> browse -> select the folder of the project
+					
+			- git fetch	-> updates JUST the local repository. updating the local repository without changing our current work 
+						   fetch makes the updates in local repository but we dont see them in Eclipse when we refresh the project
+						   
+			- git merge -> after fetch command, we need to merge whenever we want to pull the data
+						   
+			- git pull  -> brings the updates in my working area. 
+						   'pull' makes the updates in Eclipse and we can see the updates when we refresh the project
+
+		
+		
+	//////////////////////////////////////////////////////////////////////////////////	
+	//	How to solve this problem of "! [rejected] master -> master (fetch first)"
+	//	
+	//  First Do this ...
+	//
+	//	git fetch origin master
+	//	git merge  master
+	//
+	//	Then, do this ...
+	//
+	//	git fetch origin master:tmp
+	//	git rebase tmp
+	//	git push origin HEAD:master
+	//	git branch -D tmp
+	//
+	//	Now everything works well.
+	//////////////////////////////////////////////////////////////////////////////////		
+
+
+
+
+			git log ---> looking at history
+
+			git clone ---> cloning a project from gitHub to my local pc
+							- will have its own local repository
+							
+						- copies the online repository and brings it as local repository
+						- provides the working area
+						
+			git fetch ---> will update your local repository with the latest commits in the remote repository 
+
+			git pull  ---> will update your local repository and working area with the latest commits in the 
+							remote repository
+			
+						
+							
+			git stash ---> 
+
+				Situation: I am working on a feature, but a coworker has pushed some new functionality on the remote 
+				repository. I want to pull those changes, fix something quick and then push 
+				BUT I DONT WANT TO SEND THE CURRENT FEATURE IN PROGRESS!!!
+				
+				- we use git stash to temporary store changes we have made in the working area
+				- after we are done we can get those changes back and continue working on them 
+				
+			- git stash 				--> will stash the modifications (does not include new (untracked) file)
+			- git stash pop 			--> will apply back the latest stashed changes
+			- git stash pop stash@{1}
+			- git stash clear 			--> clear all the stashes
+
+			- git stash --include-untracked	
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+												===== SABAH'in NOTLARI ===== 
+					
+					
+	- install git 
+	- create an account on github.com
+ 
+ 
+	- open gitbash/terminal and practice navigation
+		- cd .. --> go back
+		- cd folderLocation --> go to that folder
+		- ls 	--> show all the files and folders in the current directory
+		- pwd   --> print working directory (show me the current folder I am at)
+		
+
+	Working with git: 
+		- git --version --> it should print the git version 
+	
+	
+	Stuff that you could see only at the beginning: 
+	
+			git config --global user.name "yourUserName" 		--> - set username
+			git config --global user.email "yourEmail@abc.com" 	--> - set email
+			
+			git config --global user.name						--> - to see username saved in the system
+		    git config --global user.email  					--> - to see email saved in the system
+	
+	- create a folder somewhere on your user (or you can use a current project that you practice codes on)
+	
+	- when you are sure you are there, type: 
+		- git init  --> this will initialize a new empty repository
+						-- then create files, make any changes etc. 
+							- use git status to see the current status of all files there
+		
+		- git add . --> this will move all changes (modification and new created files) to the staging area
+						- use git status .....
+		
+		- git commit -m "My first commit"   --> this will commit changes to the local repository
+	
+	
+	
+	Pushing everything to the REMOTE REPOSITORY: 
+	
+		Things you will see only once: 
+		
+		*********when you try to push something to the remote repository for the first time, you will have 
+				 to be authenticated. (Token authentication!!!)
+			for this, watch the First Time Authentication video
+		
+		- On your github account, go to my repositories, new repository	
+		- add a name for this repository: MyFirstRepo
+		
+		- when you create a new repository
+		- check out the commands under: …or push an existing repository from the command line
+		
+			-	git remote add origin https://github.com/MyQaTeam/NeotechProjects.git
+					- creates a link between your local repository and this new created online repository
+				
+			**** Remote REPOSITORY must be the same name as project name in Eclipse ****
+	
+			**** To ignore a folder to be pushed to GitHub, create a text file and change the extension as .gitignore 
+				 write the folder name in that .gitignore file ****
+			
+			
+			- 	git branch -M main
+					- renames your branch from master to main
+			- 	    
+					
+			-	git push -u origin --> if we don't use -u, we need to tell git bash the remote repository everytime we push something
+					- u means 'track'
+			
+					
+					
+						
+		
+		
+		
+		
+		
+		

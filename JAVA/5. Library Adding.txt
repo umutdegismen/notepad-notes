@@ -1,0 +1,17 @@
+
+
+- Download the library zip file
+- unzip it
+- on Eclipse
+	- right click on your project
+	- click on Build Path / Configure Build Path
+	- on left panel select Java Build Path
+	- on top sections select Libraries
+	- click on Classpath
+	- click on Add External JARs
+		- select and add jar files on Root
+		- select and add jar files in ooxml-lib folder
+		- select and add jar files
+- Apply and Close
+
+	

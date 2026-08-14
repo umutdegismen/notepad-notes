@@ -1,0 +1,161 @@
+
+	
+	BeanShell PreProcessor - BeanShell PostProcessor
+	-------------------------------------------------
+	
+		
+		-> Beanshell PRE-PROCESSOR, 
+			
+			BeanShell PreProcessor is used to write scripts in Java. It's being executed BEFORE the test run (PRE-processor).
+			
+			For example; we will add "Japan" th usernames where the country is Japan
+
+				String newUsername;
+
+				String country = vars.get("country");
+
+				log.info("Country is: " + country); // console output
+
+				// ctx = jMeter Context
+				// we generate a prefix to generate a unique username everytime so we don't have to change the username everytime we run the test.
+				// you can also declair a variable without declaring the data type like this -> prefix = ctx.getThreadNum() + 15;
+				
+				int prefix = ctx.getThreadNum() + 25; // 15 is just a number to make the newly added username unique
+
+				log.info(ctx.getThreadNum() + " is the thread number"); // ctx.getThreadNum() returns us the thread number
+
+				if(country.equals("Japan"))
+				{
+					newUsername = prefix.toString() + vars.get("username") + "Japan"; // concatinate prefix BEFORE the newUsername
+				}
+				else
+				{
+					newUsername = prefix.toString() + vars.get("username"); // concatinate prefix BEFORE the newUsername
+				}
+				vars.put("username",newUsername);
+				log.info("New username is: " + newUsername); // console output
+		
+		
+				//////////////////////////////////////////////////////////////////////////////////////////
+				//
+				//		To know more about jMeterContext visit the website
+				//		https://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterContext.html
+				//
+				//////////////////////////////////////////////////////////////////////////////////////////
+		
+		
+		-> Beanshell POST-PROCESSOR
+			
+			It's being executed AFTER the test run (POST-processor).
+				
+			We can get the response data by using BeanShell PostProcessor and validate the result. 
+				
+				e.g. Status Code: 	log.info(prev.getResponseCode().toString());
+				
+				OR 
+				
+				we can give some condition by using getResponseMessage method : 	prev.getResponseMessage().contains;
+				
+					if(prev.getResponseMessage().contains("unauthorized"))
+					{
+						log.info("Authotentication issue");
+					}
+					else if(prev.getResponseMessage().contains("OK"))
+					{
+						log.info("Test Passed!");
+					}
+		
+	--------------------------------------------------------------------------------------------------------
+		
+		There are a few variables that we need to know such as;
+			
+		- ctx	-> 	Sampler Context	 -> Used to get details about the current sampler context (like sampler name, thread name, etc.)
+		
+		- vars	->	JMeter Variables ->	Use when: You want to store values like response data, extracted data, or thread-specific temporary values.
+					
+					example:	vars.put("token", "abc123")   // Set
+								def token = vars.get("token")   // Get
+									
+		- props	–> 	JMeter Properties / Use when: You want to set or read a value that is visible test-wide across all threads/users.
+					
+					example: 	props.put("result", "PASS")   // Set
+								def result = props.get("result")   // Get
+					
+					real life example:
+								if (prev.getResponseCode() == "200")
+								{
+									props.put("loginStatus", "PASS")
+								}
+								else
+								{
+									props.put("loginStatus", "FAIL")
+								}
+								
+								// print the loginStatus on console
+								log.info("Login result was: " + props.get("loginStatus"))	
+
+		- prev	->	is an instance of the class SampleResult. It gives you access to the details of the request that just ran, such as:
+		
+					Method								What It Returns
+					-------								---------------
+					prev.getResponseCode()				HTTP response code (e.g. "200")
+					prev.getResponseMessage()			HTTP response message (e.g. "OK")
+					prev.getResponseDataAsString()		The full response body
+					prev.getSampleLabel()				Sampler name
+					prev.isSuccessful()					true or false based on pass/fail
+					prev.getTime()						Time taken in milliseconds
+
+			
+		
+		Let's say we have 2 different Thread Groups. We can not reach out a variable in Thread Group1 from Thread Group2 using "vars". 
+		
+		And to do that, the variable that we want to reach out from another Thread Groups, that variable must be in "Test Plan" level which means, it must be declared in "Test Plan" variables section like we do in Thread Group variables (username,password,country). 
+		
+		e.g. Let's say, we want to set the "result" variable when a test passed and then get that result for validating. To make "result" variable reachable from everywhere, we need to use "props" instead of "vars" and we need to declare it in "Test Plan" level
+			
+			-> props.put("result","PASS");
+				
+				// if 
+				if(prev.getResponseMessage().contains("unauthorized"))
+				{
+					log.info("Authotentication issue");
+				}
+				else if(prev.getResponseMessage().contains("OK"))
+				{
+					log.info("Test Passed!");
+					props.put("result","PASS");
+				}
+		
+	--------------------------------------------------------------------------------------------------------
+	
+	The methods that we used:
+	
+	- in BeanShell PreProcessor:
+	
+		- vars.get("country")						-> String country = vars.get("country"); 	// returns the value of the country variable 
+		- log.info("string to print on console")	-> log.info("Country is: " + country)		// prints the result on console	
+		- ctx.getThreadNum()						-> int prefix = ctx.getThreadNum() + 15; 	// 15 is a random number to make the username unique
+			
+			we'll add numbers in front of the username to make the newly added username unique.
+				newUsername = prefix.toString() + vars.get("username") + "Japan";	// get the username, concatinate with prefix in front, "Japan" in the end as "newUsername".
+		
+	- in BeanShell PostProcessor:
+		
+		- prev.getResponseCode()		-> returns integer. That's why we convert it to string with ".toString()". We use this to get the Status Code.
+		- prev.getResponseMessage()		-> returns String. We use it to get the response message.
+		- props.put("key","value");		-> 'props' is used to set a global value when a test PASSED 
+				
+			for example:
+				if(prev.getResponseMessage().contains("OK"))
+				{
+					log.info("Test Passed!");
+					props.put("result","PASS");
+				}
+				
+			*** To see the "result=PASSED" 
+				
+				1st way: - check the output. 
+				2nd way: - add a "Debug Sampler" -> right click on Thread Group/add/debug sampler -> make sure "jMeter properties: true"
+												 -> You should see it under "Response Body/JMeterProperties/Resul:PASS"
+		
+		

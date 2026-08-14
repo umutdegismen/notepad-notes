@@ -1,0 +1,49 @@
+
+
+													FRAMES / iFRAMES
+												~~~~~~~~~~~~~~~~~~~~~~~~
+												
+												
+												
+	How to identify frame ? 
+	
+		->	Right click on the element, see if "This Frame" option is available.
+		->	If "This Frame" option is available, that means that the element is inside a frame.
+		
+	
+	Switch to frames --by name or ID--
+		
+		*driver.switchTo().frame(String name/id)	-> example
+			
+			driver.switchTo().frame("iFrame1");
+			driver.quit();
+			
+		*throws NoSuchFrameException if the frame is not found.
+		
+		
+	Switch to frames --by WebElement--
+		
+		WebElement iFrameElement = driver.findElement(By.id("iF1"));
+		
+		// We've found the element
+		// Now we use switchTo() command
+		driver.SwitchTo().frame(iFrameElement);
+		driver.quit();
+		
+		*throws NoSuchFrameException if the frame is not found.
+			
+	
+	Switch to frames --by index--
+		
+		driver.SwitchTo().frame(int index);
+		driver.SwitchTo().frame(0);
+		
+		*throws NoSuchFrameException if the frame is not found.
+	
+		
+
+	Switch to Nested Frames
+	
+		When there are multiple frames, we need to switch to the first frame (Parent Frame) first.
+		
+		Then we need to switch to the the child frame

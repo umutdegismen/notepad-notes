@@ -1,0 +1,23 @@
+
+	Image name format:
+		
+		https://hub.docker.com/repositories/umutdegismen 
+		
+		hub.docker.com is a hub like GitHub.com. There are repositories that you can download through docker commands.
+		
+		
+		[repository-host:port] / [owner] / imageName[:tag] 	-> 'tag' should always be used with ':'
+																If we don't use a tag name, docker will use the default one [:latest]
+																
+		[repository-host:port] = hub.docker.com
+		[owner] = library (docker official)
+		[tag] = latest
+		
+		e.g.:	docker pull hello-world:latest		-> !! If we don't specify a tag name, docker will use the default one [:latest]
+				
+				docker pull nginx:1.28.1-trixie		
+				docker pull nginx:stable
+				docker pull nginx:latest
+
+		
+		

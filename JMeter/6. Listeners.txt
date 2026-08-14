@@ -1,0 +1,156 @@
+
+	
+	LISTENERS: (Reports)
+		
+		Right click on Test Plan -> Add -> Listeners
+	
+	Listeners listen our execution. Listeners will track and listen how JMeter is executing, and then it collects all the load parameters like results, graphs and it shows in the output in our JMeter Console. 
+	
+	So, that's the key point to see how our test is behaiving.
+	
+	Listeners are open source. So, anyone can add more listeners in the listeners list.
+	
+	There are many listeners depends on the proejct what to use but we will focus on the most important 3 listeners. These 3 listeners can tell how our test is behaiving on the load.
+	
+	** 
+		
+		1. VIEW RESULT TREE : 	(Make sure that you add the listeners UNDER the Thread Group so you can see the results.)
+								(Right-Click on Test Plan instead Thread Group)
+								- Green sign : Test Passed
+								- Red sign   : Test Failed
+							  
+								- Sections in View Result Tree:
+								
+								- Sampler Result:	Header like in API. 
+													We can see here, Response Code 200, Response Message OK, Load Time etc.
+								- Request		:	We can see Request Header, Parameters that we provided, Request Method etc.
+													Raw and HTTP (down side of the screen) 
+													Raw shows the response in Raw text
+													HTTP shows mpre detailed with different sections.
+								- Response Data	:	Response Body in HTML and Response Headers
+							  
+							  
+		2. AGGREGATE REPORT : 	(Right-Click on Thread Group)
+								This report is the report in real time when we do reporting to the client.
+						
+							
+							
+		3. GRAPH RESULTS	: 	(Right-Click on Thread Group)
+	
+		
+		4. ASSERTION RESULT	: 	(Right click on 'Test Plan' / add listeners / Assertion Results)
+								This is used to see which step failed the assertion. 
+								After running the test, we see the failed assertion(if there is one) under this listener.
+								
+								If there is no any failed test step, then we should see just the step names under Assertion Results.
+								
+								PASSED Result:		
+								          /login-46
+													/authenticate-56
+													/logout-58
+									
+													
+								FAILED Result:		
+								          /login-46
+													/authenticate-56
+														Response Assertion : Test failed: text expected to contain /Welcome to the Secure Area. When you are done click logout below./
+													/logout-58		
+									
+									
+	
+	
+	
+	
+	-----------------------------------------------------------------------------------------------------------------------------------
+	
+	
+	Analyzing the Listener Reports:		
+	
+		
+		ALL WE NEED TO DO IS, RUN THE TEST AND GIVE THE REPORT TO THE CLIENT. WE DON'T ACTUALLY HAVE ANYTHING TO DO WITH THE NUMBERS ON THE REPORT.
+	
+		
+		AGGREGATE REPORT:
+	  ~~~~~~~~~~~~~~~~~~~~~
+		
+		Ornegin 200 users ve 2080 'samples' request denememiz var.
+			
+			- MIN		:  	2080 samples denemede, aralarinda en hizli response alan sureyi gosterir. 
+							
+							Ornegin, 110 milisaniye. 'purchase'a tikladiktan sonra, aralarindan biri 110 milisani icinde (en hizli response time) response almis oldugunu gosterir.
+							
+			- MAX		:	'min' response time'in tam tersi. En cok zaman harcanan sureyi gosterir. 
+						
+							Ornegin, sample'lardan 1 tanesi maximum 3820 milisaniye surmus response almasi.
+			
+			
+			- AVERAGE 	:  	It's the average time taken by all the samples to execute specific label.
+				
+							Yani, server'a request gonderildikten sonra response'un kac milisaniye sonra geldiginin ortalama suresidir. 
+						
+							Ornegin, 'purchase' butonuna tikladik. 2080 'samples' ile denendikten sonra, sayfanin ekrana gelme suresinin milisaniye cinsinden ortalamasi.
+							
+			- ERROR %	: 	Error percentage of the test. %3-%4 is fine but over %10 is something you want to check.
+			
+(IMPORTANT)	- THROUGHPUT:	Throughput (VERIMLILIK) is the number of requests that are processed per time unit(seconds, minutes, hours) 
+							by the server. 
+							This time is calculated from the start of first sample to the end of the last sample. 
+							Larger throughput is better.
+							Throughput gives us the server capability.
+							
+							Answers the question "how many requests can the server handle per second?".
+							
+							Test edilen sistemin, belirli bir zaman diliminde ne kadar isteği(request) işleyebildiğini gösteren önemli bir performans metriğidir.
+							
+							Throughput, JMeter testinde saniye başına düşen işlem sayısını (istek sayısını) ifade eder.
+			
+			
+		/////////////////////////////////////////////////////////////////////////////////////
+		//
+		//	*** These are the 4 components that we mostly use when we do a performance test
+		//
+		/////////////////////////////////////////////////////////////////////////////////////
+		
+			
+			- 90% LINE	:	%90 of the samples haven't taken more than <this time>.
+			- 95% LINE	:	%95 of the samples haven't taken more than <this time>
+			- 99% LINE	:	%99 of the samples haven't taken more than <this time>
+			
+			- MEDIAN	:	%50 of the samples haven't taken more than <this time>
+				
+				For example: 
+								
+					Samples		: 3600
+					90% Line	: 205	->	90% of 3600 haven't taken more than 205 miliseconds to get the response.
+					95% Line	: 209	->	95% of 3600 haven't taken more than 209 miliseconds to get the response.
+					99% Line	: 213	->	99% of 3600 haven't taken more than 213 miliseconds to get the response.
+					Median		: 147	->	50% of 3600 haven't taken more than 147 miliseconds to get the response.
+	  
+	
+	
+	
+		GRAPHIC RESULTS:
+	  ~~~~~~~~~~~~~~~~~~~~~
+		
+			DEVIATION (Red line)	:	We expect it to be staight and low. 
+										If we see a red line that goes up, that means we have deviation from our normal response time.
+										Deviation also needs to be always less than AVERAGE(blue line) (under average on the graph).
+			
+			THROUGHPUT (Green line)	:	We expect it to be high.
+										If we see the green line goes down, that means server is not able to handle the load.
+										
+			AVERAGE (Blue line)		:	Average should be in the middle of the graph. Between "Throughput" and "Deviation".
+			
+			
+		*** When we check the graph results, if we see "Throughput" on top, "Average" in the middle and "Deviation" on the bottom, that means our test results are good and the server can handle the load very well.
+
+	
+	-----------------------------------------------------------------------------------------------------------------------------------
+
+	
+		ASSERTION RESULTS:
+	  ~~~~~~~~~~~~~~~~~~~~~
+	  
+	  -> Right click on 'Test Plan' / add listeners / Assertion Results
+	  
+	  Assertion Result is used to see which step failed the assertion. After running the test, we see the failed assertion(if there is one) under this listener.

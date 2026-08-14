@@ -1,0 +1,66 @@
+
+	Stack<> ve Deque<> kullanimi: 	-> (LeetCode_Easy -> ValidParentheses sorusu)
+	------------------------------
+	
+		Ikisi de ayni mantikta calisir. 
+		
+			-Stack (older, syncronized, slower)
+			-Deque (new, faster, non-syncronized)
+		
+		Bir kutuya ustuste plaklari koydugunu dusun. Son koydugunu ilk alirsin. (LIFO -> Last in First out)
+		
+		Metodlari: 
+			-stack.push() -> stack icine ekler. "add()" / "put()" metodlari ile ayni isi gorur.
+			-stack.peek() -> sadece stack icine bakar, bir degisiklik yapmaz. ArrayList'deki .get() metodu ile ayni gorevi yapar. Elemani getirir.
+							 Bir sonraki eleman su ise, listeden cikar gibi zamanlarda kullanilir.
+			-stack.pop()  -> stack icinden cikartir.
+			
+		Ornek:
+			
+			Verilen str degerini kontrol et. Acilan parantez, kapatiliyor mu kontrol et. 
+			
+			-Eger ilk karakter '(' VEYA '{' VEYA '[' ile basliyorsa, "stack" icine ekle. -> (stack.push(c);)
+			-Bir sonraki karakter ')' ise VE stack bos degilse VE son eklenen karakter '(' ise stack'den cikart.
+			-Stack.isEmpty ise tru dondur. Yani Ayni turde acilir parantez basliyor ve kapaniyor ise, eselesme saglaniyor ise, kutuyu bosaltiyoruz ve true donduruyoruz.
+			
+				Stack<Character> stack1 = Stack<>();
+				Deque<Character> stack2 = ArrayDeque<>();
+				
+				String str = "({[]})";
+				
+				for (char c : str.toCharArray()) 
+				{
+					if (c == '(' || c == '{' || c == '[') // eger ilk karakter '(' veya '{' veya '[' ile basliyorsa, "stack" icine ekle.
+					{
+						stack.push(c); // push opening brackets
+					} 
+					else if (c == ')' && !stack.isEmpty() && stack.peek() == '(') 
+					{
+						stack.pop(); // Match and remove the last opening bracket
+					}
+				}
+				
+		2.Kullanim:
+			
+			LiFo mantigi ile calistigi icin, "Reversed" islemleri de yapilabiliyor.
+			
+			Reverse matodu yazalim;
+			
+				public static String reversed(String str) {
+		
+					Deque<Character> stack = new ArrayDeque<>();
+					
+					String reverse ="";
+					
+					for(char c : str.toCharArray()) {
+						stack.push(c);
+					}
+					
+					while(!stack.isEmpty()) {
+						reverse+=stack.pop();
+					}
+					
+					return reverse;
+				}
+
+		

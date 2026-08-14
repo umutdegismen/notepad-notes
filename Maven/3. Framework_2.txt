@@ -1,0 +1,45 @@
+--------------------------------
+Framework Class 02 - TESTNG
+--------------------------------
+
+1. Adding Extent Reports
+	- We need to add the dependency in pom.xml file
+	- We specify the filepath where to put the report
+    - We need to create an object of ExtentSparkReporter --> we set some specific configurations such as title, name, theme...
+	- We create an object of ExtentReports to attach the above spark reporter
+	- We are using the ExtentReports object to call the createTest() method
+		- We added it to Listener class to create a test each time a test method is executed (onTestStart)
+		- This test is added to the report along with every comment/info added to it during the test method or on pass/fail
+
+	- We added the extent report object in the @BeforeTest and @AfterTest methods so that:
+		- @BeforeTest creates the necessary objects and configurations
+		- @AfterTest flushes (writes) the report to the file
+
+2. We changed the takeScreenshot(String filename)
+	- We are now saving the location where the screenshot is stored and we pass this info to the addScreenCaptureFromPath() method to show the screenshot in the report
+	- We made the screenshot unique by adding a timestamp on the name when taking a screenshot
+
+3. We updated the Listener.java class
+	- We are not only printing to the console
+	- We are also writing information/screenshot to the ExtentReports
+
+4. We created the regression.xml file which will run the test methods that belong to the regression group
+
+5. Maven Surefire Plugin
+	- added plugin to pom.xml
+	- it runs specified tests on maven build process
+
+6. Maven Lifecycles
+	- build
+	- clean
+	- test.....
+    
+    
+generateReport()		(BeforeTest)				reporting starts (reporter and the report)
+    setUp()						(BeforeMethod)
+	   test1  						(Test)						*just before starting, create the ExtentTest
+    tearDown()					(AfterMethod)
+    setUp()						(BeforeMethod)
+        test2						(Test)						*just before starting, create the ExtentTest
+    tearDown()					(AfterMethod)
+writeReport()			(AfterTest)							reporting ends

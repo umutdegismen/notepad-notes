@@ -1,0 +1,69 @@
+	===================================================================
+										GIT TAGGING QUICK REFERENCE GUIDE
+	===================================================================
+
+	
+	
+	1. YEREL TAG'LERİ LİSTELEME
+	-------------------------------------------------------------------
+		git tag
+		-> Lokalinizdeki tüm etiketleri (tag) alfabetik olarak listeler.
+
+		git tag -n
+		-> Etiketleri, oluştururken yazdığınız açıklama mesajlarıyla birlikte gösterir.
+
+		git show <tag-adi>
+		-> Belirli bir etiketin detaylarını (kim, ne zaman oluşturdu, hangi commit vb.) gösterir.
+
+
+	2. YENİ TAG OLUŞTURMA
+	-------------------------------------------------------------------
+	
+	
+	!!! TAG olustururken, MAIN branch uzerinde olmalisin !!!
+	
+		-> Yeni tag olusturma:
+				Bulunduğunuz en son commit'e (HEAD) yeni bir etiket yapıştırır.
+					git tag -a <tag-adi> -m "Mesajiniz"
+					git tag -a v1.3.0 -m "Version 1.3.0 - Stable Release"
+			
+		-> Gecmise donuk tag olusturma:
+				Geçmişteki spesifik bir commit'e (ID belirterez) etiket yapıştırır.
+					git tag -a <tag-adi> <commit-id> -m "Mesajiniz"
+					git tag -a v1.0.0 3210d08 -m "Version 1.0.0 - Initial Release"
+		
+
+	3. ETİKETLERİ UZAK SUNUCUYA (GITHUB) GÖNDERME
+	-------------------------------------------------------------------
+		git push origin <tag-adi>
+		-> Sadece belirttiğiniz tek bir etiketi GitHub'a push eder.
+
+		git push origin --tags
+		-> Lokalinizde olup GitHub'da olmayan TÜM etiketleri tek seferde push eder.
+
+
+	4. ETİKET SİLME (GEREKİRSE)
+	-------------------------------------------------------------------
+		git tag -d <tag-adi>
+		-> Lokalinizdeki bir etiketi siler.
+
+		git push origin --delete <tag-adi>
+		-> GitHub'daki (uzak sunucudaki) bir etiketi siler.
+
+
+	5. ESKİ/GEREKSİZ BRANCH'LERİ ZORLAYARAK SİLME VE TEMİZLEME
+	-------------------------------------------------------------------
+		git branch -D <branch-adi>
+		-> Lokalinizdeki bir branch'i (merge durumuna bakılmaksızın) zorla siler.
+
+		git fetch --prune
+		-> GitHub üzerinde silinmiş ama lokalinizde hala görünen "hayalet" branch listesini temizler.
+
+
+	6. ESKİ BİR ETİKETE (SÜRÜME) GERİ DÖNME
+	-------------------------------------------------------------------
+		git checkout <tag-adi>
+		-> Sadece koda göz atmak/test etmek için o sürüme geçiş yapar (Read-only / Detached HEAD).
+
+		git checkout -b <yeni-branch-adi> <tag-adi>
+		-> Belirttiğiniz etiket noktasından yeni bir geliştirme/düzeltme branch'i açar.

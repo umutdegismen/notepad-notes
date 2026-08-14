@@ -1,0 +1,70 @@
+
+	--- TESTNG ---
+
+	1. Configs folder
+		-configurations.properties
+	2. testdata
+		Excel File
+	3. com.practice.utils
+		Constants
+		ConfigsReader
+	4. com.practice.testbase
+		PageInitiliazer extends BaseClass
+		BaseClass
+		CommonMethods extends PageInitiliazer
+		Listener
+	5. com.practice.utils
+		ExcelUtility
+
+
+	
+	----------------
+	In BaseClass we have these methods:
+		@BeforeTest - generateReport()
+		@AfterTest - writeReport()
+
+		@BeforeMethod - setUp()
+		@AfterMethod - tearDown()
+	----------------
+	In Listener we have these methods:
+		onStart()
+		onFinish()
+
+		onTestStart()
+		onTestSuccess()
+		onTestFailure()
+	----------------
+	We have these test methods that will be executed:
+		emptyPasswordLogin()
+		invalidPasswordLogin()
+		validLogin()
+	----------------
+
+	This is the order of execution of the methods:
+
+	@BeforeTest - generateReport()
+	onStart()
+
+	@BeforeMethod - setUp()
+	onTestStart()
+		@Test
+		emptyPasswordLogin()
+	onTestSuccess()
+	@AfterMethod - tearDown()
+
+	@BeforeMethod - setUp()
+	onTestStart()
+		@Test
+		invalidPasswordLogin()
+	onTestFailure()
+	@AfterMethod - tearDown()
+
+	@BeforeMethod - setUp()
+	onTestStart()
+		@Test
+		validLogin()
+	onTestSuccess()
+	@AfterMethod - tearDown()
+
+	onFinish()
+	@AfterTest - writeReport()

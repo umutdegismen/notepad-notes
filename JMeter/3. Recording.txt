@@ -1,0 +1,13 @@
+
+	When recording a test:
+	
+	Test Plan Creation tab ->
+	
+		- We can change the port such as 8080. It comes 8888 by default which is fine.
+		- Right-click on Test Plan
+		- Add / Non-Test Elements / HTTPS Test Script Recorder
+		- Target Controller: Test Plan > HTTPS Test Script Recorder
+	
+	Requests Filtering tab ->
+		
+		- To avoid recording Banners, GIFs, CSS' while recording a test; click on 'Add suggested Excludes'. 

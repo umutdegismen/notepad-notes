@@ -1,0 +1,12 @@
+
+	JENKINS:
+	---------
+	
+	
+	!! NEVER EVER EXECUTE ANYTHING ON THE MASTER !! 
+		 
+		 Because, our master is a docker container and it only has Jenkins. It doesn't have Java, it doesn't have Maven, I doesn't have docker.
+	
+		 So, to avoid that, go to the MASTER node (Built-In Node), go to 'Configure', change the 'Number of executors' to 0 (zero) and save.
+	
+	

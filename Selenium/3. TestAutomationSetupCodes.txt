@@ -1,0 +1,135 @@
+
+
+
+													==== BUILDING A FRAMEWORK ====
+												~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+	1. 	Create a "configs" folder 
+			create "configuration.properties" file
+				in that file -> browser=chrome
+								url=https://hrm.neotechacademy.com/
+								username=Admin
+								password=Neotech@123
+	
+	2.	Create "Constants" (sabitler class'i. sabit degerleri burada tutacagiz)
+			
+			create a final fullPath -> 
+				
+				************** WHENEVER we create FINAL variable, we create it UPPERCASE ******************
+				
+				public static final String CONFIGURATION_FILEPATH = System.getProperty("user.dir") + "path of file";
+			
+			
+			
+	3.	Create "ConfigsReader" class and create method to read the properties
+	
+		2 things to do in this class:
+	
+			1.read this file
+			2.get the properties
+			
+				create a ReadProperties() method which loads the properties ->
+			
+				create "FileInputStream" obj and give the path to fis
+				create Properties obj -> prop.load(fis)
+				
+				put them in try catch
+			
+			// to write @param explanations: '/** + enter' 
+			
+					/**
+					 * This method will read the properties file
+					 * 
+					 * @param filePath
+					 */
+					public static void readProperties(String filePath) {
+						
+					}
+			
+				
+		Create a method which gets the properties
+		
+			create a getProperty method which returns String
+			
+			// we will use this method to get our properties (browser,url,username,password)
+			
+			/**
+			 * This method will return the value for a specified key
+			 * 
+			 * @param key
+			 * @return String value
+			 */
+			public static String getProperty(String key){
+				return prop.getProperty(key);
+			}
+			
+			
+	4.	Create a BaseClass and create a "setUp" method in there
+			
+			in setUp method, we will reach out our filePath and open the browser
+			
+				public static WebDriver driver = null;
+				
+				public static void setUp(){
+					
+					get filePath -> 
+									String path ConstantsReader.CONFIGURATION_FILEPATH; 	-> 	our path
+									ConfigsReader.readProperties(path); 					->	reach out the prop files
+									
+					// if the browser is Chrome it'll create a Chrome browser.
+					// if the browser is Firefox, it'll create Firefox browser.
+					// To do that, we'll use switch-case
+					// instead of -> WebDriver driver = new ChromeDriver();
+					
+				create a switch case the select the browser
+				
+					String browser = ConfigsReader.getProperty("browser");
+					
+					switch(browser.toLowerCase()){
+					
+					case "chrome":
+						driver = new ChromeBrowser();
+						break;
+					case "edge":
+						driver = new EdgeBroser();
+						break;
+					case "firefox":
+						driver = new FirefoxDriver();
+						break;
+					default:
+						throw new RuntimeException("Browser is NOT supported!!!");				
+					}
+					
+					
+					// navigate to the URL
+					driver.manage.window.maximize();
+					driver.get(ConfigsReader.getProperty("url");
+					driver().manage().timeouts().implicitlyWait(Duration.ofSeconds(Constants.IMPLICITWAIT_DURATION_TIME));
+				}
+				
+			
+			
+	5.	Create a tear down method so we can quit driver
+		
+		public static void teardown(){
+			// we control if the driver has been picked the correct one
+			// close the driver ONLY if it's not closed before
+			if(driver!=null)
+				driver.quit();
+		}
+		
+		
+	6.	We are ready for our TEST !!
+		
+		Now, we can call our methods from our AutomationTest class which is extends from BaseClass 
+		
+		So, it can get all features that BaseClass has
+	
+		
+	
+	
+	
+						
+
+	

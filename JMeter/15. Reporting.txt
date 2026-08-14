@@ -1,0 +1,55 @@
+
+	
+	How to run our test cases without openning UI mode (Non-GUI Mode), which means run the test cases with command?
+		
+		To run our test cases through Jenkins, we need to use this method.
+		
+		1. First we need to open the Command Propmt in ADMINISTRATOR mode. 
+			
+			*** NOT the Powershell or other terminal programs. COMMAND Propmt !!!
+		
+		2. go to the "bin" directory of jMeter "C:\Eclipse Jar Files\apache-jmeter-5.6.3\bin"
+		
+		3. write this command in terminal : "jmeter -n" (Don't press enter yet!)
+			
+			- this will run jMeter in Non-GUI mode
+			
+		4. *** THIS IS IMPORTANT *** 
+		
+			- The test has to be in "bin" folder to run it directly with this command -> "jmeter -n -t CookieManager.jmx"
+			- Test has to be named raw. NOT like "04. CookieManager.jmx". It must be "CookieManager.jmx"
+			
+		5. And last command we add is to create the reporting file. -> C:\Results.jtl (Or whatever you want to name it)
+		
+		6. Final command -> Write the command "jmeter -n -t CookieManager.jmx -l C:\Results.jtl" and hit ENTER.
+		
+	
+	To read the Results.jtl file:
+		
+		1. Monitoring JMeter Results via Excel (not a clear report but stillable to see the status codes etc.	
+			- easy to see if there is any 400 codes
+			- Drag and Drop the jtl file on Excel
+		
+		2. Monitoring JMeter Results via "Taurus" by BlazeMeter.com (Not very neccessary)
+			Taurus is a framework you can get real-time monitors right inside the console/command prompt. 
+			It is a result monitoring option with graphs. (instructor says he never tried)
+		
+		3. Monitoring JMeter Results via the BlazeMeter Cloud
+			You can easily run your JMX script in the cloud by using https://a.blazemeter.com
+			Use the free out-of-the-box version to upload your JMX script and run a load of up to 50 users.
+			To run the test, you can either upload your JMX file in the box below or at the top of the page, or open the web application and then choose "JMeter Test" and configure your test.
+			
+			After that you might need to wait for 2-4 minutes until cloud server is up and running. As soon as script is running, you will be redirected to the page of real-time monitoring where you can see all KPIs and analitycs, like response time, active users, percentage of errors and bandwidth, as well as multiple reports.
+			
+			After finishing test, you can take a screenshot of the result and send it to the client.
+			
+		
+		
+		Meanings of letters:
+			
+			-n: Non-GUI mode
+			-t: bundan sonra gelenin test case oldugunu belirtiyoruz.
+			-l: stands for reporting/results. We want to store the results somewhere, so we need to pass the path where we want to store them. 
+				e.g. C:\Results.jtl -> This command creates a .jtl file named 'Results' and saves the result in this file.
+				
+				example command: 	jmeter -n -t CookieManager.jmx -l C:\Results.jtl

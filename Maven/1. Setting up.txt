@@ -1,0 +1,226 @@
+
+	CREATING NEW MAVEN PROJECT 
+
+	Click on "Create a simple project"
+
+		Group Id 	- company name that you are representing
+						com.google
+						com.neotech
+				
+		Artifact Id - "MavenTestNGProject" or whatever you want
+						It is basically the name of your project
+						
+
+		
+		Since we are testers and not developers, we won't be using the first files in the project. 
+		We can delete them.
+		
+			src/main/java
+			src/main/resource
+	
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	
+	
+	POM.XML
+		
+		To change Java Library version on Maven Project ->
+		
+				<properties>
+					<maven.compiler.source>17</maven.compiler.source>		17 or 21 or whatever version you want
+					<maven.compiler.target>17</maven.compiler.target>
+				</properties>
+		
+		Right click and Maven/Update Project/OK	
+	
+	2nd WAY: The usual way from -> Build Path / Configure Build Path
+	
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	
+	
+	INSTALLING Libraries
+	
+	
+	src/main/java		-> copy-paste configs/configs.properties folder 
+	src/main/resource	-> copy-paste utils package
+	
+	Downloading and adding Selenium Libraries to a maven project -> download it from https://mvnrepository.com/
+	
+	Search for Selenium and click on the latest version of libraries.
+	copy and paste in POM.XML in DEPENDENCY tags
+	
+		SAME FOR 
+		
+			Selenium	-> https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
+			Apache POI	-> https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml 
+			TestNG		-> https://mvnrepository.com/artifact/org.testng/testng
+	
+	
+	---- POM.xml ----
+	
+	<project xmlns="http://maven.apache.org/POM/4.0.0"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+		<modelVersion>4.0.0</modelVersion>
+		<groupId>com.practice</groupId>
+		<artifactId>framework</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	
+		<properties>
+			<maven.compiler.source>17</maven.compiler.source>
+			<maven.compiler.target>17</maven.compiler.target>
+		</properties>
+
+		
+		<dependencies>
+		
+			<!--https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+			<dependency>
+				<groupId>org.seleniumhq.selenium</groupId>
+				<artifactId>selenium-java</artifactId>
+				<version>4.19.1</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi-ooxml</artifactId>
+				<version>5.2.5</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>2.15.1</version>
+			</dependency>
+
+
+			<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
+			<dependency>
+				<groupId>io.cucumber</groupId>
+				<artifactId>cucumber-java</artifactId>
+				<version>7.18.1</version>
+			</dependency>
+
+
+			<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-junit -->
+			<dependency>
+				<groupId>io.cucumber</groupId>
+				<artifactId>cucumber-junit</artifactId>
+				<version>7.18.1</version>
+				<scope>test</scope>
+			</dependency>
+
+
+			<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-core -->
+			<dependency>
+				<groupId>io.cucumber</groupId>
+				<artifactId>cucumber-core</artifactId>
+				<version>7.18.1</version>
+			</dependency>
+
+			<!--
+			https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
+			<dependency>
+				<groupId>com.microsoft.sqlserver</groupId>
+				<artifactId>mssql-jdbc</artifactId>
+				<version>9.4.1.jre11</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.testng/testng -->
+			<dependency>
+				<groupId>org.testng</groupId>
+				<artifactId>testng</artifactId>
+				<version>7.7.0</version>
+				<scope>test</scope>
+			</dependency>
+			
+			<!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
+			<dependency>
+				<groupId>io.rest-assured</groupId>
+				<artifactId>rest-assured</artifactId>
+				<version>5.5.0</version>
+				<scope>test</scope>
+			</dependency>
+			
+			<!-- this dependency is to use JSONObject class-->
+			<dependency>
+				<groupId>org.json</groupId>
+				<artifactId>json</artifactId>
+				<version>20210307</version>
+			</dependency>
+			
+			<!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
+			<dependency>
+				<groupId>com.mysql</groupId>
+				<artifactId>mysql-connector-j</artifactId>
+				<version>9.1.0</version>
+			</dependency>
+			
+		</dependencies>
+		
+		
+		<build>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>3.2.5</version>
+					<configuration>
+						<includes>
+
+							<include>**/*TestRunner.java</include>
+							<!--<include>**/*FailedRunner.java</include> -->
+
+							<!--runner parameter to run on Jenkins-->
+							<!--use this command on cmd -> mvn clean test -Drunner=TestRunner-->
+							<!-- <include>**/*${runner}.java</include>-->
+
+						</includes>
+						<testFailureIgnore>true</testFailureIgnore>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>net.masterthought</groupId>
+					<artifactId>maven-cucumber-reporting</artifactId>
+					<version>5.8.1</version>
+					<executions>
+						<execution>
+							<id>execution</id>
+							<phase>test</phase>
+							<goals>
+								<goal>generate</goal>
+							</goals>
+							<configuration>
+								<projectName>UmutSISProject</projectName>
+								<!-- output directory for the generated report -->
+								<outputDirectory>${project.build.directory}</outputDirectory>
+								<!-- optional, defaults to outputDirectory if not
+								specified -->
+								<inputDirectory>${project.build.directory}</inputDirectory>
+								<jsonFiles>
+									<!-- supports wildcard or name pattern -->
+									<param>**/*.json</param>
+								</jsonFiles>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</build>
+	</project>
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	
+	
+	To exclude a scenario: 
+	
+		/////////////////////////////////////////////////////////////////////////////////////////////
+		//	In command prompt, use this command:
+		//	
+		//		mvn test -DCucumber.options="--tags '@Login and not @skip"	
+		//	
+		//	This will run the scenarios with the @Login tag but not the ones with the @skip tag
+		//	
+		/////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	
+	

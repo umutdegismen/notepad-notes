@@ -1,0 +1,80 @@
+
+	
+	Command Prompt Commands
+	-----------------------
+		
+	1. "appium --allow-insecure chromedriver_autodownload"	
+		to run appium server but at the same time allow to download the latest chrome driver
+		
+	2. "cls"	--> cleans the screen
+		
+	3. "ctrl+c"	--> closes the connection to appium
+	
+	
+	
+
+	Appium
+	-------
+	
+	To communicate with the emulator, we need a DRIVER, a URL and an UiAutomator2Options object.
+	
+		For ANDROID:
+		------------
+			-> For Android we use "UiAutomator2Options"
+			-> URI		-> URI uri = new URI("http://127.0.0.1:4723/");
+			-> OPTIONS 	-> UiAutomator2Options options = new UiAutomator2Options(); 
+			-> DRIVER 	-> AndroidDriver driver = new AndroidDriver(uri.toURL(), options);
+			
+		For IOS:
+		--------
+			-> For IOS we use "XCUITestOptions" 
+			-> URI		-> URI uri = new URI("http://127.0.0.1:4723/");
+			-> OPTIONS 	-> XCUITestOptions options = new XCUITestOptions();
+			-> DRIVER 	-> AppiumDriver driver = new AppiumDriver(uri.toURL(), options);
+		
+		
+		
+	Methods of UiAutomator2Options options:
+	--------------------------------------
+		
+		-options.setApp(appPath);	-> Used to start the app in the emulator by providing the path.
+		
+		*** For ANDROID apk extension is ".apk"
+		*** For IOS apk extension is ".ipk"
+		
+	
+	
+	jUnit.jupiter Annotations we use:
+	----------------------------------
+	
+		@BeforeEach	-> same as BeforeMethod in TestNG
+		@AfterEach	-> same as AfterMethod in TestNG
+		
+		
+	
+	To run a test on real Android device
+	------------------------------------
+	
+	Settings -> About phone -> (maybe you need Software information) -> Build number -> Tap 7 times (or until developer mode is unlocked) 
+
+	If not found (for some Xiaomi phones) -> Settings -> About phone -> MIUI version -> Tap 7 times (or until developer mode is unlocked) 
+
+		Settings -> System -> Developer options -> Enable USB debugging (if not enabled)
+												-> Enable USB debugging (Security settings)
+						
+		--> Connect your device to usb and check
+		--> Settings -> Near the bottom About phone -> Android Version
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////					
+	//
+	// *** To run web application tests on chrome browser on the device, don't forget to run Appium with this command:
+	//	
+	//		"appium --allow-insecure chromedriver_autodownload"	
+	//		to run appium server but at the same time allow to download the latest chrome driver
+	//
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////					
+
+	
+
+		
+		

@@ -1,0 +1,124 @@
+===================================================================
+DOCKER IMAGE OLUSTURMA REHBERI
+===================================================================
+
+Bu doküman, Docker uzerinde sifirdan bir image (imaj) olusturma surecini ve Java projeleri icin kullanilabilecek temel imajlari en yalin sekilde aciklamak amaciyla hazirlanmistir.
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//	
+	//	1. FRAMEWORK ANA DIZININE 'DOCKERFILE' OLUSTUR:
+	//
+	//				# the image we'll use
+	//				FROM bellsoft/liberica-openjdk-alpine:latest-cds
+	//
+	//				# Install curl jq
+	//				RUN apk add curl jq
+    //
+	//				# working directory in the remote image container (we create it in the 'home/selenium-docker' folder)
+	//				# folder name can be different
+	//				WORKDIR /home/selenium-docker
+    //
+	//				# Add the required project files (RUN komutu tercih edilir. Fakat simdilik ADD kullanalim)
+	//				# eklemek istedigin baska dosyalar da varsa bir ADD satiri daha ekleyebilirsin.
+	//				ADD target/docker-resources .
+    //
+	//				# Environment Variables
+	//				# BROWSER
+	//				# HUB_HOST
+	//				# TEST_SUITE=vendor-portal.xml
+	//				# THREAD_COUNT
+    //
+	//				# Run the tests	
+	//				ENTRYPOINT java -cp 'libs/*' \
+	//												-Dselenium.grid.enabled=true \
+	//												-Dselenium.grid.hubHost=${HUB_HOST} \
+	//												-Dbrowser=${BROWSER} \						--> "\" kullanmamizin amaci, asagi satirdan devam anlaminda
+	//												org.testng.TestNG \
+	//												test-suites/${TEST_SUITE} \
+	//												-threadcount ${THREAD_COUNT}
+	//												
+	//		2. PAKETLE ve 'libs' ICERISINE 'selenium-docker.jar' & 'docker-selenium-tests.jar' DOSYALARINI OLUSTUR:
+	//				
+	//				mvn clean package -DskipTests		-> Dockerfile'in bulundugu anadizindeyken bu komutu uygula.
+	//				
+	//		
+	//		3. IMAJ DOSYASINI OLUSTUR:
+	//		
+	//				docker build -t umutdegismen/selenium .		--> :tag vermiyorum, varsayilan surum 'LATEST' olmasi icin.		
+	//																																																								
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+1. DOCKER IMAGE NEDIR VE NASIL OLUSTURULUR?
+
+	Docker imaji, uygulamanizin ve uygulamanizin calismasi icin gerekli olan tum bilesenlerin (isletim sistemi, kütüphaneler, kodlar, ortam degiskenleri) paketlenmis halidir.
+
+	Bir Docker imaji olusturmak icin 2 temel adim izlenir:
+		A) Projenizin kök dizininde uzantisi olmayan "Dockerfile" isimli bir dosya olusturmak.
+		B) Terminal veya komut satirindan dogru komutu calistirarak imaji derlemek (build etmek).
+
+-------------------------------------------------------------------
+
+2. IMAGE OLUSTURMA KOMUTU HANGISIDIR?
+
+	Bir Dockerfile'dan imaj olusturmak icin "docker build" komutu kullanilir.
+
+	En yaygin ve dogru kullanim sekli sunun gibidir:
+		docker build -t [IMAGE-NAME]:tag .
+
+Komutun detaylari:
+  * docker build 	: Imaj olusturma ana komutudur.
+  * -t           	: "Tag" yani imaja bir isim ve (istege bagli) etiket vermenizi saglar.
+  * imaj-adi     	: Imajinizin adidir (ornek: qa-automation-framework).
+  * :tag      		: Sürüm bilgisidir (ornek: :v1 veya :latest). VERILMEZSE VARSAYILAN "latest" OLUR.
+  * . (Nokta)    	: Dockerfile'in bulundugunuz dizinde (akttüel klasörde) oldugunu belirtir. 
+										BU NOKTA COK ÖNEMLIDIR, KESINLIKLE UNUTULMAMALIDIR.
+
+-------------------------------------------------------------------
+
+3. DOCKERFILE ICINDEKI "FROM" VE JAVA IMAJLARI
+
+	Dockerfile'in ilk satiri her zaman "FROM" ile baslar. 
+	
+	Bu adim, uygulamanizin hangi taban imaj (base image) uzerine kurulacagini belirler.
+
+	2 farkli Java imaji ve farklari su sekildedir:
+
+1. Hafif ve Optimize Alternatif:
+   FROM bellsoft/liberica-openjdk-alpine:latest-cds
+   * Özellikleri: Alpine Linux tabanli oldugu icin boyutu son derece kücüktür.
+   * Avantajlari: CDS (Class Data Sharing) destegi sayesinde Java uygulamasinin 
+     ilk acilis (startup) süresini ciddi oranda hizlandirir. RAM ve disk kullanimini optimize eder.
+
+2. Tam Teşekküllü, Daha Orijinal ve Büyük Alternatif:
+   FROM eclipse-temurin:21-jdk (veya projenizin ihtiyacina gore java surumu, ornek: eclipse-temurin:17-jdk)
+   * Özellikleri: Eski adıyla AdoptOpenJDK olan Eclipse Temurin, resmi ve endüstri standardı 
+     kabul edilen OpenJDK dagitimlarindan biridir. Ubuntu/Debian tabanli veya standard glibc 
+     kullanan imajlar uzerine kuruludur.
+   * Farklari: "bellsoft/liberica-openjdk-alpine" imajina kiyasla sistemde daha fazla temel arac,
+     kütüphane ve glibc bagimliligi barindirir. Bu yuzden diskte daha fazla yer kaplar. 
+     Ancak Alpine kütüphaneleriyle (musl) nadiren yasanabilecek uyumluluk sorunlarindan uzak, 
+     en "orijinal" ve safe-bet (guvenli liman) Java gelistirme ortamlardan biridir.
+
+-------------------------------------------------------------------
+
+4. BASIT BIR JAVA DOCKERFILE ORNEGI
+
+	Asagidaki taslak, bir Java projesini (örnegin bir test otomasyon framework'ünü) 
+	Dockerize ederken kullanabileceginiz en yalin Dockerfile yapisidir:
+
+# 1. Taban imaji secin (Ihtiyaca gore Temurin veya Liberica-Alpine)
+			FROM eclipse-temurin:21-jdk
+
+# 2. Konteyner icinde calisma dizinini belirleyin
+			WORKDIR /app
+				-YA DA- 
+			WORKDIR /home/selenium-docker
+
+# 3. Bilgisayarinizdaki pom.xml veya kodlari konteyner icine kopyalayin
+			COPY target/docker-resources .
+
+# 4. Run the tests
+			ENTRYPOINT java -Dselenium.grid.enabled=true -cp 'libs/*' org.testng.TestNG test-suites/vendor-portal.xml
+
+===================================================================

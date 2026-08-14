@@ -1,0 +1,22 @@
+
+	Pushing a custom built image to remote DockerHub repository:
+	------------------------------------------------------------
+	
+		[docker login] : 
+		
+			if not login, login first. 
+			if you're already logged in, you should see "Login Succeeded" message.
+			if not, provide your [username] and [password].
+		
+		[docker push umutdegismen/image_name] : 
+			Just like GitHub, we push our image to remote repository.
+		
+		[docker tag umutdegismen/image_name:latest umutdegismen/image_name:release-v1.1]	: 
+			Changes the "TAG" of the application such as 'Version'. 
+			This change is in LOCAL. 
+			DO NOT FORGET TO PUSH IT TO THE REMOTE REPOSITORY !!!
+			
+		[docker push umutdegismen/image_name:release-v1.1]
+		
+		
+		

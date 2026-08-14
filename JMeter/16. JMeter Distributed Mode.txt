@@ -1,0 +1,70 @@
+
+	JMeter Distributed Mode:
+	------------------------
+	
+	We use JMeter Distributed Mode, when we want to test thousands of threads. 
+	
+	Let's say we want to run a test with 5000 or 10000 users, but it may not possible due the ram or cpu incapabilities on one machine. 
+	
+	That's why, we use slave machines. 
+
+	How it works? 
+		
+		For instance, we'll run a test with 10000 users and we'll run this test on 10 machines. So, every machine will run 1000 users at the same time.
+		
+		So, we are just basically splitting the work load on the master machine.
+	
+	
+	Setting up the "SLAVE" machine:
+	
+		1. Open the "jmeter.properties" file in "jmeter/bin" folder in the SLAVE machine.
+		
+		2. Search for "#server.rmi.ssl.disable=false" and turn it to "true" and remove "#" in front
+			e.g. "server.rmi.ssl.disable=true"
+		
+		3. Start "jmeter-server" in the "jmeter/bin" folder in the slave machine
+		
+		4. If you see something like "Created remote object: UnicastServerRef2..." message, means that you are successfully started the slave server.
+		
+		5. Note the IP address of the slave (find it in the same line with "Created remote object: UnicastServerRef2...")
+			
+			(Because, we'll give this IP address to the "master" machine to connect it to the "slave") 
+			
+			which means, we'll update it in jmeter.properties of "master" machine.
+		
+		
+		
+		
+						//////////////////////////////////////////////////////////////////////////////////////////////////////
+						//																									//
+						//									*** BE AWARE THAT: ***											//
+						//																									//
+						//	-> Both systems MUST run the same Jmeter version												//
+						//	-> Both systems MUST be on the same subnetwork													//
+						//	-> Both systems SHOULD be as similar as possible: same OS, same directory tree, etc.			//
+						//	-> "remote hosts" only require the address. The port is specified by "server port" parameter.	//
+						//	-> Antivirus or firewall MAY block the connection.												//
+						//																									//
+						//////////////////////////////////////////////////////////////////////////////////////////////////////
+						
+	
+			
+	
+	Setting up the "MASTER" machine:
+		
+		1. Open the "jmeter.properties" file in "jmeter/bin" folder in the MASTER machine. 
+		
+		2. Search for remote_hosts" and change the IP address with the one you got from the slave machine
+			e.g. "remote_hosts=127.0.0.1"
+			
+		3. Restart the jmeter in "master" machine and run the test on selected nodes
+		
+		4. Do NOT click directly to RUN button on jmeter on master machine.
+		
+			To run the test on the "slave" machine through the "master" machine, we need to follow these steps:
+			
+			- Click on "Run" (on the menu strip)
+			- Navigate and click to "Run / Remote Start / (you will see the IP address)"
+			- As soon as the test has started, you should see "starting the test on host 'IP address'..." on the "SLAVE" machine.
+			- When it's done, you should see something like "Finished the test on host 'IP address'..." on the "SLAVE" machine.
+		

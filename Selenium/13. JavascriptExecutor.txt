@@ -1,0 +1,16 @@
+		
+	
+	JavascriptExecutor -> is an interface which provides a mechanism to execute javascript code through the selenium WebDriver
+	
+	JavascriptExecutor js = (JavascriptExecutor) driver;
+	js.executeScript("javascript command");
+	
+	
+	Using JavascriptExecutor: 
+		- click on elements 
+		- scroll
+		- manipulate/change elements 
+		- retrieve values 
+		- we can also handle pop-ups
+	
+	

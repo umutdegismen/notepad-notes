@@ -1,0 +1,135 @@
+
+
+		SCRUM
+	-------------
+
+		Scrum is a methodology, a management process. It follows the agile values and principles. 
+		
+		In Scrum framework,
+			
+		Product Owner -> User Stories -> Product Backlog  -> Planning Meeting -> Sprint Backlog -> Delivery -> Sprint Demo + Sprint Retro
+			
+		- Product Owner creates the "User Stories" and they are added to the "Product Backlog (the main requirement document)". We plan (Planning Meeting ) and begin the sprint (2-4 weeks - Sprint Backlog). Then the developer team developes the product and we deliver. Then We have sprint demo and retrospective meetings.
+			
+	
+	SCRUM ROLES
+	------------
+	
+		1. Product Owner
+		2. Scrum Master
+		3. Developement Team
+
+
+	MEETINGS
+	---------
+
+		-Daily standup meetings - everyday
+
+		-SPRINT PLANNING - FIRST day of sprint
+
+		-SPRINT GROOMING - IN BETWEEN of sprint
+
+		-SPRINT DEMO (Review) - Right After sprint ends
+
+		-SPRINT RETRO / RETROSPECTIVE ---> LAST day of sprint
+
+	--------------------------------------------------------------------------------------------------------------------
+
+	SCRUM CEREMONIES
+	----------------
+	
+	1- ==== STANDUP MEETINGS ==== (Daily Stand-up Meetings)
+			
+			**** It's called stand-up because the team is making a circle and whose turn is standing up.
+
+		Attendees	: Scrum Master (Leads the team)
+					  Development team
+					  BA’s (Business Analysis) -> BA is who is communicating with the client about the requirements
+					  Product Owner (Optional)
+					  
+		When 		: Daily - 15mins long
+
+		Purpose		: What did you do yesterday ?
+					  What are you doing today ? 
+					  Any blockers/impediments ? 
+
+
+	2- ==== SPRINT PLANNING ====
+
+		Attendees 	: Development team
+					  Scrum Master
+					  BA’s (Business Analysis)
+					  Product Owner
+					
+		When	  	: At the beginning of the Sprint. 
+					  Team meets to discuss user stories & tasks.
+					  
+		Lead		: Scrum Master but Product Owner makes the decision
+		
+		Purpose		: Sprint Backlog is defined and estimated
+					  We use "Planning Poker" for estimating the effort for a user story. 
+					  "Modified Fibonacci" numbers are used in the voting system.
+						-Fibonacci 			= 0,1,2,3,5,8,13,21
+						-Modified Fibonacci 	= 0,1/2,1,2,3,5,8,13,20 (added 1/2 and round-down to 20)
+					  	
+		
+	3- ==== SPRINT GROOMING / REFINEMENT MEETINGS ====
+
+		Attendees 	: Development team
+					  Scrum Master
+					  BA’s
+					  Product Owners
+		
+		When		: Product owner and team representatives arrange it in the mid-sprint time. 
+					  In this case, planning and refinement meetings alternate but happen on the same day each week.
+
+		Lead		: Product owner
+		
+		Purpose 	: The grooming involves;
+					  splitting big items into smaller ones, rewriting backlog items to be more expressive, deleting no more need items etc.
+						
+
+	4- ===== SPRINT DEMO / SPRINT REVIEW ====
+
+		Attendees 	: Development team
+					  Scrum Master
+					  BA’s
+					  Product Owner
+					  Customers Stock holders
+
+		When		: Right after sprint ends
+
+		Purpose		: Typically lead by a SME or Test Lead.
+					  Show what was accomplished in the sprint.
+					  Demonstration client newly created functionality, walk them through and receive feedback
+
+
+	5- ==== SPRINT RETRO / RETROSPECTIVE MEETINGS ====
+
+		Attendees 	: Development team
+					  Scrum Master
+					  BA’s
+					  Product Owners (Optional)
+		
+		When		: Right before sprint ends OR/usually LAST DAY OF SPRINT
+
+		Purpose		: What went well ?
+					  What could be improved ?
+					  What type of issues and problems came up ?
+					  Continue doing things that worked.
+					  Stop doing things that causes problems.
+					  To review and improve sprint cycles
+					  
+
+
+
+
+
+								
+
+
+
+
+
+
+			

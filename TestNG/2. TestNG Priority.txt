@@ -1,0 +1,102 @@
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Class 02
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~							
+
+	TEstNG, priority'e gore test siralamasi yapar. 
+	Priority belirtilmez ise,  default priority 0'dir.
+	Negatif deger oncelikte one gecer. -1 gibi
+	
+	If we don't want to run a test we can add (enabled = false)
+	Birden fazla test metodunu disable yapmak icin de kullanilabilir.
+	Bir boolean tanimlanip , metodlara o tanim atanip, tek bir yerden enabled ya da disabled yapilip run edilecek olan testler kontrol edilebilir.
+		
+		@Test(priority = 2, enabled = false)
+		public void testTwo() 
+		{
+			System.out.println("Test two!");
+		}
+			
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	
+
+
+	We can also give more than one parameter using arrays syntax
+	
+	dependsOnMethods = {"testOne","testTwo"})
+	
+		@Test(dependsOnMethods = {"testOne","testTwo"})
+		public void testFive() {
+			System.out.println("Test five!");
+		}
+	If one of those will fail, this test will skip because 	{"testOne","testTwo"} means AND.
+	
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	
+	
+	// In this scenario:
+	// 1st will throw exception which means a FAIL for TestNG
+	// 2nd will run as 2nd since it has priority = 2 and will run because 'enabled=true'
+	// 3rd priority default 0 but it will NOT run because 2nd will PASS but 1st will FAIL.
+	// SO if there is more then one condition, it means AND !
+	// 4th will NOT run because depends 1st one and it is FAILED.
+	
+	// FAIL
+	@Test(priority = 1)	
+	public void testOne() throws Exception {
+		System.out.println("Test one!");
+		throw new Exception();
+	}
+	
+	// PASS
+	@Test(priority = 2, enabled = true)
+	public void testTwo() {
+		System.out.println("Test two!");
+	}
+
+	// WILL NOT RUN BECAUSE 1ST IS FAIL -> SKIP
+	@Test(dependsOnMethods = {"testOne","testTwo"})
+	public void testThree() {
+		System.out.println("Test three!");
+	}
+	
+	// WILL NOT RUN -> SKIP
+	@Test(dependsOnMethods = "testOne")
+	public void testFour() {
+		System.out.println("Test four!");
+	}
+		
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	
+
+	ATTRIBUTES
+
+	Different parameters/attributes to use with @Test
+		priority
+		enabled
+		dependsOnMethods
+		dependsOnGroups
+		
+		In TestNG we can specify these attributes:
+- priority of the test cases/test methods
+	In TestNG test cases are executed in alphabetical order based on the name of the test methods.
+	When do don't want to rely on that, we can use the priority attribute/parameter
+
+	@Test(priority = 2)
+	public void validateLogin(){
+    }
+
+- enable/disable the test cases
+	By default all test cases are set to true for execution (enabled = true)
+	If there is any test case that we want to skip(test case failed previously and the developers didn't fix the bug), we can do it by using enabled attribute and set it to false.
+
+	@Test(enabled = false)
+	public void validateLogin(){
+    }
+
+- dependency on other test cases
+	If we want to set up dependency between test cases we can use dependsOnMethods attribute/parameter
+
+	@Test(dependsOnMethods = { "validateLogin" })
+	public void addEmployee(){
+    }
+
+	If test case "validateLogin" will fail, test case "addEmployee" will never get executed because it has a dependency on the other test method.

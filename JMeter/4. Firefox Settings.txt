@@ -1,0 +1,39 @@
+
+
+	Setting up the proxy : 
+	
+		- Open Firefox
+		- Go Settings
+		- Network Settings (at the very bottom)
+		- Click on manual proxy configuration
+		- Provide the port number whatever we provide it in JMeter (by default 8888)
+		- Provide the HTTP Proxy address (localhost): 127.0.0.1
+		- Check the box for 'Use this proxy server for all protocols'
+		- Click OK
+		
+		As soon as we do this settings, Firefox browser won't open any url and give a proxy error. 
+		Whenever we start recording, it will be able to navigate to the url we want to recor and test.
+		
+	
+	Installing the Certificate to Firefox :
+		
+		HTTP websites are fine and don't need any certificates.
+		
+		But, we are unable to go any HTTPS websites without installing the certificate.
+		
+		This Certificate is provided by JMeter.
+		
+		As soon as we click on 'start' recording, JMeter tess us that the certificate is created in 'bin' folder.
+	
+			Steps: 
+				
+				- go to Firefox browser settings
+				- type 'certificate' in search box
+				- click on 'view certificates'
+				- click on 'Authorities' and 'Import'
+				- provide 'ApacheJMeterTemporaryRootCA.crt' file from the 'bin' folder
+				- check the boxes 'trust...' and click OK
+				
+		
+			
+	

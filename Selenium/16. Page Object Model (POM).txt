@@ -1,0 +1,31 @@
+	
+	
+	Page Object Model (POM): 
+	
+		- idea/design pattern to create a repository of elements. 
+			- it enhances test maintenance 
+			- it improves code redundancy
+		- for each web page we create a java class to store the elements of this page. 
+
+	
+	How to implement POM: 
+		
+		1. without PageFactory 
+			- when we create an object, it will locate the elements immediately. 
+			So, this forces us to create the object when we go to the respective page.
+				
+		2. with PageFactory and @FindBy annotation
+			- it will locate the elements only when we need it (lazy initialization).
+			
+			In the Element's Page class:
+				
+			public class LoginPage {
+			
+				@FindBy(xpath="//xpath here")
+				public WebELement username;
+				
+				// in the CTOR
+				public LoginPage(){
+					PageFactory.initElements(BaseClass.driver, this);
+				}
+			}

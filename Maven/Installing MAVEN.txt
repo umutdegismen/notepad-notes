@@ -1,0 +1,13 @@
+https://www.youtube.com/watch?v=ktJbJx-_toE
+
+1. Download and install Java JDK (done)
+2. Set Environment Variable JAVA_HOME (If you just have your JDK added to the path it should be OK)
+3. Download Apache Maven from its official site (http://maven.apache.org/) 
+Go to Downloads 
+Download apache-maven-3.8.5-bin.zip
+4. Unzip the file in the location that you want to install Maven (C:\Program Files\maven)
+5. Create an Environment Variable (M2_HOME) pointing to the location you installed maven
+6. Add it to your path variable as (%M2_HOME%\bin)
+7. Verify by running mvn -version in your command prompt.
+
+NOTE: Steps 1 and 2, also, 5 and 6 can also be done by just adding the location of your java/maven to the path variable!!!

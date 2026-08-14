@@ -1,0 +1,49 @@
+
+	To set a windows environment in Command Prompt or Powershell:
+		- Open Command Prompt
+		- setx API_USERNAME "myuser" 		-> press enter
+		- setx API_PASSWORD "mypassword" 	-> press enter
+		- restart CMD or IDE to make them visible
+		
+	OR in GUI:
+		- win+R -> type 'SystemPropertiesAdvanced'
+		- go to environments 
+		- you can add, edit, delete
+		
+	To GET a windows environment in COMMAND PROMPT:
+		- Open Command Prompt
+		- echo %API_USERNAME% 	-> press enter
+		- echo %API_PASSWORD% 	-> press enter
+		
+	To GET a windows environment in POWERSHELL:
+		- Open Powershell
+		- echo $env:API_USERNAME 	-> press enter
+		- echo $env:API_PASSWORD 	-> press enter
+		
+	To GET them in JAVA:
+		System.getenv("API_USERNAME");
+			String password = System.getenv("API_PASSWORD");
+			String username = System.getenv("API_USERNAME");
+		
+	Best practice is to make a Null Check:
+		if (System.getenv("API_USERNAME") == null) {
+			throw new RuntimeException("Missing environment variable: API_USERNAME");
+		}
+		if (System.getenv("API_PASSWORD") == null) {
+			throw new RuntimeException("Missing environment variable: API_PASSWORD");
+		}
+		
+	To UPDATE a windows environment in COMMAND PROMPT:
+		- setx API_USERNAME newUser			-> press enter
+		- setx API_PASSWORD newPassword123	-> press enter
+		- restart CMD or IDE to make them visible
+		
+		***(Set the new variable in 'quotes' if there is space between words like "new user". otherwise do not use 'quotes')***
+		
+	OR in GUI:
+		- win+R -> type 'SystemPropertiesAdvanced'
+		- go to environments 
+		- you can add, edit, delete
+
+
+		

@@ -1,0 +1,89 @@
+
+	JENKINS
+	~~~~~~~
+	
+	Creating a new Job:
+	
+	1. General > Description 		-> for example, Cucumber SIS-Project build on Maven structure)
+	2. General > GitHub project	    -> We select GitHub project and provide Project url
+	3. Source Code Management > Git -> We provide Repository URL, Credentials and the Branch we want to work on.
+		When adding the credentials,
+			username : GitHub username
+			password : the github token (it's saved in the google drive)
+			ID : something like a description such as - <github-token>
+	4. Build Triggers > Build periodically OR Poll SCM (depends on what we need)
+	5. Build Environment > Delete workspace before build starts  !!! IMPORTANT !!! 
+		-> To ensure that the workspace of a job is cleaned out before the build begins.
+		-> The workspace is the directory where Jenkins checks out the code and performs the build process.
+		
+	6. Build Steps > INVOKE TOP-LEVEL MAVEN TARGETS -> GOALS: <clean test -Drunner=JenkinsRunner> !!! NO 'mvn' at the beginning!!!
+	7. Post-build Actions > Cucumber reports
+						  > E-mail Notification	
+	
+	
+	
+	
+	BUILD TRIGGERS:
+	~~~~~~~~~~~~~~~
+	
+	>>>	Build periodically: It uses CRON syntax.
+							www.cronmaker.com type of web site can be used to calculate the time period.
+			
+			- 5 stars (*****) -> means, jenkins will check the project in every minute
+			- Or at a specific time for example
+			
+			For Example: 	10 20 * * 6 -> That run at Saturday, January 4, 2025, 8:10 PM
+							
+							  10    20 	 * 	  *    6
+							MINUTE HOUR DOM MONTH DOW
+							
+							MINUTE	-> Minutes within the hour (0–59)
+							HOUR	-> The hour of the day (0–23)
+							DOM		-> The day of the month (1–31)
+							MONTH	-> The month (1–12)
+							DOW		-> The day of the week (0–7) where 0 and 7 are Sunday.
+						
+			
+		
+	>>>	Poll SCM: 	Jenkins will check the project whenever we make any changes in the project, in GitHub.
+					(SCM : Source Code Management)
+				
+					Based on the provided Cron time, it will check the remote repository. If there is any changes, it will pull it from GitHup repository and build the process.
+					
+		
+		Differences between 'Poll SCM' and 'Build Periodically':
+		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			
+			'Build Periodically' runs no matter what at the scheduled time.
+			'Poll SCM' runs what at the scheduled time IF THERE IS AANY CHANGES in Github remote code.
+				
+				
+	BUILD STEPS:
+	~~~~~~~~~~~~~
+	
+	>>> INVOKE TOP-LEVEL MAVEN TARGETS	:	Since we want to control a Maven project, we use this option.
+		
+		In the 'Goals' section we provide the maven command. Which runner class we want to run etc.
+			
+			-> The command we provide in 'Goals':
+				> 'clean test' (first cleans, then runs test)
+			
+			-> The comman we provide for executing a specific Runner Class then we use this command: 
+				> 'clean test -Drunner=JenkinsRunner'
+				
+				('-Drunner=JenkinsRunner' -> this is the parameter. 														  )
+				(							If we want to trigger TestRunner class then we provide TestRunner as a parameter. )
+				(							(-Drunner=TestRunner)															  )
+			
+	
+	POST-BUILD ACTIONS:	
+	~~~~~~~~~~~~~~~~~~~
+		
+		Cucumber reports: 	Here, we setup the Cucumber reports. 
+							Cucumber reports is a plug-in that we need to install from the plug-ins section in Jenkins. 
+		
+		
+		E-mail Notification: Basically, used to get email notifications.
+
+		We are able to add more actions by clicking 'Add post-build action' like 'Slack notifications, Delete workspace when build is done' etc.
+			

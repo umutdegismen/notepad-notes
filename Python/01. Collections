@@ -1,0 +1,50 @@
+
+
+	COLLECTIONS:
+	
+	Common methods for all three of them:
+		
+		to see the list of the methods:
+			-print(dir(listName))
+		
+		to see the list of the methods with the description:	
+			-print(help(listName))
+			
+	
+	LIST : [] insertion order - changleable - allows duplication 
+		
+		- append
+		- clear
+		- copy
+		- count
+		- extend
+		- index
+		- insert
+		- pop
+		- remove
+		- reverse
+		- sort
+		
+	
+	SET : {} NO insertion order - immutable, but Add/Remove 0K. NO duplicates
+		
+		- add
+		- clear
+		- copy
+		- difference
+		- difference_update
+		- discard
+		- intersection
+		- intersection_update
+		- isdisjoint
+		- issubset
+		- issuperset
+		- pop
+		- remove
+		- symmetric_difference
+		- symmetric_difference_update
+		- union
+		- update
+	
+	
+	TUPLE : () insertion order - immutable - allows duplication - FASTER

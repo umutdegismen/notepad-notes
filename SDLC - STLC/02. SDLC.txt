@@ -1,0 +1,56 @@
+
+
+ 
+ Software Development Life Cycle
+	
+ The software development lifecycle (SDLC) is the cost-effective and time-efficient process that development teams use to design and build high-quality software. 
+
+ The development process goes through 5 phases and they are;
+ 
+ -> Requirement Analysis
+ -> Design
+ -> Development
+ -> Testing
+ -> Deployment
+
+ 
+
+ 1st phase is Requirement Analysis (we can say it as planning phase)
+	
+	The planning phase typically includes tasks like cost-benefit analysis, scheduling, and resource estimation. The development team collects requirements from several stakeholders such as customers to create a software.
+
+ 2nd phase is Design:
+	
+	In the design phase, software engineers analyze requirements and identify the best solutions to create the software. After this analysis, they design; 
+	
+	- the application architecture
+	- the user interfaces 
+	- the system interfaces etc.
+	
+ 
+ 3rd phase is Development/Coding Phase:
+ 
+	In this phase, basicaly, the developer or the development team codes the product. 
+	
+	Developer takes all the detail design documents from the design phase and transform them into actual system.
+ 
+ 4rd phase is the testing phase which is what we are gonna do.
+ 
+	The Quality analysis (QA) or manual testing team tests the product for bugs, errors and stability.  
+	
+	the testing phase often runs parallel to the development phase, because many teams immediately test the code they write,.
+	
+ 5th phase Deployment phase
+	
+		When teams develop software, they code and test on a
+	different copy of the software than the one that the users have access to.
+		The software that customers use is called production, 
+	while other copies are said to be in the build environment, or testing environment.
+	
+		Having separate build and production environments ensures 
+	that customers can continue to use the software even while it is being changed or upgraded. The deployment phase includes several tasks to move the latest build copy to the production environment, such as packaging, environment configuration, and installation.
+	
+ 
+	
+
+

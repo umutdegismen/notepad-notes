@@ -1,0 +1,33 @@
+
+	Port Mapping:
+		
+		Bir ag uzerinde 100 tane bilgisayar oldugunu dusun. Bu 100 pc icinde, Pc-A, Pc-B uzerinde bir program calistirilacak diyelim.
+		
+		Bunun icin IP adresi kullaniyoruz. Pc-A, Pc-B'nin ip adresini girerek Pc-B'ye baglaniyor. Peki pc-B uzerinde farkli farkli programlar oldugunu dusunelim. Pc-A, bu hangi programlari calistiracagini nasil anlayacak? 
+		
+		Port ile.
+		
+		Her programin kendine ait bir portu vardir. Ornegin Jenkins, 8080 portu uzerinde calisiyor. (port numaralarini kendimiz tanimlayabiliriz)
+		
+		Dolayisiyla pc-A, pc-B uzerinde jenkins calistirmak icin 197.165.12.13:8080 seklinde [ip adresi:port] ip adresi girmek durumundadir.
+		
+		Port mapping bu zamanlarda kullaniyoruz.
+		
+				
+		Port mapping commands:
+	
+			docker run -p hostPort : containerPort image
+			docker run -p 80:80	umutdegismen/sqr_finder
+			docker run -p 90:80					
+			
+												(hostPort)							(containerPort)
+																				--->	80 -> Jenkins
+																	-----80----|
+			machine A 	----------------> 	machine B ports: 80 ve 90		   |
+						192.163.14.15:80							-----90----|
+																				--->	80 -> Selenium Grid
+
+			
+		
+			
+		

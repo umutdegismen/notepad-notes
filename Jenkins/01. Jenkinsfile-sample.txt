@@ -1,0 +1,67 @@
+
+	Jenkinsfile:
+	------------
+	
+	-> After creating the jenkinsfile, copy everything in it and navigate to Jenkins.
+	-> Create a new job
+	-> Select Pipeline and give it a name (e.g. PIPELINE_DEMO) 
+	-> Scroll down and paste it into the 'Script' section under 'Pipeline' you've copied. 
+	-> Save.
+	
+		pipeline{
+			
+			agent any // we won't use any agents for now. That's why, 'agent any'
+			
+			stages{	
+				/*	
+					'stages' has the list of commands you want to execute
+					'stages' is ile the test methods in TestNG
+				*/
+				stage('stage-1'){		
+					steps{	// steps can have more than one step
+						echo "doing mvn clean"
+						echo "doing mvn package"	
+					}
+				}
+				stage("stage-2"){
+					steps{
+						echo "doing docker build image"
+						echo "doing mvn package"							
+					}
+				}
+				stage("stage-3"){
+					steps{
+						echo "pushing docker image"
+					}
+				}
+			}
+			
+			post{ 
+				always{
+					echo "doing clean up"
+				}
+				/*
+					We can have OPTIONAL post-building action block. 
+					This is like @AfterTest method in TestNG.
+					Once everything is DONE in the 'stages' section, this will be executed.
+					We can use the following methods:
+						success: will be executed only the job is SUCCESSFUL.
+						failure: will be executed only the job is FAILURES.
+						aborted: will be executed only the job is ABORTED.
+						always : will be executed only the job is ALWAYS. 
+								 If you don't care all the jobs are success or failed, you can say always.
+				success{
+					"do something on success"
+				}	
+				failure{
+					"do something on failure"
+				}
+				aborted{
+					"do something on abort"
+				}
+				always{
+					"do something always"
+				}
+				*/			
+			}
+		}

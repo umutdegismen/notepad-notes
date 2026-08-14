@@ -1,0 +1,70 @@
+
+		Advanced xPath
+	~~~~~~~~~~~~~~~~~~~~~~~~
+
+	
+		https://accounts.lambdatest.com/register	
+			
+	--->	/../preceding-sibling:: --> goes through in siblings to up(parents)
+										kendinden oncekilere bakar. [2] -> kendinden sonra yukari dogru 2. element
+																	[1] -> kendinden sonra yukari dogru ilk element
+			sample:
+				xpath: //input[@id='userpassword']/../../preceding-sibling::div//input	
+				
+				
+				
+		<html>
+			<body>
+				<div>
+					<div> </div>				---> -
+					<input> </input>			---> --			
+					<div> </div>				---> ---> SIBLINGS		
+					<div id="famous"> </div>	---> --
+					<div> </div>				---> -	
+				</div>			
+				<div>
+					<input> </input>
+				</div>
+			</body>
+		</html>				
+
+			
+		{Locationg the parent}	
+			//div[@id='famous']/..
+			//div[@id='famous']/parent
+					
+				
+		{Locationg the siblings (div) BEFORE itself}
+			//div[@id='famous']/preceding-sibling::div
+					
+				
+		{Locationg the siblings (div) AFTER itself}
+			//div[@id='famous']/following-sibling::div
+					
+					
+		{Locationg uncle's daughter (input)}
+			//div[@id='famous']/../following-sibling::div/input
+			
+
+			
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			
+			
+		https://hrm.neotechacademy.com/ 
+		
+	--->	/following-sibling:: 	--> goes through in siblings to down (child)
+			
+			sample:
+				xpath: //div[@class='input-field'][1]/following-sibling::div[1]/input
+			
+			
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			
+			
+		https://accounts.lambdatest.com/register	
+		
+	--->	/descendant:: 	--> it doesn't care how many chidren a div has in it. 
+			
+			sample:
+				xpath: //form[@class='form reg-custom']//descendant::input[2]
+			

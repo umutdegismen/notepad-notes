@@ -1,0 +1,74 @@
+
+	SQL queries:
+	
+	Beginner Level
+
+		1. Show all the customers from Germany.
+			SELECT * FROM Customers WHERE Country='Germany';
+		
+		2. List the ProductName and UnitPrice of all products that cost more than 30.
+			SELECT ProductName,UnitPrice FROM Products WHERE UnitPrice > 30;
+			
+		3. Display the FirstName and LastName of employees who work in the London office.
+			SELECT FirstName, LastName FROM Employees WHERE City='London';
+		
+
+	🔹 Intermediate Level
+
+		4. Find the total number of orders placed by customer ALFKI.
+			SELECT COUNT(*) FROM Orders WHERE CustomerID = 'ALFKI';
+
+		5. Show the average unit price of all products in the Beverages category.
+			SELECT AVG(p.UnitPrice) AS 'Beverages Average' FROM Products p 
+			JOIN Categories c
+			ON p.CategoryID = c.CategoryID 
+			WHERE CategoryName='Beverages';
+
+		6. List the top 5 most expensive products (ProductName, UnitPrice).
+			SELECT TOP 5 ProductName, UnitPrice FROM Products ORDER BY UnitPrice DESC;	-> MSSql
+			SELECT ProductName, UnitPrice FROM Products ORDER BY UnitPrice DESC LIMIT 5; -> MySql
+			
+
+	🔹 Joins Practice
+
+		7. Show all orders along with the customer’s company name who placed them.
+			SELECT o.OrderID,o.OrderDate, c.CompanyName 
+			FROM Orders o 
+			JOIN Customers c
+			ON O.CustomerID = c.CustomerID;
+
+		8. Find all products supplied by Exotic Liquids.
+			SELECT p.ProductName ,s.CompanyName
+			FROM Products p
+			JOIN Suppliers s
+			ON p.SupplierID=s.SupplierID 
+			WHERE s.CompanyName = 'Exotic Liquids';
+			
+
+		9. List all orders (OrderID, OrderDate) along with the employee’s full name who handled the order.
+			SELECT e.FirstName+' '+e.LastName AS 'Fullname', o.OrderID, o.OrderDate 
+			FROM Orders o 
+			JOIN Employees e
+			ON o.EmployeeID=e.EmployeeID;
+			
+
+	🔹 A Bit Tricky
+
+		10. Find the total sales (Quantity * UnitPrice) per customer. Show CustomerID and TotalSales.
+			SELECT o.CustomerID, SUM((od.Quantity*od.UnitPrice)) as 'Total' 
+			FROM orders o
+			JOIN [Order Details] od
+			ON o.OrderID=od.OrderID
+			GROUP BY o.CustomerID
+			ORDER BY o.CustomerID;
+
+		11. Show the top 3 customers who spent the most money (TotalSales).
+			SELECT TOP 3 c.CustomerID, c.ContactName,c.CompanyName, SUM(od.Quantity*od.UnitPrice) as 'TotalSales'
+			FROM Orders o
+			JOIN [Order Details] od
+			ON o.OrderID = od.OrderID
+			JOIN Customers c
+			ON c.CustomerID = o.CustomerID
+			GROUP BY c.CustomerID,c.ContactName,c.CompanyName
+			ORDER BY TotalSales DESC;
+			

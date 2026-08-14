@@ -1,0 +1,112 @@
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//
+	//	To SET and GET the login information:
+	//	
+	//		git config --global user.name "username" 				--> - set username
+	//		git config --global user.email "github email address" 	--> - set email
+	//			
+	//		git config --global user.name								--> - to see username saved in the system
+	//		git config --global user.email  							--> - to see email saved in the system
+	//	
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+	First GIT steps when creating a new project:
+	----------------
+	
+	- eclipse'de projeyi olustur
+	- GitHub'da repository olutur
+	- Navigate to project folder on GitBash [cd c/Users/Bluesman/eclipse-workspace/[project-name]]
+	- Initiliaze git folder and remote repository
+			git init
+			git add .
+			git commit -m "Initial project setup"
+			git branch -M main
+			git remote add origin https://github.com/umutdegismen/parallel-automation-framework.git
+			git push -u origin main
+
+
+	////////////////////////////////////////////////////////////////////////////////////////
+	//
+	//  *** After creating a new branch, you need to push it to remote repository too ***
+	//	
+	//	-> git push -u origin <branch-name> --> for pushing the newly created branch.
+	//
+	////////////////////////////////////////////////////////////////////////////////////////		
+	
+	
+	
+	Steps to MERGE the changes with main:
+	-------------------------------------
+
+	1. ON MY BRANCH -> kendi kodunu, kendi branch'ine push et.
+
+		-git add .
+		-git commit -m ""
+		-git push
+
+	2. CHANGE BRANCH to MAIN -> Main'e gec ki takimdaki herkesin update ettigi en 'UPDATED' kodu pull et.
+		
+		-git checkout main
+		-git pull
+
+	3. CHANGE BRANCH to MY BRANCH and merge your code with the code on main branch
+
+		-git merge main	(On my branch)
+
+	4. There may be a conflict now
+		
+		if there is a conflict:
+		
+			-go to Eclipse 
+			-you will see conflicts on Eclipse with a "RED DOT" and fix the conflict on eclipse
+
+			(On my branch)
+			-git add .
+			-git commit -m "merging" -> use this message
+			-git push
+			-create pull request on gitHub
+		
+	
+	
+	////////////////////////////////////////////////////////////////////////////////////////	
+	//
+	//	To DELETE the remote branch: 
+	//  -----------------------------
+	//
+	//		git push origin -d <branchName>
+	//		git push origin --delete <branchName>
+	//
+	//
+	//	1. git branch -d <branchName>
+	//		What it does: Deletes the specified branch, but only if it has been fully merged with its upstream branch.
+	//		When to use: Use this to clean up branches that have already been merged into the main or another branch, 
+	//		indicating they are no longer needed.
+	//
+	//	2. git branch -D <branchName>
+	//		What it does: Forcefully deletes the specified branch, even if it hasn't been merged.
+	//		When to use: Use this when you want to delete a branch regardless of whether its changes have been merged. 
+	//		Be careful, as this can lead to loss of work.
+	//	
+	//	3. git push origin -d <branchName> or git push origin --delete <branchName>
+	//		What it does: Deletes the specified branch from the REMOTE REPOSITORY.
+	//		When to use: Use this to remove a branch from the remote repository after it has been merged or is no longer needed.
+	//
+	////////////////////////////////////////////////////////////////////////////////////////	
+	
+	////////////////////////////////////////////////////////////////////////////////////////	
+	//
+	//	To UPDATE/CHANGE the remote URL: 
+	//  --------------------------------
+	//	1. change the url in GitHub (remote repository)
+	//  2. git remote -v
+	//		 check the linked url on git bash
+	//  3. git remote set-url origin <new-url>
+	//		 push the new remote repository url
+	//	4. git remote -v
+  //		 verify the new url
+	//
+	////////////////////////////////////////////////////////////////////////////////////////	
+			
+

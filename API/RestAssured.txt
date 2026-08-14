@@ -1,0 +1,89 @@
+	
+	
+	RestAssured - is a java library that allows us to automate Rest APIs.
+				- it supports GET, POST, PUT/PATCH, DELETE methods
+				
+	RestAssured follows a BDD approach ( given, when, then )
+
+	given() - RequestSpecification - prepare the request
+			- what we need to send to the server (headers, body, params, auth ect.)
+		
+	when()  - send the request (similar to hitting send on Postman)
+			- when().post(endpoint) ...
+		
+	then()  - ValidatableResponse - validate the response 
+			- we make assertions for status code, header, body...
+
+	
+	////////////////////////////////////////////////////
+	
+	1st WAY
+	
+		JSONObject obj = new JSONObject();
+		obj.put("name", APIGlobalVariables.name);
+		obj.put("description", APIGlobalVariables.description);
+		obj.put("instructor", APIGlobalVariables.instructor);
+		obj.put("instructorEmail", APIGlobalVariables.instructorEmail);
+		obj.put("term", APIGlobalVariables.term);
+		obj.put("credits", APIGlobalVariables.credits);
+		
+		String payload = obj.toString();
+		
+		
+	///////////////////////////////////////////////	
+		add this dependency !!!
+		
+			<dependency>
+				<groupId>org.json</groupId>
+				<artifactId>json</artifactId>
+				<version>20210307</version>
+			</dependency>
+	///////////////////////////////////////////////
+
+	
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	
+	2nd WAY	
+		
+		String payload = String.format(
+						"""
+						{
+						  "id": "%s",
+						  "name": "%s",
+						  "description": "%s",
+						  "instructor": "%s",
+						  "instructorEmail": "%s",
+						  "term": "%s",
+						  "credits": "%s"
+						}
+						""", 
+						APIGlobalVariables.classId,
+						APIGlobalVariables.updateName,
+						APIGlobalVariables.updateDescription,
+						APIGlobalVariables.updateInstructor,
+						APIGlobalVariables.updateInstructorEmail,
+						APIGlobalVariables.updateTerm,
+						APIGlobalVariables.updateCredits);
+						
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	
+	To get the "result" in jsonPath() as Map<String,String>  -->
+	
+		Map<String,Object> resultMap = response.body().jsonPath().getMap("result");
+		
+		for (Map.Entry<String, Object> entry : resultMap.entrySet()) {
+			String key = entry.getKey();
+			String value = String.valueOf(entry.getValue()); // Convert each value to a String
+
+			System.out.println(key + " = " + value);
+		}
+		
+		OR
+		
+		resultMap.forEach((key, value) -> System.out.println(key + " -> " + value));
+		
+	Bu sekilde 'Map<String,Object>' yapmamizin nedeni; 
+	
+	result icinde int deger oldugu zaman Map<String,String> ile java.lang.ClassCastException: class java.lang.Integer cannot be cast to class java.lang.String hatasi aliyoruz. Onu onlemek icin 'value' kismini 'Object' yapiyoruz ki tum degerleri alalim.
+	
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

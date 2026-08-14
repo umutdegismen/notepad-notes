@@ -1,0 +1,2 @@
+Git branch color -> Basic > Decoration Color : 181, 152, 86 (Default)
+Gherkin Unmatched Steps Color -> General > Editors > Text Editors > Annotations > Cucumber Unmatched Steps : 247, 207, 84 (Default)

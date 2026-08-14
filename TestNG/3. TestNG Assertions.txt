@@ -1,0 +1,42 @@
+
+Differences between SOFT ASSERTION and HARD ASSERTION
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	SOFT ASSERTION
+
+		- Keeps running till the end if there is a failing test in the test. It doesn't matter for it.
+		
+		- Let's say we test 4 cases in a test using soft assertion. 3 is passed and 1 is failed. The result will be FAILED.
+		
+	Syntax:
+		
+		SoftAssert soft = new SoftAssert();
+		soft.assertTrue(logoExists, "Logo is NOT displayed!");
+		
+				~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+				
+		soft.assertEquals(actualResult, expectedResult,"Account name is not Jacqueline White");
+		soft.assertAll();
+		
+		//soft.assertAll();  ----> 	this will collect all sof assertions
+									until this step, test will NOT be executed. 
+									we can say, it is like .perform in Actions
+									this will assert all the assertions at the same time.
+		
+
+	HARD ASSERTION
+
+		- If the assortion fails, it stops executing. It will not continue. Like using break in a loop.
+		
+	Syntax:
+	
+		Assert.assertEquals(expectedTitle, actualTitle);
+		
+	
+	
+	To perform test validation in TestNG we use assertions.
+	
+	- Hard Assert uses Assert class and if it fails the execution of TC will stop
+	- Soft Assert uses SoftAssert class and it will continue execution of TC even if assertion fails.
+		At the end of the TC we have to call assertAll() method --> This will collect all soft assertions and will decide if TC passed or failed
+		

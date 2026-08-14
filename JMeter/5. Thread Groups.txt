@@ -1,0 +1,49 @@
+
+	Thread Group :
+	
+		We use Thread Group to test how many users are going to use the website at the same time.
+			
+		Which means; 
+			A thread group is a set of threads executing the same scenario.
+			
+	When creating thread group;
+		
+		1. right click on test plan
+		2. add -> threads(users) -> thread group
+		3. Number of Threads (users) -> How many users are going to be using the website? 50 users should hit the flow. 
+										(That is my requirement.)
+		4. Ramp-up Period (seconds)	 -> How many seconds you want all the users to be on the website, to hit the server?	
+		5. Loop Count 				 -> How many times is this process goind to be repeated ? Let's say 5.
+		6. Or - check 'Infinite' & 'Specific Thread lifetime' and provide duration. 
+		   Let's say the duration is 60 seconds, it will do the process during 60 seconds.
+		   
+		*** THE CLIENT GIVES ALL THE DETAILS WHAT HE NEEDS.
+				
+	For Example;
+			
+		Let's say our scenario is, 50 users are going to be on the website for 5 seconds. So that means, every 1 second, 10 user is going to be online on the website. This is how it works in real time scenario. 
+		
+		Let's say, 1000 users are going to visit and click to a specific product. They won't click that product at the same time. That product will be clicked for 5 seconds for example or 10 seconds. So, that's why, we use 'Ramp-up Period (in seconds)'. 
+		
+		  We provide some period of time in seconds and simulate that scenario. 
+			
+			1000 users will click on the product, for 10 seconds period of time which means 100 users per second. 
+		  
+			And we will repeat this process 5 times (Loop count = 5).
+			
+			So, this product will be clicked 5 x 1000 = 5000 times.
+			
+	
+	If the user FAILs, what should thread group do ? 
+		
+		We select what the thread should do in "Action to be taken after a Sampler error" section.
+		
+	Either we should CONTINUE with the remaining users, or... 
+		
+			- Continue (Most of the time peaople use Continue)
+			- Start Next Thread Loop
+			- Stop Thread
+			- Stop Test
+			- Stop Test Now
+	
+	

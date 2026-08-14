@@ -1,0 +1,41 @@
+
+
+
+	For central elements to use when creating a table;
+	
+	1) <table>           -> Everything is embedded inside of
+	2) <tr>              -> ROW		-> Stands for Table Row
+	3) <td>              -> CELL 	-> Stands for Table Data
+	4) <th>              -> COLUMN	-> Stands for Table Header
+
+	Note1:We place the <th> (table column) elements inside the <tr> (table row) elements because each row must have columns to define its structure. Without columns, the rows would be empty.
+	
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	
+	Note2: <td> (data) correspond with <th>. And every positions of th represent the same same position of td.
+
+
+	For example:
+	
+		<tr>
+			<th> The Planets <th>
+			<th> The Oceans <th>
+		<tr>
+
+		<tr>
+			<td> Earth <td>
+			<td> Blues <td>
+		<tr>
+
+		So:
+			Earth --> The Planets
+			Blues --> The Oceans
+
+
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		
+	// if you want ignore getting the Header Row, you can write your xpath by using 
+		//	-> //table[@id='id...']/tbody/tr
+		//  -> //table[@id='id...']//tr -> will bring the header row too
+
+

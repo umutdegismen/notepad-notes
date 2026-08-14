@@ -1,0 +1,253 @@
+                                               
+											   
+											   COLLECTION FRAMEWORK
+                                              -----------------------
+                                              
+    Wrapper Classes  
+   -----------------
+    
+    * Collections don't accept primitive data types. That's why we have Wrapper Classes!
+    
+        int     -> Integer
+        String  -> String
+        boolean -> Boolean
+        float   -> Float
+        char    -> Character
+        double  -> Double
+        long    -> Long
+        short   -> Short
+    
+    Collection : Group of objects represented in a single unit
+    
+    Array: Fixed size data structor that has no ready methods such as add, remove..
+    
+    In collections, the data structores have ready methods that help you manipulate the elements.
+    
+    Collection interface has 3 children:
+        - List
+            * ArrayList     ->  stores the data one by one. Shifts the values when a value have been removed. 
+                                Gets the index directly.
+            * LinkedList    ->  stores the data in arrow shape. (ic-ice. matruska bebek gibi, yelpaze seklinde)
+                                
+        - Set
+            *HashSet        ->  stores the data randomly.
+            *LinkHastSet
+        - Queue
+        
+    List: is an ordered collection that allows duplicates
+    List interface is implemented in : ArrayList, LinkedList and Vector Classes
+
+-> To overcome limitations of Arrays Collections Framework has been introduced.
+
+        Collections will be dynamic in size
+        Collections will have ready methods to manipulate the data
+        Inside collections we can store/use only OBJECT
+
+------------------------------------------------------------------------------------------------------------
+
+                                                  LIST INTERFACE
+                                                -------------------
+
+
+
+	LIST -> ARRAYLIST -> When adds a new element, copies all the elements in the array and creates a new array with the new element
+					
+	SET ->  LINKEDSET -> It's like a bingo bag. Just adds the new number in the bag. 
+	
+	
+	
+	
+        ArrayList
+       -----------
+
+		
+
+        STRUCTOR -> ArrayList<Integer> numbers = new ArrayList<>();
+    
+    
+	➔ numbers.add();
+	➔ numbers.addAll();   -> you have to provide a list in it. 
+			
+			List<String> africa2 = new ArrayList<>();     // creating an empty list
+			africa2.addAll(africa);                       // providing an other list
+			System.out.println("africa2 -> "+africa2);
+
+	➔ add ( Object o )              ->	adds an object to the arraylist
+	➔ add(int index, Object o)      ->	adds the object to the array list at the specified index
+	➔ remove(Object o)              ->	removes the object from the ArrayList
+	➔ remove(int index)             ->	removes element from a given index
+	➔ set(int index, Object o)      ->	used for updating an element. 
+										It replaces the element present at the specified index with the object
+	➔ int indexOf(Object o)         ->	gives the index of the object o. 
+										if the element is not found in the list then this method returns the value -1.
+	➔ get(int index)                ->	returns the object of list which is present at the specified index
+	➔ int size()                    ->	gives the size of the ArrayList – Number of elements of the list
+	➔ contains(Object o)            ->	checks whether the given object is present in the array list. 
+										if its there then it returns true else it returns false
+	➔ clear()                       ->	used for removing all the elements of the array list in one go.
+										The below code will remove all the elements of ArrayList
+
+
+
+		LinkedList 
+	   ------------
+
+    * LinkedList - Class that implements the list interface and stores elements in a form of double linked objects
+	* LinkedList is good for insertion and removal of elements (especially in the middle of the list)
+	
+	*** They both have INSERTION ORDER !! 
+	
+    WHY ??
+		
+		If you remove, or insert an object in the middle of the ARRAYLIST, java has to move all the elements after that to fill the empty index.
+		
+		But if you remove an object of an LINKEDLIST, Java finds the object directly by using index of the element and removes it.
+		
+		So, in big lists which has millions of objects in it, ARRAYLIST works slower.
+
+
+
+	ArrayList vs LinkedList:
+	
+		1. 	ArrayList uses a dynamic array to store the elements/objects meanwhile LinkedList uses a doubly linked list 
+			to store the elements/objects
+		
+		2. 	ArrayList is the best choice to retrieve data, LinkedList is the best choice to insert and remove data
+
+		
+		Tersten yazdirmak icin: SADECE LINKEDLIST ile calisir!!
+		
+		.descendingIterator() is a reverse method that works ONLY with LinkedList
+		
+		Structor ->	 
+		
+					Iterator<Integer> it = linkedListName.DescendingIterator();
+					while(it.hasNext()){	
+						System.out.print(it.next()+" ");
+					}
+
+
+
+													 ITERATOR
+													----------
+
+Iterator: Is used to iterate objects in all collections.
+
+        STRUCTOR -> Iterator<Integer> it = numbers.iterator();  -> It iterates a specific list
+
+	
+    There are 3 methods in the Iterator class
+		
+		➔ it.hasNext();   	->  This method will return true/false. if there is a next element
+		➔ it.next(); 		->  This method will return the next element from the list
+		➔ it.remove();		->  This method will remove the current element from the list
+
+		*How to sort a LinkedList descending:
+		
+			Iterator it = linked1.descendingIterator();
+			while(it.hasNext()) 
+			{
+				System.out.print(it.next()+" ");
+			}
+        
+ ------------------------------------------------------------------------------------------------------------       
+        
+                                                    SET INTERFACE
+                                                  -----------------
+       HASHSET
+    ------------
+                                                     
+	- HashSet does NOT guarantee any insertion order
+	- No Duplicates
+	- Allows Null element
+
+        STRUCTOR -> HashSet<String> strList = new HashSet<>();
+        
+    HashSet Methods
+  -------------------
+        
+		➔ .add(Element e)		: It adds the element e to the list.
+		➔ .clear()				: It removes all the elements from the list.
+		➔ .contains(Object o)	: It checks whether the specified Object o is present in the list or not. 
+									If the object has been found it returns true else false.
+		➔ .isEmpty()			: Returns true if there is no element present in the Set.
+		➔ Iterator iterator()	: Used to return an iterator over the element in the set.
+		➔ .size()				: It gives the number of elements of a Set.
+		➔ .remove (Object o)	: It removes the specified Object from the Set.
+		➔ .clone()				: This method returns a shallow copy of the HashSet.
+
+		➔ NOTE: A Set doesn't provide any method for data retrieval.
+		 
+
+
+    LINKEDHASHSET
+    --------------
+    
+	- LinkedHashSet keeps insertion order
+	- No Duplicates
+	- Allows Null element 
+    
+    
+     TREESET
+    ---------
+
+	- TreeSet SORTS the elements in ASCENDING order
+	- No Duplicates
+	- Does NOT allow Null element
+		
+
+	List icinde bir elemandan kac adet oldugunu gostermek icin:
+
+				Collections.frequence(listName, object);
+		
+			EXAMPLE:
+			
+				Set<Integer> numbers = HashSet<>();
+				
+				for(int i: numbers){
+					System.out.println(Collections.frequence(numbers,i));
+				}
+				-------------------------
+				
+				List<Integer> numbers = new ArrayList<>();
+				numbers.add(4);
+				numbers.add(6);
+				numbers.add(3);
+				numbers.add(4);
+				numbers.add(4);
+
+				for (Integer i : numbers) {
+				
+					System.out.print(Collections.frequency(numbers, i)+" ");
+				}
+				
+				Output -> 3 1 1 3 3 -->	(4->3x)
+										(6->1x)
+										(3->1x)
+										(4->3x)
+										(4->3x)
+										
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

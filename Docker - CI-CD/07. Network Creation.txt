@@ -1,0 +1,34 @@
+
+	Creating NETWORK:
+	
+		"Network" birden fazla image dosyasinin birbiri ile etkilesimde olabilmesi icin kurdugumuz bir agdir.
+		
+		Diyelim ki [nginx] ve [alpine] adli 2 image indirdik (docker pull alpine & docker pull nginx).
+		
+		Bu iki image arasinda herhangi bir connection olmadigi icin birbirleri ile etkilesimde bulunamazlar. 
+		
+		Bu durumda biz de bir network kurup, bu iki image'in birbirini gormesini saglayabiliriz.
+			
+			- network tanimlama: 
+				<docker network create [network-name]>
+				
+			- nginx'i olusturdugumuz network'e atama: (--name=[name of container] ile isim verebiliriz)
+				<docker run --name=[nginx-new-name] --network=my-network nginx>
+				
+			- alpine'i olusturdugumuz network'e atama:
+				<docker run -d --network=my-network alpine>
+				
+			- to check if the network is working properly, we can ping it and wait for response:
+				1. go inside the container in the network		: docker exec -it my-alpine sh
+				2. ping the host name (website)					: ping my-nginx
+				
+			- to navigate to nginx index.html page: (it will basically download the html page)
+				wget my-nginx
+				
+				now you should be able to see the index.html using the command:
+					less index.html
+			
+			- to list the created networks:
+				<docker network ls>
+
+		

@@ -1,0 +1,356 @@
+
+
+
+														TYPES OF SOFTWARE TESTING 
+													   ===========================	    
+							   
+							   
+							   FUNCTIONAL						  			   	  NON-FUNCTIONAL					   OTHERS
+								   |								  					|								 |
+			-----------------------|--------------------------			  --------------|---------------				 |
+			|			 |			       |			     |			  |			    |			   	|  			     |	
+		  Unit		Integration		    System		     Acceptance	   Security    Performance		Usability			 |
+		Testing		  Testing	        Testing		      Testing		Testing	    Testing	         Testing			 |
+			|			|			       |				 |							|				|				 |
+			|			|			       |				 |				 			|				|				 |
+	   White-Box	Grey-Box		    Black-Box		   Alpha				      Load 		     Accessiblity	 Installation
+					Incremental	        Smoke			   Beta						  Stress		 Browser		 Configuration
+					Non-Incremental     Sanity										  Stability	     Exploratory	 Recovery
+										End-to-End									  Scaleability					 Regression
+																													 User Interface
+																													 Ad-Hoc
+																													 Agile
+																													 Reliability
+
+
+
+	Sirasiyla yapilan testler - Test Levels
+		
+		
+				 TEST LEVELS																						        Acceptance
+				-------------																				  Integration -> 
+			    /		    \															 System Integration -> 
+			   /  Acceptance \												    System -> 
+			  /	 	System	  \										  System -> 	
+			 /	 Integration   \			 Component Integration -> 
+			/	 	Unit	    \	Unit -> 
+		
+		
+		
+		
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		//																												//
+		//	Ornegin;																									//
+		//																												//
+		//		Android ve IOS cihazimiz var. 																			//
+		//																												//
+		//		1. Once ikisinde de ayri ayri COMPONENT TESTING yapiyoruz.												//
+		//		2. ikisinde de ayri ayri INTEGRATION (COMPONENT INTEGRATION) testing yapiyoruz.							//
+		//		3. ikisinde de ayri ayri SYSTEM testing yapiyoruz.														//
+		//		4. simdi 2 ayri systemimiz var!																			//
+		//		5. simdi system integration testing yapiyoruz.															//
+		//																												//
+		//				Android		|		IOS																			//
+		//			-----------------------------------																	//
+		//			1. Component	|	1. Component					----> Usually performed by the Developer		//
+		//			2. Integration	|	2. Integration					----> Usually performed by the Developer		//
+		//			3. System		|	3. System						----> Performed by the TESTER					//
+		//			4. System Integration Testing of 2 different System ----> Performed by the TESTER					//
+		//																												//
+		//			** If we have only one system then "System Integration Testing" is optional							//
+		//																												//
+		//		Now we have two system and we perform SYSTEM INTEGRATION Testing.										//
+		//																												//
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		
+		1. Unit TESTING 				->  Component Testing - (DONE by DEVELOPERS)
+		2. Integration TESTING 			-> 	Farkli birimlerin birbiriyle uyumlu calisip calismadiginin testi. (DONE by DEVELOPERS)
+											Front-end ve Back-end birlestikten sonra yapilan test 
+											(Front-end: User side of coding, Back-end: Admin side of coding)
+											
+			There are 2 types of Integration Testing; 
+			
+				- Component Integration ->  It tests the integration of components. 
+											e.g we have 2 methods / classes, do they work well with each other?
+				- System Integration	->  It cares about integration of 2 different system like, 
+											
+											Front-end <-> Back-end
+											Windows   <-> OS
+											Database  <-> API
+			
+		3. System TESTING 				-> 	Also known as END TO END Testing. (E2E) (DONE by TESTERS) 
+											In system testing, our main goal is to find defects. We need to make the system fail and get it fixed to increase the quality
+											
+		4. Acceptance TESTING 			-> 	UAT (user acceptance test). (DONE by USERS)
+											Stakeholders, POs can be UAT in a team. Some companies have 3rd party UAT teams. The goal is to test the whole system. It should be as bug free as possible. It should be ready to release. 
+
+
+
+	
+															TESTING TYPES
+														====================
+	
+
+	1- FUNCTIONAL TESTING
+	   -------------------
+	   
+		- Testing what the system does. 
+		- Usually answered with "Yes/No".
+			
+		For example, I have a login functionality or a login screen with "username", "password" and "login" button. 
+			
+		I want to ensure that the login is working. 
+				
+			- When I provide a valid username, And I provide a valid password, Then I click on login button, will the application redirect me to the correct screen or not?
+				
+			- If I leave the username empty, will the application show me an error message telling me that username field must be filled or not?
+			- If I send a very long username, I provide numbers instead of letters etc...
+			
+
+			1. UNIT TESTING : Component Testing - (PERFORMED BY THE DEVELOPERS in Dev Environment)
+				- Every single method in code, is one unit. 
+				- Testing the methods if they work correctly.
+				- It's also called Component Testing
+				
+				Hataları geliştirme sürecinde erken aşamalarda yakalar.
+				Sorunlu kodu izole ederek hata ayıklamayı kolaylaştırır.
+				Test vakaları aracılığıyla kod tabanı için belge sağlar.
+				Mevcut işlevselliğin bozulmadığından emin olmak için kodun yeniden yapılandırılmasını kolaylaştırır.
+
+
+			2. INTEGRATION TESTING:			
+			
+				- Farkli birimlerin birbiriyle uyumlu calisip calismadiginin testi. 
+				- Front-end ve Back-end birlestikten sonra yapilan test 
+					(Front-end: User side of coding, Back-end: Admin side of coding)
+												
+				There are 2 types of Integration Testing; 
+				
+					- Component Integration -> It tests the integration of components. e.g we have 2 methods / classes, do they work well with each other?
+					- System Integration	-> It cares about integration of 2 different system like, 
+												
+												Front-end <-> Back-end
+												Windows   <-> OS
+												Database  <-> API
+
+			3. SYSTEM TESTING : 		
+				- Also known as END TO END Testing. (E2E) Performed by the TESTER. 
+				- In system testing, our main goal is to find defects. We need to make the system fail and get it fixed to increase the quality
+
+			4. ACCEPTENCE TESTING : (Performed by USERS (UAT)-User Acceptance Testing) in Stage Environment)
+				
+				- Stakeholders, POs can be UAT in a team. Some companies have 3rd party UAT teams. 
+				- The goal is to test the whole system. It should be as bug free as possible. It should be ready to release. 
+
+
+
+	2- NON-FUNCTIONAL TESTING
+	   ----------------------
+		
+			It's actually not considered as a type of testing, it's more considered as a category of software testing. 
+			
+			So, non-functional testing includes USUABILITY, PERFORMANCE, LOAD, STRESS, VOLUME, SECURITY types of software testing.
+			
+			- Testing how the system performs.
+			- It's hard to answer with Yes/No.
+			- Usually measured as a range.
+			
+			For example, if I ask you "is the application quick enough?" "Is it responding in amount of time ?" the answer can not be Yes/No. Because the answer is subjective. 
+			
+			We might consider the "response within 1 second" is extremely fast for an application, on the other hand, 100 miliseconds might be considered as extremely slow in gaming. That's why it depends on nature of the application, it depends on the nature of the user that is using it. That's why it's not easy to answer with Yes/No.
+
+			It's mostly being compared to the benchmarks or some standards in the market or international standards that we need to follow, and we compare our application against them. 
+		
+		WHEN YOU CLICK ON HOME PAGE BUTTON AND IT OPENS THE HOME PAGE AS IT SHOULD  -->>	FUNCTIONAL TEST
+		WHEN YOU CLICK ON HOME PAGE BUTTON AND IT TAKES 30 SEC TO OPEN IT 			-->>	NON-FUNCTIONAL TESTERS
+	
+	
+	
+	3- BLACK-BOX TESTING
+	  -------------------
+		
+		It cares about inputs and outputs. In black-box testing we don't have access to internal structure of the system. The internal structure might be "database", "software code", "API" etc.. We just provide input and wait for the output. We don't care about the inrternal structure.
+		
+		-Tester doesn't know what is inside
+		-Requires NO knowledge of internal paths, structures or implementation of the software being tested
+		-Black Box testing only cares about input/output
+		
+		
+		
+	4- WHITE-BOX TESTING
+	  -------------------
+	  
+		It is performed by the DEVELOPERS when they do the UNIT TEST.
+		
+		In white-box testing, we have access to API, Database and the Code of the application. We focus here "HOW" is the application is performing my functionality. I added an item to the cart. I don't only care that the item is added to the cart, I also care HOW is the item added to the cart. I need to know how is the item added to cart? What is the API request that was sent? What is the response taht is received ? and so on. 
+			
+		-Requires detailed programming skills.
+		-Mostly done by developers where they execute their code before it goes to QA environment. (Unit testing is a white-box testing)
+		-Internal structure is known to the Developer who is going to test the software.
+		
+		(GRAY-BOX Testing)
+			is done when a tester PARTIALLY knows the internal structure of an application as the algorithms used
+		
+		-this type of testing is kind of a mix of black & white testing techniques.
+		-includes internal structure tests and input/output tests
+
+	
+	
+	5- STATIC TESTING 	
+	  -------------------
+	
+		Any testing that does NOT include executing the software, whether I have access to the code or not, is considered as Static Testing.
+		
+		It's usually done in the Phase 1 of SDLC which is the Requirements Analysis phase. 
+		
+		It's done without any test execution. It's only done by analyzing the requirements.
+			
+		It's a software testing technique which is used to check defects in software application WITHOUT executing the code.
+				
+			!!!   It can ONLY be done BEFORE the development is done !!!
+				
+		---->> It's a DESIGN - It's a SCREENSHOT!  <<----
+					
+			How can you test an application without executing the code? (SDLC phases) ?
+					
+			-Requirements Analysis  -> Using the Requirements Analysis (e.g., walkthrough, inspection, code reviews / in the meetings) 
+			-Design Phase 			-> With Design of the application  
+										(Think of design phase, we don’t actually have an app at this stage so this is where we would be doing our static testing.)
+											   
+	
+	
+	6- DYNAMIC TESTING
+	  -------------------	
+	  
+		Any testing that includes executing the software, providing an input and waiting for an output whether it's black-box or white-box, is considered as Dynamic Testing.
+		
+		It involves functional testing, performance testing, and other types of testing that requires running the software.
+		
+		- It checks an application when the code is run. 
+		- It checks for functional behavior of software system, memory/CPU usage and overall performance of the system.
+		
+	
+	
+	7- RE-TESTING (Confirmation Testing)
+	   --------------------------------
+		
+		When we find a defect, we report it to the developer. The developer debugs the task and after he fixed it, tells us "Okay, I solved this functionality." then we perform re-testing on the same functionality with the same steps and check if it's fixed or not. If it's fixed, we close the report on Jira, if not, we return it to the developer again.
+	
+	
+	
+	8- REGRESSION TESTING :
+	  ----------------------	
+	  
+		- Testing the whole application with new updates before every release.
+		- It's being performed after any change, any modification is done to the application.
+		- we perform Regression Testing to ensure that new added functionalities are not impacting to the existing (unchanged) functionalities. 
+		- For example, the developer added a functionality, removed a functionality or resolved a defect, is this affecting (impacting) other parts of the application? Regression Testing is answering that question.
+			
+		- Regression testing suite will have a lot of test cases. Test cases can range from 200 to 2000 test cases based on project.
+
+		---> REGRESSION TEST SUITE is called for test case SETS. For example we have 150-200 test cases, 
+					we call it REGRESSION TEST SUITE
+			
+			
+	
+	9- SMOKE TESTING : (1ST TEST WE DO IN THE MORNING!!)
+	   ---------------
+	   
+		- It's basically being done to save time. Testing the main functionalities everyday to keep everything under control (Login/Logout, delivery, payment etc.) and to be able to continue testing the rest of the application.
+			
+		- A smoke test is quick, lightweight test or set of tests, usually automated, that confirms that the basic functionalities of the system is working correctly.
+			
+		- We run the smoke test on Jenkins. If something does not work, it sends out an email, lets us know that smoke test did not pass. This is mostly done through automated script. Automated Smoke test can be scheduled multiple times a day to give timely report to the team. 
+			
+		- We can also run the smoke test manually.
+			
+		---> SMOKE TEST SUITE is called for test case SETS. For example we have 15-20 test cases, 
+					we call it SMOKE TEST SUITE
+	
+	
+	
+														OTHER TYPES OF TESTING:
+													 ----------------------------
+
+	 GUI TESTING (Graphical User Interface)
+	======================================= 
+		
+		-> GUI Testing is a software testing type that checks the Graphical User Interface of the Software.
+		-> The purpose of Graphical User Interface (GUI) Testing is to ensure the functionalities of software application work as per specifications by checking screens and controls like menus, buttons, radio buttons, drop down, checkboxes, links, text boxes etc.
+		
+		
+	 ALPHA & BETA TESTING 
+	======================
+
+		ALPHA testing:
+		
+			- Alpha testing is performed to identify all possible bugs before the product is released to end-users. 
+			- In Alpha testing, we invite some potential users to our company and ask them to test our product under our supervision.
+			- If there is some security concerns, the companies can skip the Alpha Testing and only do the Beta Testing.
+			
+		
+		BETA testing:
+		
+			- Beta testing is done by releasing a beta version of the software to a limited number of end-users to obtain feedback on the product quality. The end user teststhe the app or the game on their side and we collect the app crashes reports and analytics about it.
+	
+	
+	USABILITY TESTING :
+	=================
+			--> Usability focuses on the ease of use, learnability and efficiency of the product.
+			--> It is mostly based on Monitoring purposes.
+			--> There are different tools to 
+		
+		
+	 Ad-Hoc TESTING
+	================	
+		NO Test Cases
+		NO Test Design
+		NO Documentation 
+		
+		-> Testing performed without planning and documentation.
+		-> This test is like exploring the application. If you are new to the team and dont know about the application, you basicly click around and explore the application.
+		-> You dont have to report the application since you find an issue. If you find an issue, you have to report it.
+		-> A lot of bugs can be find in AD-Hoc Testing.
+		-> It can be also called Exploratory Testing, Random Testing or Monkey Testing.
+		
+		
+	 POSITIVE & NEGATIVE TESTING
+	=============================
+
+		Positive Testing:
+			Testing the application with VALID input.
+			
+		
+		Negative Testing:
+			Testing the application with INVALID input.
+			
+			
+			
+	 508 COMPLIANCE TESTING 	(Text-To-Speech testi diyebiliriz. Engelliler
+	========================
+
+		--> Mandatory for government websites
+		--> Popular tool used for 508 testing is JAWS (Job Access With Speech)
+		--> 508 Compliance Testing checks if digital content is accessible to people with disabilities, following Section 508 standards. 
+			It ensures features like screen reader compatibility and keyboard navigation work, making the content usable for everyone
+			
+			
+	 BOUNDARY VALUE Analysis
+	=========================
+
+		--> Boundry testing is to make sure the software accepts valid data inside the avalid Boundary (Lower Boundary and Higher Boundary) and rejects invalid data outside the valid boundary.
+		
+		Example :
+		
+			1. Tax return period is from 1st until 15th of April.
+			2. If you spend less than $50 and Amazon.com still did not charge you for shipping, that means there is a defect in the application.
+			
+			Many defects can be find with this method.
+			
+
+
+		
+		
+		
+		

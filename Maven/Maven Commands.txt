@@ -1,0 +1,10 @@
+
+
+cls         -> clean page
+
+mvn clean   -> clean target
+
+mvn test    -> execute test
+
+mvn clean test -Drunner=TestRunner  ->  used to trigger "TestRunner" class from Jenkins and Maven
+                                        since we use <include> **/*${runner}.java </include>  (sending runner class name as parameter)

@@ -1,0 +1,176 @@
+
+
+Local to remote: 
+
+- git init																					: initialize an empty repository used only when creating a new repository 
+- git add																						: will move the items to the staging area (at first means, start tracking them)
+- git add src/  or git add . 
+- git commit																				: will pass the staged changes to the local repository
+- git commit --amend -m "Your new commit message"		: RENAME the last commit
+- git restore .																			: means turn to the previous state. so basically discard changes. (git restore .)
+- git revert HEAD																		: it will revert the last commit and commit it 
+- git remote add origin <url>												: adds the origin (remote location)
+- git branch -M main																: rename the master branch to main 
+- git push -u origin main														: push the changes to the remote and track the origin/main branch
+- git diff 																					: shows the differences that has made
+- git pull origin main															: WE WILL USE THIS A LOT!!! 
+			When everyone pushes something to their branches and merge them with main, we pull the changes from the main.
+			When I do GIT PULL ORIGIN MAIN, I am getting the changes on my current branch from the remote MAIN branch.
+			We specify that we want the updates from the MAIN. That's why we say 'origin main'. REMOTE MAIN.
+						
+						
+
+
+Remote to local: 
+
+- git clone <repo url>: it will clone the repository in the current folder
+
+- git pull: 	it will get the changes from remote repository to the local 
+				repository and working area
+
+- git fetch:	it will only update the local repository
+
+
+- git stash  							--> only tracked changes
+- git stash -u  						--> stash tracked and untracked changes ( stash ALL OF THEM !! like -> add .)
+- git stash -m "feature in progress" 	--> stash tracked changes with a message
+- git stash git stash apply stash@{0} 	--> if there is more than one stashes, we can choose which one we call back
+- git stash list						--> tum stash'leri listeler
+
+ -->>>  Bir proje uzerinde calisirken, o proje ile ilgili baska birinin yaptigi degisiklige bakmak icin pull yapmamiz gerekebilir.
+		
+		Iste boyle bir durumda stash kullanilir. 
+		
+		-git stash yaparak o an uzerinde calistigimiz degisiklikleri rafa kaldirip, baskasinin yaptigi degisiklikleri gormek icin pull yapiyoruz.
+		
+		Daha sonra onunla isimiz bittigi zaman kendi uzerinde calistigimiz dosyayi geri getirmek icin "git stash pop" diyoruz.
+		
+		
+		
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	CONFLICT ---> 	Iki kisi ayni anda, ayni linelar icine kod yazip push ederse, cakisma oluyor. Buna da CONFLICT deniyor.
+	
+	Conflict olustugunda, conflict olusan kisi ile iletisime gecip kodlari karsilastirmak gerekiyor. 
+	Once kendi kodumuzu git stash yapariz ve daha sonra git pull yapilir ki karsi tarafin kodlari cekilir. 
+	
+	karsi tarafin kodlarini cektikten sonra, git stash pop yaparak, kendi degisikliklerimizi karsi tarafin degisiklikleri ile birlestiririz.
+	
+	"conflict olustu, degisikligin kalsin mi, ne yapalim? gibi iletisime gecilir.
+	Aramizda cozdukten sonra duruma gore eclipse'de olusan conflict uyarilari temizlenir. 
+	KENDI BRANCH'imize git add. / git commit -m / git push ve git pull request yapilir. Ve git merge yapilir.
+	
+	Tum degisiklikler yapildiktan sonra, Conflict cozuldukten sonra, main branch'e checkout yapilarak uzerinde calistigimiz 
+	BRANCH silinir. 
+	git pull ile tum yapilan degisikler cekilerek local main 'imiz update edilir ve guncel hale gelinir.
+					
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+	YANLISLIKLA main'de commit edilen bir degisikligi, baska bir branch'e aktarma !!!
+	
+	*If you’ve committed to the main branch by mistake and want to move the commit entirely to a new branch:
+	
+		1. Create and switch to a new branch from the current commit:
+			git checkout -b new-branch-name
+			
+		2. Push the new branch to the remote:
+			git push origin new-branch-name
+			
+		3. Go back to main and reset it: If you want to remove the commit from main, go back to main and reset it to the previous commit:
+			git checkout main
+			git reset --hard HEAD~1
+			
+		4. Push the reset state of main to the remote: This will remove the commit from main on the remote repository as well:
+			git push origin main --force
+		
+	* This way, the commit will exist only on the new branch and not on main.
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+SCENARIO: Branch recap and online conflict resolution 
+
+	- creating a new branch: 
+		git branch branchName
+		git checkout -b branchName (this creates and switches to that branch) 
+
+	- made some changes 
+
+	- git add . 
+
+	- git commit -m "my new test"
+
+	- git push origin sabahBranch
+
+	- we create a pull request (we are asking that the changes are merged to main)
+
+	- conflict (the merge cannot happen automatically)
+
+	- fixed the conflict
+
+	- merged the changes on main (remote)
+
+
+	what should we do now???
+		everyone must pull these changes
+
+	because we were on the sabahBranch 
+		to update we do: git pull origin main (because this means, get changes from main into sabahBranch)
+
+	then we move to the main branch (git checkout main)
+		to update we do: git pull (by default local main pulls from origin/main)
+
+
+
+
+
+SCENARIO: Local update and conflict resolution
+	- this can happen without commit your changes or after you have committed your changes 
+
+	- we developed a new method at the end of CommonMethods
+	- we noticed that the new updates on the remote repo, have changes there too
+	- so, we stashed these changes and we pull the remote repo changes
+	- we did git pull (we got the changes succesfully
+	- git stash pop (apply the stash back) -- the conflict with still be there 
+	- we decide which codes to keep and then we clean up 
+	- we send it upstream (add, commit, push)
+	
+
+
+SCENARIO: Tried to push and they got rejected because of a conflict
+	we did not know there are new changes in the remote repository
+	we run git push to send our own changes and the changes got rejected	(CONFLICT)
+	
+	I try to get the change locally (git pull). 
+		- the automatic merge failed (due to the conflict)
+	we stash our changes  
+	we get the updates (git pull)
+		* we decided which changes to keep for each file in the conflict
+	we push changes (add, commit, and push)
+
+
+	
+Git Stash Idea: 
+I want to send something to the remote repository. But I do not want to send some changes that I have in the working area.
+
+What are my options??? What do I do with those changes?
+	- discard all the current changes and start from the begining 
+	- put them somewhere that they are not lost, but I do not want them mixed with anything else
+	
+    
+
+
+When combining code: 
+	- we can be combining different files   					--> git will handle it automatically
+	- we can be working on the same file, in different lines 	--> git will handle it automatically
+	- we can be working on the same file, overlapping lines  	--> CONFLICT!!!
