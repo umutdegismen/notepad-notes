@@ -1,63 +1,71 @@
-
+	
 	VOLUME MAPPING: (Basically file sharing)
 	----------------------------------------
-	
-		Bu, Docker konteynerinin içindeki bir klasörü veya dosyayı, host makinenizdeki bir klasöre bağlamak anlamına gelir. Böylece konteyner içindeki veriler kalıcı olur ve konteyner silinse bile host üzerinde saklanır.
+
+		Bu, Docker konteynerinin içindeki bir klasörü veya dosyayı, host makinenizdeki bir klasöre bağlamak anlamına gelir. 
+		Böylece konteyner içindeki veriler kalıcı olur ve konteyner silinse bile host üzerinde saklanır.
 		
 			"docker run -v /host/klasor:/container/klasor [imageName]"
 			
 			"docker run -v /HostPath/folderName:/ContainerPath/folderName [imageName]"
-
+		
 		Burada "/host/klasor", host makinedeki klasör, "/container/klasor" konteyner içindeki klasördür.
 		
 		Docker-Volume Mapping icin "D:","E:","F:" gibi directory'ler kullanma!
 		
 		Best directory for volume mapping is the project root. 
-		To use that path, we either use an absolute path or //${PWD} which means the 'CURRENT FOLDER'.
+		To use that path, we either use an absolute path or the current folder shortcut (terminal'e göre değişir, aşağıya bak).
 		
 			!! Bu ayari Docker Desktop programinda "Settings/Resources/File Sharing" kismindan degistirebilirsin. !!
 			
 			
-					Terminal		Karşılığı
-					--------------------------
-					Git Bash		$(pwd)
+					Terminal		Karşılığı			Not
+					------------------------------------------------------------------------
+					Git Bash		$(pwd)				⚠️ '/' ile başladığı için MSYS path 
+														   çevirmesine takılabilir -> //$(pwd) 
+														   ya da MSYS_NO_PATHCONV=1 kullan
 					PowerShell		${PWD} veya $PWD
 					CMD				%cd%
 		
 		
 		SAMPLE COMMAND	: 	
 			
-			docker run -it -v c:/Users/Blu3s/docker/workspace:/use/sampleFolder ubuntu
+			docker run -it -v c:/Users/Blu3s/docker/workspace:/usr/sampleFolder ubuntu
 			docker run -it -v //${PWD}:/home/sampleFolder ubuntu
 							  
-						// -> olusturulan klasoru sonunda olusturulan ';C' eklenmesini engeller.
-						// -> Docker'ın path'i olduğu gibi okumasını sağlar
+						// -> argümanın EN BAŞINA konur (host path'in önüne). 
+							 MSYS, '/' ile başlayan argümanları otomatik Windows path'ine 
+							 çevirmeye çalışır; bu çeviri sırasında ':' ayracı ';' ye 
+							 dönüşüp ';C' gibi bozuk bir path ortaya çıkarır.
+						// -> Başa eklenen bu '//' , MSYS'e "bu argümanın tamamını 
+							 olduğu gibi bırak, çevirme" der.
+						// -> Bu, $(pwd) veya ${PWD} farketmeksizin, path '/' ile 
+							 başladığı sürece geçerlidir.
 						
 			-- YA DA --
 			
-			docker run -it -v "$(pwd)/result:/home/selenium-docker/test-output" [imageId] -> burada 'pwd' LOWERCASE !!!! 
+			docker run -it -v "//$(pwd)/result:/home/selenium-docker/test-output" [imageId]  -> 'pwd' LOWERCASE !!!!
+			
+			-- YA DA (her komutta // yazmak yerine, path çevirmeyi tamamen kapatmak) --
+			
+			export MSYS_NO_PATHCONV=1   -> ~/.bashrc içine eklenirse kalıcı olur, 
+											bundan sonra hiçbir komutta // gerekmez
 											
-			-> 	-it : intereactive mode (to see inputs and outputs) otherwise, after applying the command, it'll exit.
+			-> 	-it : interactive mode (to see inputs and outputs) otherwise, after applying the command, it'll exit.
 			->	-v  : volume mapping
 			->	c:/Users/Blu3s/docker/workspace 	: path in local machine (host path)
-			->	/use/sampleFolder 					: folderName in the container -> ALWAYS CREATE THE REMOTE FOLDER IN A FOLDER LIKE 'usr'
+			->	/usr/sampleFolder 					: folderName in the container -> ALWAYS CREATE THE REMOTE FOLDER IN A FOLDER LIKE 'usr'
 			->	ubuntu 								: the image name that we want to create the connection with.
 							
 		SAMPLE PRACTICE:
-
 			docker run -it -v //$(pwd)/udemy-docker:/usr/udemy ubuntu 	-> create the remote directory 'udemy'
-			ls -al														-> list the folders in 'ubuntu'
-			cd usr/udemy 												-> navigate to the created folder 'udemy' 
-			OUTPUT: root@afdb1ab2d31a:/usr/a# 
+			ls -al															-> list the folders in 'ubuntu'
+			cd usr/udemy 													-> navigate to the created folder 'udemy' 
+			OUTPUT: root@afdb1ab2d31a:/usr/udemy# 
 			
 		After creating a folder in ubuntu, we create a txt file there by using ubuntu commands.
 		
-			echo "docker is awesome" > test-result.txt 	: creates a "test-result" txt file on ubuntu.
-			mv test-resul.txt test-result.txt 			: renames the remote folder name on ubuntu.
-			less test-result.							: just opens the file and shows what is inside which we wrote "docker is awesome"
-			to quit 									: press 'q'
-			
-
-			
-			
-							
+			echo "docker is awesome" > test-resul.txt 	    : creates a "test-resul" txt file on ubuntu.
+			mv test-resul.txt test-result.txt 			    : renames the file (typo fix: 'resul' -> 'result').
+			less test-result.txt							: just opens the file and shows what is inside which we wrote "docker is awesome"
+			to quit 									    : press 'q'
