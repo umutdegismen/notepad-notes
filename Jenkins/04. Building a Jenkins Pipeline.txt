@@ -1,0 +1,14 @@
+
+Building a Pipeline Job:
+------------------------
+
+    1. Under Pipeline/Definition:
+        - Pipeline script from SCM
+    2. SCM:
+        - Git
+        - Enter Repository URL and Credentials (Username and Github Token)
+    3. Branches to build:
+        - Change the branch name to */main from */master
+    4. Script Path:
+        Jenkinsfile (Jenkinsfile must be created in the project root directory)
+    5. Save.
