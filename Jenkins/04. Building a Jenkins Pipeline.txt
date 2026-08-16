@@ -10,5 +10,41 @@ Building a Pipeline Job:
     3. Branches to build:
         - Change the branch name to */main from */master
     4. Script Path:
-        Jenkinsfile (Jenkinsfile must be created in the project root directory)
-    5. Save.
+        - Jenkinsfile (Jenkinsfile must be created in the project root directory)
+            If  it would be in the project directory like: "src/test/resources"
+            Then we should write in the Script path: src/test/resources (which is NOT RECOMMENDED).
+            Please keep the Jenkinsfile in the rood directory.
+    5. Additional Behaviours:
+        -Add -> Clean before checkout
+    6. Save.
+
+
+
+JENKINSFILE
+-----------
+    
+    In case pushing the image to docker hub may be denied, we pass the credentials in the 'Push Image Stage':
+    
+    'dockerhub-credentials'     -> Credential-ID in Jenkins Credentials
+
+    !!!! ONEMLI !!!!
+        login credentials, ' ' single quote yaziyoruz cunku kelimesi kelimesine bir string gondermemiz lazim ki 
+        environment variable, parametre olarak kullanilabilinsin. 
+    
+    
+        stage('Push Image'){
+            environment{
+                DOCKER_HUB = credentials('dockerhub-credentials')
+            }
+            steps{
+                bat 'docker login -u %DOCKER_HUB_USR% -p %DOCKER_HUB_PSW%'
+                bat "docker push umutdegismen/selenium"
+            }
+        }
+
+        // login oldugu icin logout da olmali 
+        post{
+            always{
+                bat "docker logout"
+            }
+        }
