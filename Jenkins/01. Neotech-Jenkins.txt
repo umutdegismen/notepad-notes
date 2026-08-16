@@ -6,7 +6,7 @@
 	
 	1. General > Description 		-> for example, Cucumber SIS-Project build on Maven structure)
 	2. General > GitHub project	    -> We select GitHub project and provide Project url
-	3. Source Code Management > Git -> We provide Repository URL, Credentials and the Branch we want to work on.
+	3. Source Code Management 		-> Git -> We provide Repository URL, Credentials and the Branch we want to work on.
 		When adding the credentials,
 			username : GitHub username
 			password : the github token (it's saved in the google drive)
